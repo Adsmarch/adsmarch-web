@@ -2,7 +2,7 @@
   <div>
     <h1 class="text-2xl font-bold p-4">首页测试</h1>
     <HomeSwiper />
-
+    <a href="/about-us">关于我们</a>
   <div class="min-h-screen bg-slate-100 flex flex-col items-center justify-center space-y-6">
     <div class="p-8 bg-white rounded-2xl shadow-xl border border-slate-200 text-center max-w-md w-full">
       <h1 class="text-3xl font-bold text-slate-800 mb-4">
