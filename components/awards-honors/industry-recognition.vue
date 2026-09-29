@@ -3,14 +3,14 @@
 
         <!-- 标题 + 左右切换按钮 -->
         <div class="flex items-center justify-between mb-[32px] md:mb-[64px]">
-            <div class="flex items-center gap-3">
+             <div class="flex items-start md:gap-[24px] gap-[12px]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[20px] h-[20px] md:w-[28px] md:h-[28px] shrink-0">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
                     <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
                     <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
-                <h2 class="text-[28px] md:text-[48px] font-[600] leading-none text-white">
+                <h2 class="text-[40px] md:text-[96px] font-[600] leading-none text-white">
                     行业认可
                 </h2>
             </div>
