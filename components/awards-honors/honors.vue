@@ -2,7 +2,7 @@
     <div class=" pt-[56px] md:pt-[120px] pb-[29px] md:pb-[0px]">
 
         <!-- 标题 -->
-        <div class="flex items-start gap-3 mb-[32px] md:mb-[64px]">
+          <div class="flex items-start md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" md:width="32" md:height="32"
                 viewBox="0 0 24 24" fill="none" class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
                 <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
