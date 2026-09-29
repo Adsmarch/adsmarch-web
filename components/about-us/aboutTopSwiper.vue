@@ -79,7 +79,7 @@
       <!-- 左右切换按钮（仅 PC） -->
       <button id="about-swiper-prev"
         class="hidden md:flex px-[10px] py-[10px] absolute left-[7.5%] top-1/2 -translate-y-1/2 z-10 md:w-[64px] md:h-[64px] rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
-        aria-label="上一张">
+        :aria-label="$t('about.top.prev')">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
           <path
             d="M4.26793 6.76219H32L31.9646 9.20206H4.23513L11.0324 16H7.99115L0 8.01745L8.02654 0H10.997L4.26793 6.76219Z"
@@ -88,7 +88,7 @@
       </button>
       <button id="about-swiper-next"
         class="hidden md:flex px-[10px] py-[10px] absolute right-[7.5%] top-1/2 -translate-y-1/2 z-10 md:w-[64px] md:h-[64px] rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
-        aria-label="下一张">
+        :aria-label="$t('about.top.next')">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
           <path
             d="M27.7321 6.76219H0L0.0353947 9.20206H27.7649L20.9676 16H24.0088L32 8.01745L23.9735 0H21.003L27.7321 6.76219Z"
@@ -103,6 +103,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
@@ -110,15 +111,24 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
+const { t, tm } = useI18n()
+
 // 标题文案（每行一条）
-const titleLines = ['连接中国与世界，', '成就每一次全球突破']
+const titleLines = computed(() => {
+  const raw = tm('about.top.titleLines')
+  const len = Array.isArray(raw) ? raw.length : 0
+  return Array.from({ length: len }, (_, i) => t(`about.top.titleLines.${i}`))
+})
 
 // 企业理念文案
-const values = [
-  { label: '企业愿景：', text: '服务10000家企业走向世界，成就10000个出海人！' },
-  { label: '经营理念：', text: '客户至上、放眼未来、公平正义、坚持创新' },
-  { label: '行动准则：', text: '以德为本、志存高远、信守承诺' }
-]
+const values = computed(() => {
+  const raw = tm('about.top.values')
+  const len = Array.isArray(raw) ? raw.length : 0
+  return Array.from({ length: len }, (_, i) => ({
+    label: t(`about.top.values.${i}.label`),
+    text: t(`about.top.values.${i}.text`)
+  }))
+})
 
 // 轮播图片
 const images = [

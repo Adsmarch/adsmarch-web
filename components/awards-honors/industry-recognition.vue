@@ -3,20 +3,20 @@
 
         <!-- 标题 + 左右切换按钮 -->
         <div class="flex items-center justify-between mb-[32px] md:mb-[64px]">
-            <div class="flex items-center gap-3">
+            <div class="flex items-start md:gap-[24px] gap-[12px]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[20px] h-[20px] md:w-[28px] md:h-[28px] shrink-0">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
                     <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
                     <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
-                <h2 class="text-[28px] md:text-[48px] font-[600] leading-none text-white">
-                    行业认可
+                <h2 class="text-[40px] md:text-[96px] font-[600] leading-none text-white">
+                    {{ $t('awards.industry.title') }}
                 </h2>
             </div>
 
             <div class="flex items-center gap-[8px] md:gap-[12px]">
-                <button type="button" aria-label="上一组" @click="slidePrev"
+                <button type="button" :aria-label="$t('awards.industry.prev')" @click="slidePrev"
                     class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded-[4px] bg-[#26282C] flex items-center justify-center text-[#7D86A1] hover:bg-[#33363B] transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
                         <rect width="64" height="64" rx="4" fill="#131416" />
@@ -25,7 +25,7 @@
                             fill="#7D86A1" />
                     </svg>
                 </button>
-                <button type="button" aria-label="下一组" @click="slideNext"
+                <button type="button" :aria-label="$t('awards.industry.next')" @click="slideNext"
                     class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded-[4px] bg-[#0043FF] flex items-center justify-center text-white hover:bg-[#0037D4] transition-colors duration-300">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
                         <rect width="64" height="64" rx="4" fill="#0043FF" />
@@ -72,6 +72,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Scrollbar as SwiperScrollbar, Pagination as SwiperPagination } from 'swiper/modules'
 import img1 from '@/assets/image/recognition-1.png'
@@ -95,13 +96,21 @@ function slidePrev() {
 function slideNext() {
     swiperInstance?.slideNext()
 }
+const { t, tm } = useI18n()
+
+// 行业认可图片（按顺序与 i18n 文案 zip）
+const recognitionImages = [img1, img2, img3, img4]
+
 // 行业认可列表（图片为占位，后续可替换为真实证书/奖杯图）
-const recognitions = [
-    { id: 1, year: '2023', desc: '证书/协会/公益 xxxx文字占位', image: img1 },
-    { id: 2, year: '2024', desc: '证书/协会/公益 xxxx文字占位', image: img2 },
-    { id: 3, year: '2023', desc: '证书/协会/公益 xxxx文字占位', image: img3 },
-    { id: 4, year: '2023', desc: '证书/协会/公益 xxxx文字占位', image: img4 }
-]
+const recognitions = computed(() => {
+    const raw = tm('awards.industry.recognitions')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => ({
+        year: t(`awards.industry.recognitions.${i}.year`),
+        desc: t(`awards.industry.recognitions.${i}.desc`),
+        image: recognitionImages[i]
+    }))
+})
 </script>
 
 <style scoped>

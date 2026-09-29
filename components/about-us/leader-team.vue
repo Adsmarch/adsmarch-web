@@ -13,11 +13,11 @@
                         <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
                     </svg>
                     <h2 class="text-[40px] min-[1250px]:text-[96px]  font-[600] mb-[20px] md:mb-[24px]">
-                        领导团队
+                        {{ $t('about.leaderTeam.title') }}
                     </h2>
                 </div>
                 <p class="text-[16px] min-[1250px]:text-[24px] leading-[1.6] text-[#fff]">
-                    截至目前，麦炽已赋能数千家企业，业务足迹覆盖全球200多个国家和地区。我们凭借平均经验5年以上的资深专家团队，帮助中国企业从"走出去"到"扎下去"，实现可持续的全球化增长。
+                    {{ $t('about.leaderTeam.desc') }}
                 </p>
             </div>
 
@@ -55,19 +55,19 @@
                     <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
                 <h2 class="text-[40px] font-[600] leading-none">
-                    领导团队
+                    {{ $t('about.leaderTeam.title') }}
                 </h2>
             </div>
             <p class="text-[16px] leading-[1.6] text-[#7D86A1] mb-[32px]">
-                截至目前，麦炽已赋能数千家企业，业务足迹覆盖全球200多个国家和地区。我们凭借平均经验5年以上的资深专家团队，帮助中国企业从"走出去"到"扎下去"，实现可持续的全球化增长。
+                {{ $t('about.leaderTeam.desc') }}
             </p>
 
             <!-- 轮播切换按钮 -->
             <div class="flex items-center justify-end gap-[20px] mb-[32px]">
                 <button id="team-swiper-prev"
                     class="w-[40px] h-[40px] rounded bg-[#131416] flex items-center justify-center transition disabled:opacity-40"
-                    aria-label="上一张">
-                    <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[6.4rem] md:h-[6.4rem]"
+                    :aria-label="$t('about.leaderTeam.prev')">
+                    <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 40 40" fill="none">
                             <path
                                 d="M12.6675 19.2264H30L29.9779 20.7513H12.647L16.8952 25H14.9945L10 20.0109L15.0166 15H16.8731L12.6675 19.2264Z"
@@ -77,7 +77,7 @@
 
                 <button id="team-swiper-next"
                     class="w-[40px] h-[40px] rounded bg-blue-600 flex items-center justify-center transition disabled:opacity-40"
-                    aria-label="下一张">
+                    :aria-label="$t('about.leaderTeam.next')">
                     <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 64 64" fill="none">
                         <path
                             d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z"
@@ -129,26 +129,27 @@
 
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation } from 'swiper/modules'
 
 import 'swiper/css'
 
-const members = [
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' },
-    { name: '韩宗良', role: '麦炽科技创始人&CEO', desc: '深耕AI出海，服务 MiniMax、美图、智谱AI等，年操盘广告预算超5000万美元', photo: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021' }
-]
+const { t, tm } = useI18n()
+
+// 成员照片（当前均为同一张占位图）
+const memberPhoto = 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021'
+
+const members = computed(() => {
+    const raw = tm('about.leaderTeam.members')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => ({
+        name: t(`about.leaderTeam.members.${i}.name`),
+        role: t(`about.leaderTeam.members.${i}.role`),
+        desc: t(`about.leaderTeam.members.${i}.desc`),
+        photo: memberPhoto
+    }))
+})
 
 const swiperProgress = ref(0)
 
@@ -164,7 +165,7 @@ function onSlideChange(swiper) {
 }
 
 function updateProgress(swiper) {
-    const total = members.length
+    const total = members.value.length
     if (!total) {
         swiperProgress.value = 0
         return

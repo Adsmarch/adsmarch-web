@@ -9,7 +9,7 @@
                 <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
             </svg>
             <h2 class="text-[40px] lg:text-[96px] font-[600] text-right">
-                与我们在此相遇
+                {{ $t('about.bottomVideo.title') }}
             </h2>
         </div>
 
@@ -37,7 +37,7 @@
             <!-- 播放按钮（仅有视频时显示） -->
             <button v-if="cities[activeIndex].videoUrl" @click="togglePlay"
                 class="absolute inset-0 flex items-center justify-center group"
-                aria-label="播放视频">
+                :aria-label="$t('about.bottomVideo.play')">
                 <span v-if="!isPlaying"
                     class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center group-hover:bg-black/60 transition">
                     <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
@@ -129,7 +129,7 @@
 
 
 <script setup>
-import { ref, nextTick } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation } from 'swiper/modules'
 
@@ -137,38 +137,42 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 
-const cities = [
+const { t, tm } = useI18n()
+
+// 城市封面/视频 URL（保留硬编码，按顺序与 i18n 文案 zip）
+const cityMedia = [
     {
-        name: '北京',
-        address: '地址信息占位 地址信息占位 地址信息占位 地址信息占位',
         cover: 'https://cdn.shopify.com/s/files/1/0702/5937/6290/files/11_5c23e45e-181d-431f-9f8d-06677bd08993.png?v=1789876538',
         videoUrl: 'https://cdn.shopify.com/videos/c/o/v/1e8f2fae04424e0f82379b10610a0da1.mp4'
     },
     {
-        name: '济南',
-        address: '地址信息占位 地址信息占位 地址信息占位 地址信息占位',
         cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
         videoUrl: ''
     },
     {
-        name: '上海',
-        address: '地址信息占位 地址信息占位 地址信息占位 地址信息占位',
         cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
         videoUrl: ''
     },
     {
-        name: '西安',
-        address: '地址信息占位 地址信息占位 地址信息占位 地址信息占位',
         cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
         videoUrl: ''
     },
     {
-        name: '南通',
-        address: '地址信息占位 地址信息占位 地址信息占位 地址信息占位',
         cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
         videoUrl: ''
     }
 ]
+
+const cities = computed(() => {
+    const raw = tm('about.bottomVideo.cities')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => ({
+        name: t(`about.bottomVideo.cities.${i}.name`),
+        address: t(`about.bottomVideo.cities.${i}.address`),
+        cover: cityMedia[i].cover,
+        videoUrl: cityMedia[i].videoUrl
+    }))
+})
 
 
 const activeIndex = ref(0)
@@ -218,7 +222,7 @@ function onVideoTimeUpdate() {
 
 
 function updateSwiperProgress(swiper) {
-    const total = cities.length
+    const total = cities.value.length
     const slidesPerView = Number(swiper.params.slidesPerView)
     const maxMove = total - slidesPerView
     if (maxMove <= 0) {

@@ -30,7 +30,7 @@
                 <!-- 世界地图 PC -->
                 <div class="hidden min-[1120px]:block min-[1120px]:mt-[41px]">
                     <img src="https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643"
-                        alt="世界地图" class="w-full" />
+                        :alt="$t('about.development.mapAlt')" class="w-full" />
                 </div>
             </div>
 
@@ -39,11 +39,11 @@
                 <div class="relative z-10 flex flex-col min-[1120px]:flex-row min-[1120px]:items-start min-[1120px]:justify-end gap-4">
                     <h2
                         class="text-[40px] w-full min-[1120px]:text-[96px] font-[600] min-[1120px]:text-left text-right min-[1120px]:mb-[64px] mb-[32px]">
-                        关于麦炽
+                        {{ $t('about.development.aboutTitle') }}
                     </h2>
                 </div>
 
-                <img class="w-[24px]" src="/assets/Union.png" alt="装饰图标" />
+                <img class="w-[24px]" src="/assets/Union.png" :alt="$t('about.development.decoAlt')" />
 
                 <div class="min-[1120px]:mt-[24px] mt-[16px] font-[400] text-[16px] min-[1120px]:text-[20px] leading-[1.5]">
                     <p v-for="(para, i) in introParagraphs" :key="i">
@@ -53,7 +53,7 @@
 
                 <div class="min-[1120px]:hidden mt-6">
                     <img src="https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643"
-                        alt="世界地图" class="w-full" />
+                        :alt="$t('about.development.mapAlt')" class="w-full" />
                 </div>
             </div>
         </div>
@@ -72,16 +72,16 @@
                     </svg>
 
                     <h3 class="text-[40px] md:text-[96px] font-[600]">
-                        发展历程
+                        {{ $t('about.development.devTitle') }}
                     </h3>
                 </div>
                 <div class="flex items-center gap-[20px]">
 
                     <button id="dev-swiper-prev"
-                        class="w-[40px] h-[40px] md:w-[6.4rem] md:h-[6.4rem]  rounded bg-[#131416] text-white flex items-center justify-center hover:bg-gray-700 transition"
-                        aria-label="上一张">
+                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px]  rounded bg-[#131416] text-white flex items-center justify-center hover:bg-gray-700 transition"
+                        :aria-label="$t('about.development.prev')">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[6.4rem] md:h-[6.4rem]"
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 40 40" fill="none">
                             <path
                                 d="M12.6675 19.2264H30L29.9779 20.7513H12.647L16.8952 25H14.9945L10 20.0109L15.0166 15H16.8731L12.6675 19.2264Z"
@@ -90,9 +90,9 @@
                     </button>
 
                     <button id="dev-swiper-next"
-                        class="w-[40px] h-[40px] md:w-[6.4rem] md:h-[6.4rem] rounded bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"
-                        aria-label="下一张">
-                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[6.4rem] md:h-[6.4rem]"
+                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"
+                        :aria-label="$t('about.development.next')">
+                        <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 64 64" fill="none">
 
                             <path
@@ -175,7 +175,7 @@
 
 <script setup>
 
-import { ref, nextTick } from 'vue'
+import { ref, computed, nextTick } from 'vue'
 
 import {
     Swiper,
@@ -190,76 +190,27 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 
+const { t, tm } = useI18n()
+
 /* =========================================================
    公司简介
 ========================================================= */
 
-const introParagraphs = [
+const introParagraphs = computed(() => {
+    const raw = tm('about.development.intro')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => t(`about.development.intro.${i}`))
+})
 
-    '麦炽科技（AdsMarch）成立于2018年，总部位于北京，并在上海、济南、西安和南通设有分公司，是卓越的一站式出海整合营销服务商。',
-
-    '依托Google、Meta、TikTok等全球主流媒体资源，麦炽科技构建了覆盖APP出海、跨境电商、素材制作、海外KOL营销、顾问教育、SEO&GEO、PR、ASO、联盟营销及市场活动的业务矩阵，持续帮助中国品牌进入全球市场并实现长期增长。',
-
-    '截至目前，麦炽已赋能数千家企业，业务足迹覆盖全球200多个国家和地区。我们凭借平均经验5年以上的资深专家团队，帮助中国企业从"走出去”到“扎下去”，实现可持续的全球化增长。'
-
-]
-
-const timeline = [
-
-    {
-        year: '2018',
-        title: '破土',
-        desc: '麦炽科技成立，正式提供出海营销服务。'
-    },
-
-    {
-        year: '2019',
-        title: '蓄力',
-        desc: '跑通业务模型，完善团队建设，日消耗突破2万美金。'
-    },
-
-    {
-        year: '2020',
-        title: '破局',
-        desc: '打破赛道边界，进军跨境电商与游戏增长。'
-    },
-
-    {
-        year: '2021',
-        title: '跨越',
-        desc: '建立服务标准体系，人员规模达到数十人。'
-    },
-
-    {
-        year: '2022',
-        title: '背书',
-        desc: '技术实力获证，荣获中关村高新技术企业。'
-    },
-
-    {
-        year: '2023',
-        title: '跃升',
-        desc: '荣获 Google 一代认证服务商，落地首场千人盛会。'
-    },
-    {
-        year: '2024',
-        title: '聚势',
-        desc: '多次获得行业认可，人员规模持续扩充，成功举办多场行业峰会。'
-    },
-
-    {
-        year: '2025',
-        title: '进化',
-        desc: '团队突破百人，实现从全球化服务生态赋能的进化。'
-    },
-
-    {
-        year: '2026',
-        title: '智变',
-        desc: '人才与业务版图战略扩张，重塑内部架构，赋能未来出海。'
-    }
-
-]
+const timeline = computed(() => {
+    const raw = tm('about.development.timeline')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => ({
+        year: t(`about.development.timeline.${i}.year`),
+        title: t(`about.development.timeline.${i}.title`),
+        desc: t(`about.development.timeline.${i}.desc`)
+    }))
+})
 
 
 const devSwiper = ref(null)
@@ -288,7 +239,7 @@ function onSlideChange(swiper) {
 }
 
 function updateProgress(swiper) {
-    const total = timeline.length
+    const total = timeline.value.length
     if (!total) {
         swiperProgress.value = 0
         return

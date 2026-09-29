@@ -86,6 +86,292 @@
       }
     ]
   },
+  "about": {
+    "top": {
+      "titleLines": [
+        "Connecting China and the World,",
+        "Powering Every Global Breakthrough"
+      ],
+      "values": [
+        {
+          "label": "Vision: ",
+          "text": "Helping 10,000 companies go global and 10,000 talents achieve their overseas ambitions!"
+        },
+        {
+          "label": "Philosophy: ",
+          "text": "Customer first, future-focused, fairness and justice, unwavering innovation"
+        },
+        {
+          "label": "Principles: ",
+          "text": "Virtue-based, aiming high, keeping our promises"
+        }
+      ],
+      "prev": "Previous",
+      "next": "Next"
+    },
+    "development": {
+      "aboutTitle": "About AdsMarch",
+      "mapAlt": "World map",
+      "decoAlt": "Decorative icon",
+      "intro": [
+        "Founded in 2018 and headquartered in Beijing, AdsMarch has branch offices in Shanghai, Jinan, Xi'an and Nantong, and is a premier one-stop integrated marketing service provider for global expansion.",
+        "Backed by major global media resources such as Google, Meta and TikTok, AdsMarch has built a business matrix covering app globalization, cross-border e-commerce, creative production, overseas KOL marketing, consulting and education, SEO & GEO, PR, ASO, affiliate marketing and marketing events, continuously helping Chinese brands enter global markets and achieve long-term growth.",
+        "To date, AdsMarch has empowered thousands of businesses, with a footprint spanning more than 200 countries and regions worldwide. With senior expert teams averaging over five years of experience, we help Chinese enterprises move from \"going global\" to \"taking root\" and achieve sustainable global growth."
+      ],
+      "devTitle": "Milestones",
+      "prev": "Previous",
+      "next": "Next",
+      "timeline": [
+        {
+          "year": "2018",
+          "title": "Breaking Ground",
+          "desc": "AdsMarch was founded, officially delivering overseas marketing services."
+        },
+        {
+          "year": "2019",
+          "title": "Building Momentum",
+          "desc": "Business model proven, team strengthened, daily ad spend exceeded $20,000."
+        },
+        {
+          "year": "2020",
+          "title": "Breakthrough",
+          "desc": "Broke category boundaries, entering cross-border e-commerce and game growth."
+        },
+        {
+          "year": "2021",
+          "title": "Leap Forward",
+          "desc": "Established a service standard system; team grew to dozens of members."
+        },
+        {
+          "year": "2022",
+          "title": "Endorsement",
+          "desc": "Technology strength certified — named a Zhongguancun High-Tech Enterprise."
+        },
+        {
+          "year": "2023",
+          "title": "Rising",
+          "desc": "Certified Google Tier-1 partner and hosted the first thousand-person summit."
+        },
+        {
+          "year": "2024",
+          "title": "Gathering Momentum",
+          "desc": "Earned repeated industry recognition, expanded the team, and hosted multiple industry summits."
+        },
+        {
+          "year": "2025",
+          "title": "Evolution",
+          "desc": "Team surpassed 100 members, evolving into a globalized service ecosystem enabler."
+        },
+        {
+          "year": "2026",
+          "title": "Intelligent Shift",
+          "desc": "Strategic expansion of talent and business landscape, reshaping internal structure to empower future globalization."
+        }
+      ]
+    },
+    "leaderTeam": {
+      "title": "Leadership Team",
+      "desc": "To date, AdsMarch has empowered thousands of businesses, with a footprint spanning more than 200 countries and regions worldwide. With senior expert teams averaging over five years of experience, we help Chinese enterprises move from \"going global\" to \"taking root\" and achieve sustainable global growth.",
+      "prev": "Previous",
+      "next": "Next",
+      "members": [
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        },
+        {
+          "name": "Han Zongliang",
+          "role": "Founder & CEO, AdsMarch",
+          "desc": "Deep expertise in AI globalization, serving MiniMax, Meitu, Zhipu AI and more, with annual managed ad budgets exceeding $50 million"
+        }
+      ]
+    },
+    "bottomVideo": {
+      "title": "Meet Us Here",
+      "play": "Play video",
+      "cities": [
+        {
+          "name": "Beijing",
+          "address": "Address placeholder Address placeholder Address placeholder Address placeholder"
+        },
+        {
+          "name": "Jinan",
+          "address": "Address placeholder Address placeholder Address placeholder Address placeholder"
+        },
+        {
+          "name": "Shanghai",
+          "address": "Address placeholder Address placeholder Address placeholder Address placeholder"
+        },
+        {
+          "name": "Xi'an",
+          "address": "Address placeholder Address placeholder Address placeholder Address placeholder"
+        },
+        {
+          "name": "Nantong",
+          "address": "Address placeholder Address placeholder Address placeholder Address placeholder"
+        }
+      ]
+    }
+  },
+  "awards": {
+    "honors": {
+      "title": "Awards & Honors",
+      "awards": [
+        {
+          "year": "2021",
+          "name": "Zhongguancun High-Tech Enterprise"
+        },
+        {
+          "year": "2023",
+          "name": "Austart Incubator Ecosystem Partner & Certified Globalization Service Provider"
+        },
+        {
+          "year": "2023",
+          "name": "Jingming Award \"Outstanding Cross-Border E-Commerce Service Award of the Year\""
+        },
+        {
+          "year": "2023",
+          "name": "Huxiao Award — Excellence in Both Agency Operations & Cross-Border E-Commerce"
+        },
+        {
+          "year": "2023",
+          "name": "PAGC 2026 7th Golden Sail Award \"2026 H1 Global Buzz Brand Award\""
+        },
+        {
+          "year": "2024",
+          "name": "Shortlisted for Google \"Best Policy Advocate\" Grand Award"
+        },
+        {
+          "year": "2024",
+          "name": "Shortlisted for Google \"Best Rising Collaboration\" Agency Grand Award"
+        },
+        {
+          "year": "2024",
+          "name": "Google Greater China \"Outstanding Breakthrough Award\""
+        },
+        {
+          "year": "2025",
+          "name": "Golden Sail Award H1 \"Global Popularity Award\""
+        },
+        {
+          "year": "2025",
+          "name": "Shortlisted for YouTube Works Awards (China) \"Best Full-Funnel Marketing\""
+        },
+        {
+          "year": "2025",
+          "name": "6th TBI Outstanding Brand Innovation Award \"Most Breakthrough Service Provider in China's AI Global Growth\""
+        },
+        {
+          "year": "2025",
+          "name": "Zuoyebang Annual Outstanding Contribution Award"
+        },
+        {
+          "year": "2025",
+          "name": "Huodongxing Annual Outstanding Organizer Selection — \"Annual Technology & Business Pioneer Organizer\""
+        }
+      ]
+    },
+    "industry": {
+      "title": "Industry Recognition",
+      "prev": "Previous",
+      "next": "Next",
+      "recognitions": [
+        {
+          "year": "2023",
+          "desc": "Certificate / Association / Charity xxxx text placeholder"
+        },
+        {
+          "year": "2024",
+          "desc": "Certificate / Association / Charity xxxx text placeholder"
+        },
+        {
+          "year": "2023",
+          "desc": "Certificate / Association / Charity xxxx text placeholder"
+        },
+        {
+          "year": "2023",
+          "desc": "Certificate / Association / Charity xxxx text placeholder"
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact Us",
+    "subtitle": "AdsMarch  Technology, dedicated to helping Chinese enterprises go global,making international business simpler!",
+    "fields": {
+      "name": { "label": "Name", "placeholder": "Please enter your name" },
+      "phone": { "label": "Phone", "placeholder": "Please enter your phone number" },
+      "email": { "label": "Email", "placeholder": "xxxxxx{'@'}xxx.com" },
+      "company": { "label": "Company", "placeholder": "xxxxxxxx" },
+      "position": { "label": "Position", "placeholder": "XXXX Operations" },
+      "website": { "label": "Website (optional)", "placeholder": "xxxxxxxx.com" }
+    },
+    "businessTitle": "Your Core Business Areas",
+    "businessAreas": {
+      "internet_app_1": "Pan-Internet / Apps",
+      "ecommerce_dtc": "Cross-Border E-Commerce / DTC Brands",
+      "internet_app_2": "Pan-Internet / Apps",
+      "gaming": "Gaming / Pan-Entertainment",
+      "education": "Education & Training / Online Education",
+      "b2b_manufacturing": "B2B Manufacturing & Industrial Products Going Global",
+      "saas_hitech": "SaaS / High-Tech Products",
+      "other": "Other Industries"
+    },
+    "consultTitle": "Consultation Details",
+    "messagePlaceholder": "Please describe your current pain points, budget, or goals in as much detail as possible so we can offer the right service.",
+    "submit": "Submit"
+  },
   "footer": {
     "careers": "Careers",
     "about": "About Us",

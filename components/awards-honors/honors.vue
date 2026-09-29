@@ -2,7 +2,7 @@
     <div class=" pt-[56px] md:pt-[120px] pb-[29px] md:pb-[0px]">
 
         <!-- 标题 -->
-        <div class="flex items-start gap-3 mb-[32px] md:mb-[64px]">
+        <div class="flex items-start md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" md:width="32" md:height="32"
                 viewBox="0 0 24 24" fill="none" class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
                 <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -10,7 +10,7 @@
                 <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
             </svg>
             <h2 class="text-[40px] md:text-[96px] font-[600] leading-none text-white">
-                奖项与荣誉
+                {{ $t('awards.honors.title') }}
             </h2>
         </div>
 
@@ -18,7 +18,7 @@
         <div class="hidden md:flex items-start gap-[24px] lg:gap-[80px]">
             <!-- 左侧奖杯图片 -->
             <div class="w-[42%] lg:w-[45%] shrink-0 rounded-[4px] md:rounded-[8px] overflow-hidden">
-                <img :src="honorImage" alt="奖项与荣誉" class="w-full object-cover" loading="lazy" />
+                <img :src="honorImage" :alt="$t('awards.honors.title')" class="w-full object-cover" loading="lazy" />
             </div>
 
             <!-- 右侧奖项网格 -->
@@ -56,7 +56,7 @@
         <!-- ========== 手机端：图片 + 横向轮播 ========== -->
         <div class="md:hidden">
             <div class="rounded-[8px] overflow-hidden mb-[32px]">
-                <img :src="honorImage" alt="奖项与荣誉" class="w-full object-cover" loading="lazy" />
+                <img :src="honorImage" :alt="$t('awards.honors.title')" class="w-full object-cover" loading="lazy" />
             </div>
             <!-- 奖项轮播 -->
             <Swiper :modules="[SwiperScrollbar]" :slides-per-view="1.2" :space-between="12" :loop="false" :speed="600"
@@ -98,6 +98,7 @@
 </template>
 
 <script setup>
+import { computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Scrollbar as SwiperScrollbar } from 'swiper/modules'
 
@@ -116,22 +117,17 @@ function onSlideChange(swiper) {
     activeIndex.value = swiper.activeIndex
 }
 
+const { t, tm } = useI18n()
+
 // 奖项列表
-const awards = [
-    { id:1,year: '2021', name: '中关村高新技术企业' },
-    { id:2,year: '2023', name: '澳创时代孵化器生态合作伙伴及认证 出海服务商' },
-    { id:3,year: '2023', name: '鲸鸣奖“年度跨境电商卓越服务奖”' },
-    { id:4,year: '2023', name: '虎啸奖代运营&跨境电商双优秀奖' },
-    { id:5,year: '2023', name: 'PAGC2026第七届金帆奖“2026H1 出海热度品牌奖”' },
-    { id:6,year: '2024', name: '入围谷歌“最佳政策捍卫者”大奖' },
-    { id:7,year: '2024', name: '入围谷歌“最佳新锐协作"代理大奖' },
-    { id:8,year: '2024', name: '谷歌大中华区“卓越突破奖”' },
-    { id:9,year: '2025', name: 'Golden Sail Award H1"出海人气奖”' },
-    { id:10,year: '2025', name: '入围YouTube Works Awards (China)“最佳全链路营销”' },
-    { id:11, year: '2025', name: '第六届TBI杰出品牌创新奖“中国AI出海增长领域最具突破力的服务商”' },
-    { id:12,year: '2025', name: '年度作业帮突出贡献奖' },
-    { id:13,year: '2025', name: '活动行年度卓越主办方评选中荣获"年度科技与商业先锋主办方"' }
-]
+const awards = computed(() => {
+    const raw = tm('awards.honors.awards')
+    const len = Array.isArray(raw) ? raw.length : 0
+    return Array.from({ length: len }, (_, i) => ({
+        year: t(`awards.honors.awards.${i}.year`),
+        name: t(`awards.honors.awards.${i}.name`)
+    }))
+})
 </script>
 
 <style  scoped>
