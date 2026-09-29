@@ -1,4 +1,99 @@
 {
-  "welcome": "Welcome to our website",
-  "about": "About Us"
+  "nav": {
+    "services": "Services",
+    "insights": "Insights",
+    "about": "About Us",
+    "awards": "Awards & Recognition",
+    "careers": "Careers",
+    "contact": "Contact Us",
+    "switchLang": "Language / 切换语言",
+    "sub": {
+      "app": "App Globalization",
+      "ecommerce": "Cross-Border E-Commerce",
+      "design": "Ad Design",
+      "kol": "Global Influencer Marketing",
+      "training": "Globalization Training",
+      "marketing": "Market Communications",
+      "seo": "SEO & GEO",
+      "careersHome": "Careers Home",
+      "jobs": "Explore Jobs"
+    }
+  },
+  "homeBanner": {
+    "title": "Igniting Global Growth Momentum for Chinese Brands",
+    "subtitle": "AdsMarch empowers Chinese brands to expand worldwide and achieve sustained growth through strategic insights, global media, creative content, and data-driven operations.",
+    "btn": "Learn More"
+  },
+  "homeValue": {
+    "title": "Every Day, We Create Value for Global Expansion",
+    "cards": {
+      "app": {
+        "title": "App Globalization",
+        "desc": "Empowered polybuzz to deepen global AI social media campaigns, with daily spend exceeding $20,000+",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "ecommerce": {
+        "title": "Cross-Border E-Commerce",
+        "desc": "Driven Yotobike to build a clear purchasing journey and strengthen brand storytelling",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "design": {
+        "title": "Ad Design",
+        "desc": "Providing localized creative design and short video production to elevate global brand influence",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "kol": {
+        "title": "Global Influencer Marketing",
+        "desc": "Supported iFLYTEK with a dual-drive strategy of affiliate and influencer marketing, exceeding 25M+ impressions",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "marketing": {
+        "title": "Market Communications",
+        "desc": "Building industry content ecosystems and high-end networking events to amplify brand presence",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "training": {
+        "title": "Globalization Training",
+        "desc": "Providing systematic, practical training for global ad campaigns to precisely empower talent development",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      },
+      "seo": {
+        "title": "SEO & GEO",
+        "desc": "Empowered Tenniix to enhance AI visibility and establish long-term traffic and brand assets globally",
+        "detail": "Leveraging extensive experience, we deliver professional guidance across product analysis, account strategy, and creative assets. Through iterative optimization, the overall day-2 retention rate increased from 25% to over 40%, with daily ad spend stabilizing above $20,000."
+      }
+    }
+  },
+  "homeSocialMedia": {
+    "title": "Global Media Resources",
+    "subtitle": "Covering {count} countries and regions worldwide",
+    "tag": "Google Official Tier-1 Premier Partner"
+  },
+  "homeGlobalAcclaim": {
+    "title": "Global Acclaim",
+    "list": [
+      {
+        "year": "2023",
+        "title": "Austart Ecosystem Partner & Certified Globalization Service Provider"
+      },
+      {
+        "year": "2024",
+        "title": "Austart Ecosystem Partner & Certified Globalization Service Provider"
+      },
+      {
+        "year": "2023",
+        "title": "Austart Ecosystem Partner & Certified Globalization Service Provider"
+      }
+    ]
+  },
+  "footer": {
+    "careers": "Careers",
+    "about": "About Us",
+    "contact": "Contact Us",
+    "locations": "Beijing (HQ), Shanghai, Xi'an, Jinan, Nantong",
+    "qrTech": "AdsMarch Tech",
+    "qrCrossBorder": "AdsMarch Cross-Border",
+    "copyright": "Copyright {'@'} AdsMarch Tech - Helping 10,000+ businesses go global",
+    "icp": "Beijing ICP No. 20001126-1"
+  }
 }

@@ -15,4 +15,3 @@ import LeaderTeam from '~/components/about-us/leader-team.vue';
 
 </script>
 
-<style lang="scss" scoped></style>

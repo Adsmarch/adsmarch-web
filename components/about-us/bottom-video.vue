@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-12 lg:pb-20 px-5 lg:px-[120px] m-auto">
+    <div class="pb-12 lg:pb-20 px-[15px] lg:px-[120px] m-auto">
 
         <!-- ========== 标题 ========== -->
         <div class="flex items-start justify-end gap-3 mb-[32px] lg:mb-[64px]">

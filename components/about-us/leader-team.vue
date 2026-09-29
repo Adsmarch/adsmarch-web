@@ -1,5 +1,5 @@
 <template>
-    <div class="pb-[28px] md:pb-[120px] px-5 md:px-[120px] m-auto">
+    <div class="pb-[28px] md:pb-[120px] px-[15px] md:px-[120px] m-auto">
 
         <!-- ========== PC：网格布局 ========== -->
         <div class="hidden md:grid grid-cols-4 gap-[24px]">

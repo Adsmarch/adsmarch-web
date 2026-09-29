@@ -1,7 +1,7 @@
 <template>
  
     <!-- 标题 + 企业理念 -->
-    <div class="px-5 md:px-[120px] m-auto">
+    <div class="px-[15px] md:px-[120px] m-auto">
       <div
         class="flex flex-col md:flex-row md:items-start md:justify-between gap-8 mb-[32px] md:mb-[64px] pt-[56px] md:pt-[120px]">
         <div class="flex flex-col">
@@ -32,7 +32,7 @@
 
     <!-- 图片轮播 -->
      <div class="w-full">
-    <div class="relative mt-10 md:mt-12 -mx-5 md:mx-0">
+    <div class="relative mt-10 md:mt-12">
      <Swiper
   :modules="[SwiperNavigation, SwiperPagination]"
   :slides-per-view="1.4"
@@ -55,7 +55,7 @@
   }"
   :breakpoints="{
     768: {
-      slidesPerView: 1.6,
+      slidesPerView: 1.4,
       spaceBetween: 24
     }
   }"
@@ -78,7 +78,7 @@
 
       <!-- 左右切换按钮（仅 PC） -->
       <button id="about-swiper-prev"
-        class="hidden md:flex px-[10px] py-[10px] absolute left-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
+        class="hidden md:flex px-[10px] py-[10px] absolute left-[7.5%] top-1/2 -translate-y-1/2 z-10 md:w-[64px] md:h-[64px] rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
         aria-label="上一张">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
           <path
@@ -87,7 +87,7 @@
         </svg>
       </button>
       <button id="about-swiper-next"
-        class="hidden md:flex px-[10px] py-[10px] absolute right-4 top-1/2 -translate-y-1/2 z-10 w-11 h-11 rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
+        class="hidden md:flex px-[10px] py-[10px] absolute right-[7.5%] top-1/2 -translate-y-1/2 z-10 md:w-[64px] md:h-[64px] rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition"
         aria-label="下一张">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none">
           <path
@@ -129,10 +129,8 @@ const images = [
 ]
 
 // loop + centeredSlides 要求幻灯片数 >= slidesPerView*2+1，
-// 4 张不够会导致两端没图可补（空白/划不动），复制成 8 张保证循环
+// 4 张不够会导致两端图为空白，复制成 8 张保证循环
 const loopImages = [...images, ...images]
-
-// 自定义分页：8 张图仍只显示 4 个点，按 realIndex % 4 高亮
 function renderPagination(swiper) {
   const real = images.length
   const active = swiper.realIndex % real

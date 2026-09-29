@@ -1,5 +1,5 @@
 <template>
-    <div class="px-5 md:px-[120px] m-auto">
+    <div class="px-[15px] md:px-[120px] m-auto">
 
         <!-- ========== 关于麦炽 ========== -->
         <div
