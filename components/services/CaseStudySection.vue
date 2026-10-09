@@ -30,9 +30,9 @@
         <SwiperSlide 
           v-for="item in caseList" 
           :key="item.id" 
-          class="h-auto !w-[80%] sm:!w-[80%] lg:!w-[75%] xl:!w-[65%]"
+          class="h-auto !w-[84%] sm:!w-[80%] lg:!w-[75%] xl:!w-[65%]"
         >
-          <div class="bg-[#131416] rounded-sm overflow-hidden flex flex-col h-full border border-white/5 hover:border-white/10 transition-colors">
+          <div class="bg-[#131416] rounded-[4px] overflow-hidden flex flex-col h-full border border-[#131416] transition-colors">
             
             <div 
               class="relative w-full aspect-[16/9] overflow-hidden bg-black/40 group"
@@ -42,7 +42,7 @@
               <img 
                 :src="item.coverImage" 
                 :alt="$t(`classicCases.items.${item.key}.title`)" 
-                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
               />
               
               <div 
@@ -72,7 +72,7 @@
                 <h4 class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold text-white mb-4 leading-snug">
                   {{ $t(`classicCases.items.${item.key}.subtitle`) }}
                 </h4>
-                <p class="text-[16px] sm:text-[20px] text-[#7D86A1] leading-relaxed line-clamp-4 mt-auto">
+                <p class="text-[16px] sm:text-[20px] text-[#7D86A1] leading-[1.5] mt-auto">
                   {{ $t(`classicCases.items.${item.key}.description`) }}
                 </p>
               </div>

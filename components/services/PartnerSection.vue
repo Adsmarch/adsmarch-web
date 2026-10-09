@@ -71,11 +71,11 @@
       </div>
 
     <div class="w-full md:w-[62%] md:order-1">
-    <div class="grid grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8 border-y border-[#454C5F]">
+    <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8 border-y border-[#454C5F]">
         <div 
         v-for="(logo, index) in partnerLogos" 
         :key="index"
-        class="w-[112px] h-[64px] md:w-[160px] md:h-[160px] xl:w-[200px] xl:h-[200px] relative overflow-hidden flex items-center justify-center group"
+        class="w-[112px] h-[64px] md:w-[120px] md:h-[80px] lg:w-[200px] lg:h-[200px] xl:w-[160px] xl:h-[160px] 2xl:w-[200px] 2xl:h-[200px] relative overflow-hidden flex items-center justify-center group"
         >
         <img 
             :src="logo" 
