@@ -3,7 +3,7 @@
     <div class="w-full px-[15px] md:px-[40px] xl:px-[120px] h-[72px] xl:h-[96px] flex items-center justify-between gap-4">
       
       <NuxtLinkLocale to="/" class="flex items-center shrink-0">
-        <img src="/logo.svg" alt="AdsMarch Logo" class="h-6 xl:h-8 w-auto" />
+        <img src="/logo.svg" alt="AdsMarch Logo" class="h-6 xl:h-10 w-auto" />
       </NuxtLinkLocale>
 
       <div class="flex items-center space-x-4 xl:space-x-8 2xl:gap-[120px] xl:gap-[40px] h-full">
