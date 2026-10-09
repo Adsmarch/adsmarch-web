@@ -381,5 +381,89 @@
     "qrCrossBorder": "AdsMarch Cross-Border",
     "copyright": "Copyright {'@'} AdsMarch Tech - Helping 10,000+ businesses go global",
     "icp": "Beijing ICP No. 20001126-1"
+  },
+  "floatWidget": {
+    "consult": "Contact",
+    "consultQr": "Contact QR Code",  
+    "follow": "Follow Us",
+    "followQr": "Follow Us QR Code"
+  },
+  "appBanner": {
+    "title": "App Globalization",
+    "subtitle": "Providing comprehensive global marketing services to help Chinese enterprises enhance their overseas brand image.",
+    "description": "Reaching 3 billion+ global users, leveraging over $200 million in ad spend experience and an annual output of 500,000 creative assets to drive precise user acquisition and efficient conversion globally."
+  },
+  "appService": {
+    "title": "Our Services",
+    "items": {
+      "strategy": {
+        "title": "Global Business Strategy",
+        "points": [
+          "Market Research & Competitor Analysis",
+          "Target Market Analysis",
+          "Brand Positioning & Differentiation",
+          "Channel Selection & Content Localization"
+        ]
+      },
+      "aso": {
+        "title": "App Store Optimization (ASO)",
+        "points": [
+          "Account Setup & Management",
+          "Campaign Planning & Budgeting",
+          "Ad Launch & Performance Tracking",
+          "Conversion & Refined Optimization"
+        ]
+      },
+      "ads": {
+        "title": "Media Ad Optimization",
+        "points": [
+          "Account Structure Optimization",
+          "Budget Allocation & Bidding Adjustment",
+          "Creative Testing & Ad Optimization",
+          "Strategy Adjustments & ROI Growth"
+        ]
+      },
+      "kol": {
+        "title": "Influencer Marketing",
+        "points": [
+          "Global Influencer Screening",
+          "Content Co-Creation & Campaign Outreach",
+          "Campaign Execution",
+          "Performance Review & Trust Building"
+        ]
+      },
+      "sns": {
+        "title": "Social Media Management",
+        "points": [
+          "Overseas Social Account Management",
+          "Content Planning & Copywriting",
+          "Short Video Production",
+          "Continuous Operation & Engagement"
+        ]
+      }
+    }
+  },
+  "classicCases": {
+    "title": "Classic Cases",
+    "items": {
+      "editor": {
+        "title": "AI Editor",
+        "subtitle": "Empowering CapCut to acquire global users via Google",
+        "description": "Focusing on Europe, Latin America, Japan, and Korea, centered on CapCut's AI audio/video capabilities, entering through high-intent scenarios like background removal and subtitles. Maintained 30%+ retention rate with stable conversion quality during expansion."
+      },
+      "imageGen": {
+        "title": "AI Image Generator",
+        "subtitle": "Accompanying Vidu's full-funnel ad optimization upgrade",
+        "description": "Tested regions and landing pages to optimize budgets, connected multi-touchpoint audience targeting, and broke bottlenecks through long-term operations—achieving a 310% MoM ad spend growth and a 75% increase in paid rate."
+      },
+      "companion": {
+        "title": "AI Companion",
+        "subtitle": "Empowering PolyBuzz in global AI social app marketing",
+        "description": "Leveraged deep expertise across product analysis, account strategy, and creative tactics. Through iterative optimizations, day-2 retention grew from 25% to over 40%, with daily ad spend stabilizing above $20,000 USD."
+      }
+    }
+  },
+  "partner": {
+    "title": "Empowering\nGlobal Growth"
   }
 }

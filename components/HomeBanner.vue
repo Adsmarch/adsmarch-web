@@ -63,7 +63,7 @@
           <div>
             <NuxtLinkLocale
               to="/contact"
-              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-8 sm:py-4 bg-[#0043FF] text-white text-[14px] sm:text-[20px] font-semibold rounded hover:bg-[#0038E0] transition-colors duration-200 w-auto min-w-[120px] sm:w-[240px] h-[40px] sm:h-[64px]"
+              class="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-8 sm:py-4 bg-[#0043FF] text-white text-[14px] sm:text-[20px] font-semibold rounded hover:bg-[#103C93] transition-colors duration-200 w-auto min-w-[120px] sm:w-[240px] h-[40px] sm:h-[64px]"
             >
               <span>{{ $t('homeBanner.btn') }}</span>
               <svg width="6" height="12" viewBox="0 0 6 12" fill="none" class="w-1.5 h-2.5 sm:w-2 sm:h-3 ml-1">

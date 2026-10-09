@@ -1,6 +1,6 @@
 <template>
   <section ref="sectionRef" class="relative w-full bg-black text-white min-h-[100vh]">
-    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[60px] md:pb-[120px]">
+    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[120px] md:pb-[120px]">
       <div 
         class="flex flex-col items-center transition-transform duration-700 ease-out z-20 gap-3 xl:gap-6"
         :class="[

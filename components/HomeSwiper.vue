@@ -1,7 +1,6 @@
 <template>
-  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] overflow-hidden">
-
-    <div class="flex items-start justify-end gap-6 mb-8 md:mb-[56px] xl:mb-[64px]">
+  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] overflow-hidden select-none">
+    <div class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px]">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 mt-2">
         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
@@ -12,7 +11,6 @@
       </h2>
     </div>
     <div>
-      
       <Swiper
         :modules="[SwiperNavigation]"
         :slides-per-view="1.2"
@@ -33,17 +31,21 @@
           v-slot="{ isActive }"
           class="h-auto"
         >
-          <div :class="['transition-all duration-300', index % 2 === 1 ? 'mt-[80px]' : 'mt-0']">
+          <div :class="['transition-all duration-300', index % 2 === 1 ? 'md:mt-[80px]' : 'mt-0']">
             <NuxtLinkLocale
               :to="`/services/${item.key}`"
               :class="[
                 'group relative block h-[396px] xl:h-[520px] rounded-md overflow-hidden transition-all duration-500 border border-[#232730]',
-                isActive ? 'active-gradient-card' : 'bg-[#101216] hover:active-gradient-card'
+                isActive ? 'active-gradient-card md:!bg-[#101216] md:hover:active-gradient-card' : 'bg-[#101216] hover:active-gradient-card'
               ]"
             >
               <div 
                 class="absolute inset-0 z-0 transition-opacity duration-500"
-                :class="[isActive ? 'opacity-0' : 'opacity-100 group-hover:opacity-0']"
+                :class="[
+                  isActive 
+                    ? 'opacity-0 md:opacity-100 md:group-hover:opacity-0' 
+                    : 'opacity-100 group-hover:opacity-0'
+                ]"
               >
                 <img :src="item.image" :alt="$t(`homeValue.cards.${item.key}.title`)" class="w-full h-full object-cover" />
                 <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
@@ -54,7 +56,9 @@
                 <div 
                   :class="[
                     'absolute top-6 left-6 z-20 transition-all duration-500 ease-in-out pointer-events-none',
-                    isActive ? 'opacity-100 scale-100' : 'opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100'
+                    isActive 
+                      ? 'opacity-100 scale-100 md:opacity-0 md:scale-90 md:group-hover:opacity-100 md:group-hover:scale-100' 
+                      : 'opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100'
                   ]"
                 >
                   <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -69,7 +73,9 @@
                   <div 
                     :class="[
                       'mb-3 transition-all duration-300 ease-in-out',
-                      isActive ? 'opacity-0 -translate-y-2' : 'opacity-100 translate-y-0 group-hover:opacity-0 group-hover:-translate-y-2'
+                      isActive 
+                        ? 'opacity-0 -translate-y-2 md:opacity-100 md:translate-y-0 md:group-hover:opacity-0 md:group-hover:-translate-y-2' 
+                        : 'opacity-100 translate-y-0 group-hover:opacity-0 group-hover:-translate-y-2'
                     ]"
                   >
                     <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -91,7 +97,7 @@
                     :class="[
                       'grid transition-all duration-500 ease-in-out',
                       isActive 
-                        ? 'grid-rows-[1fr] opacity-100 mb-8' 
+                        ? 'grid-rows-[1fr] opacity-100 mb-8 md:grid-rows-[0fr] md:opacity-0 md:mb-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100 md:group-hover:mb-8' 
                         : 'grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100 group-hover:mb-8'
                     ]"
                   >
@@ -106,7 +112,7 @@
                     :class="[
                       'grid transition-all duration-500 ease-in-out',
                       isActive 
-                        ? 'grid-rows-[1fr] opacity-100' 
+                        ? 'grid-rows-[1fr] opacity-100 md:grid-rows-[0fr] md:opacity-0 md:group-hover:grid-rows-[1fr] md:group-hover:opacity-100' 
                         : 'grid-rows-[0fr] opacity-0 group-hover:grid-rows-[1fr] group-hover:opacity-100'
                     ]"
                   >
@@ -130,23 +136,23 @@
       <div class="flex justify-center items-center space-x-4 mt-12 md:mt-16 relative z-20">
         <button 
           @click="slidePrev" 
-          class="w-10 h-10 xl:w-16 xl:h-16 bg-white text-black rounded flex items-center justify-center hover:bg-gray-200 transition active:scale-95 cursor-pointer"
+          class="group w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center transition cursor-pointer focus:outline-none"
           aria-label="Previous Slide"
         >
-         <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="64" height="64" rx="4" fill="white"/>
-          <path d="M20.0004 31.2V33.4625L39.2004 52.6625L41.4629 50.4L23.3941 32.3313L41.4629 14.2625L39.2004 12L20.0004 31.2Z" fill="#0043FF"/>
-        </svg>
+          <svg class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="4" fill="#131416" class="transition-colors duration-200 group-hover:fill-[#103C93]"/>
+            <path d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" fill="#7D86A1" class="transition-colors duration-200 group-hover:fill-white"/>
+          </svg>
         </button>
         
         <button 
           @click="slideNext" 
-          class="w-10 h-10 xl:w-16 xl:h-16 bg-[#0043FF] text-white rounded flex items-center justify-center hover:bg-blue-700 transition active:scale-95 cursor-pointer"
+          class="group w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center transition active:scale-95 cursor-pointer focus:outline-none"
           aria-label="Next Slide"
         >
-          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect width="64" height="64" rx="4" fill="#0043FF"/>
-            <path d="M43.4625 31.2V33.4625L24.2625 52.6625L22 50.4L40.0688 32.3313L22 14.2625L24.2625 12L43.4625 31.2Z" fill="white"/>
+          <svg class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="64" height="64" rx="4" fill="#0043FF" class="transition-colors duration-200 group-hover:fill-[#103C93]"/>
+            <path d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" fill="white"/>
           </svg>
         </button>
       </div>

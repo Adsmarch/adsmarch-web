@@ -59,7 +59,7 @@
         <div class="flex items-center space-x-3 xl:space-x-6 shrink-0 h-full">
           <NuxtLinkLocale 
             to="/contact" 
-            class="hidden sm:inline-flex items-center leading-none justify-center gap-2 px-4 py-2 xl:px-6 xl:py-3 text-sm xl:text-base 2xl:text-[20px] font-semibold bg-[#0043FF] text-white rounded hover:opacity-80 transition active:scale-95 whitespace-nowrap h-[40px]"
+            class="hidden sm:inline-flex items-center leading-none justify-center gap-2 px-4 py-2 xl:px-6 xl:py-3 text-sm xl:text-base 2xl:text-[20px] font-semibold bg-[#0043FF] text-white rounded hover:bg-[#103C93] transition whitespace-nowrap h-[40px]"
           >
             {{ $t('nav.contact') }}
             <svg width="6" height="12" viewBox="0 0 6 12" fill="none" class="w-1.5 h-3">
@@ -68,7 +68,7 @@
           </NuxtLinkLocale>
 
           <div class="hidden xl:flex items-center relative group h-full cursor-pointer">
-            <button class="text-sm xl:text-base 2xl:text-[20px] text-[#7D86A1] flex items-center space-x-2 hover:text-white font-semibold focus:outline-none">
+            <button class="text-sm xl:text-base 2xl:text-[20px] text-[#7D86A1] flex items-center space-x-2 hover:text-[#0043FF] font-semibold focus:outline-none">
               <span>{{ currentLocaleName }}</span>
               <svg width="16" height="16" viewBox="0 0 20 20" fill="none" class="transition-transform duration-200 group-hover:rotate-180">
                 <path d="M9.9931 12.9921L4 9.54386L4 7L10 10.4522L16 7L16 9.54386L10.0069 12.9921L10.0069 13L10 12.996L9.9931 13L9.9931 12.9921Z" fill="currentColor"/>
@@ -198,10 +198,10 @@
         </div>
 
         <div class="pt-4 border-t border-gray-800 shrink-0 bg-[#131416]">
-          <div class="relative">
+          <div class="relative" ref="langContainerRef">
             <button 
               @click="isMobileLangOpen = !isMobileLangOpen"
-              class="text-base text-[#7D86A1] flex items-center space-x-2 hover:text-white font-semibold focus:outline-none"
+              class="text-base text-[#7D86A1] flex items-center space-x-2 hover:text-[#0043FF] font-semibold focus:outline-none"
             >
               <span>{{ currentLocaleName }}</span>
               <svg 
@@ -243,12 +243,11 @@
 </template>
 
 <script setup>
-import { ref, computed, watch, onUnmounted } from 'vue'
+  import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 
 const { t, locale, setLocale } = useI18n()
 const route = useRoute()
 
-// 当前路由是否命中该菜单项（有子菜单时匹配任一子项路径）
 const isItemActive = (item) => {
   const match = (path) => route.path === path || route.path.startsWith(path + '/')
   if (item.children && item.children.length > 0) {
@@ -257,62 +256,81 @@ const isItemActive = (item) => {
   return match(item.path)
 }
 
-const isMobileMenuOpen = ref(false)
-const isMobileLangOpen = ref(false)
+  const isMobileMenuOpen = ref(false)
+  const isMobileLangOpen = ref(false)
 
-watch(isMobileMenuOpen, (isOpen) => {
-  if (import.meta.client) {
-    if (isOpen) {
-      document.body.style.overflow = 'hidden'
-    } else {
-      document.body.style.overflow = ''
+  const langContainerRef = ref(null)
+
+  const handleClickOutside = (event) => {
+    if (
+      isMobileLangOpen.value && 
+      langContainerRef.value && 
+      !langContainerRef.value.contains(event.target)
+    ) {
+      isMobileLangOpen.value = false
     }
   }
-})
 
-onUnmounted(() => {
-  if (import.meta.client) {
-    document.body.style.overflow = ''
+  onMounted(() => {
+    if (import.meta.client) {
+      document.addEventListener('click', handleClickOutside)
+    }
+  })
+
+  onUnmounted(() => {
+    if (import.meta.client) {
+      document.removeEventListener('click', handleClickOutside)
+      document.body.style.overflow = ''
+    }
+  })
+
+  watch(isMobileMenuOpen, (isOpen) => {
+    if (import.meta.client) {
+      if (isOpen) {
+        document.body.style.overflow = 'hidden'
+      } else {
+        document.body.style.overflow = ''
+      }
+    }
+  })
+
+  const openSubMenuIndices = ref([])
+
+  const toggleSubMenu = (index) => {
+    const position = openSubMenuIndices.value.indexOf(index)
+    if (position > -1) {
+      openSubMenuIndices.value.splice(position, 1)
+    } else {
+      openSubMenuIndices.value.push(index)
+    }
   }
-})
 
-const openSubMenuIndices = ref([])
+  const currentLocaleName = computed(() => {
+    return locale.value === 'zh' ? '中文' : 'EN'
+  })
 
-const toggleSubMenu = (index) => {
-  const position = openSubMenuIndices.value.indexOf(index)
-  if (position > -1) {
-    openSubMenuIndices.value.splice(position, 1)
-  } else {
-    openSubMenuIndices.value.push(index)
-  }
-}
-
-const currentLocaleName = computed(() => {
-  return locale.value === 'zh' ? '中文' : 'EN'
-})
-
-const navList = computed(() => [
-  {
-    title: t('nav.services'),
-    children: [
-      { title: t('nav.sub.app'), path: '/services/app' },
-      { title: t('nav.sub.ecommerce'), path: '/services/ecommerce' },
-      { title: t('nav.sub.design'), path: '/services/design' },
-      { title: t('nav.sub.kol'), path: '/services/kol' },
-      { title: t('nav.sub.training'), path: '/services/training' },
-      { title: t('nav.sub.marketing'), path: '/services/marketing' },
-      { title: t('nav.sub.seo'), path: '/services/seo' }
-    ]
-  },
-  { title: t('nav.insights'), path: '/insights' },
-  { title: t('nav.about'), path: '/about' },
-  { title: t('nav.awards'), path: '/awards' },
-  {
-    title: t('nav.careers'),
-    children: [
-      { title: t('nav.sub.careersHome'), path: '/careers' },
-      { title: t('nav.sub.jobs'), path: '/jobs' }
-    ]
-  }
-])
+  const navList = computed(() => [
+    {
+      title: t('nav.services'),
+      children: [
+        { title: t('nav.sub.app'), path: '/services/app' },
+        { title: t('nav.sub.ecommerce'), path: '/services/ecommerce' },
+        { title: t('nav.sub.design'), path: '/services/design' },
+        { title: t('nav.sub.kol'), path: '/services/kol' },
+        { title: t('nav.sub.training'), path: '/services/training' },
+        { title: t('nav.sub.marketing'), path: '/services/marketing' },
+        { title: t('nav.sub.seo'), path: '/services/seo' }
+      ]
+    },
+    { title: t('nav.insights'), path: '/insights' },
+    { title: t('nav.about'), path: '/about' },
+    { title: t('nav.awards'), path: '/awards' },
+    {
+      title: t('nav.careers'),
+      children: [
+        { title: t('nav.sub.careersHome'), path: '/careers' },
+        { title: t('nav.sub.jobs'), path: '/jobs' }
+      ]
+    }
+  ])
 </script>
