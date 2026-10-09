@@ -16,7 +16,7 @@
         </svg>
       </div>
 
-      <div class="flex flex-col lg:flex-row justify-between items-end gap-10 md:gap-6 z-10">
+      <div class="flex flex-col lg:flex-row justify-between items-end gap-[170px] md:gap-6 z-10">
         <div class="flex flex-col items-start gap-8 md:gap-16 w-full lg:max-w-[600px]">
           <nav class="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-14 text-[20px] md:text-[24px] font-semibold text-white">
             <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.careers') }}</a>

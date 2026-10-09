@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] h-[calc(100vh-72px)] xl:h-[calc(100vh-96px)] overflow-hidden bg-black text-white flex items-center">
+  <section class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] h-[70vh] xl:h-[calc(100vh-96px)] overflow-hidden bg-black text-white flex items-center">
     <div class="absolute inset-0 z-0">
       <video
         autoplay
