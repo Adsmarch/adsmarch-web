@@ -86,6 +86,40 @@
       }
     ]
   },
+  "insightFilter": {
+    "title": "Our Research and Insights",
+    "filter": "Filter",
+    "sortBy": "Sort by",
+    "sortOptions": {
+      "featured": "Featured",
+      "latest": "Latest",
+      "hottest": "Hottest"
+    },
+    "categories": {
+      "practical": "Tips",
+      "research": "Research",
+      "industry": "Industry Reports"
+    },
+    "clearAll": "Clear All",
+    "showResults": "Show Results"
+  },
+   "insights": {
+    "loadMore": "Load More",
+    "items": [
+      { "date": "2026-01-20", "category": "Industry Reports", "title": "2025 Mobile App Marketing Whitepaper (Non-Gaming)" },
+      { "date": "2026-01-20", "category": "Tips", "title": "The Essence of IAA: Holding a Batch of Depreciating Means of Production" },
+      { "date": "2026-01-20", "category": "Tips", "title": "Avoiding Pitfalls in Basic Google Ads Setup" },
+      { "date": "2026-01-20", "category": "Tips", "title": "A Quick Chat on Attribution in Overseas Ad Campaigns" },
+      { "date": "2026-01-20", "category": "Tips", "title": "Full Breakdown of the HSNIN Paper on Meta Latest Ad Algorithm" },
+      { "date": "2026-01-20", "category": "Tips", "title": "Web Paywall: A New Growth Model for Subscription and Content Products" }
+    ]
+  },
+   "insightDetail": {
+    "title": "Return to Collection"
+   },
+   "insightId": {
+    "title": "relevant recommendation"
+   },
   "about": {
     "top": {
       "titleLines": [
@@ -361,7 +395,6 @@
     "businessAreas": {
       "internet_app_1": "Pan-Internet / Apps",
       "ecommerce_dtc": "Cross-Border E-Commerce / DTC Brands",
-      "internet_app_2": "Pan-Internet / Apps",
       "gaming": "Gaming / Pan-Entertainment",
       "education": "Education & Training / Online Education",
       "b2b_manufacturing": "B2B Manufacturing & Industrial Products Going Global",
@@ -370,8 +403,15 @@
     },
     "consultTitle": "Consultation Details",
     "messagePlaceholder": "Please describe your current pain points, budget, or goals in as much detail as possible so we can offer the right service.",
-    "submit": "Submit"
+    "submit": "Submit",
+    "errors": {
+      "required": "This field is required",
+      "email": "Please enter a valid email address",
+      "phone": "Please enter a valid phone number",
+      "website": "Please enter a valid website URL"
+    }
   },
+ 
   "footer": {
     "careers": "Careers",
     "about": "About Us",

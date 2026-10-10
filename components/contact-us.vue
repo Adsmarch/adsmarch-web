@@ -56,8 +56,12 @@
                             {{ field.label }}<span v-if="field.required"> *</span>
                         </label>
                         <input v-model="form[field.key]" :type="field.type || 'text'" :placeholder="field.placeholder"
-                            :required="field.required"
-                            class="w-full h-[44px] mb-[20px] md:mb-[0px] md:h-[48px] bg-[#131416] md:bg-[#1A1B1E] border border-[#2A2D33] rounded-[4px] px-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200" />
+                            :required="field.required" @blur="touched[field.key] = true"
+                            :class="showError(field.key) ? 'border-[#FF6B6B]' : 'border-[#2A2D33]'"
+                            class="w-full h-[44px] mb-[20px] md:mb-[0px] md:h-[48px] bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] px-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200" />
+                        <p v-if="showError(field.key)" class="text-[14px] text-[#FF6B6B] -mt-[12px] mb-[20px] md:mb-[0px]">
+                            {{ errors[field.key] }}
+                        </p>
                     </div>
                 </div>
 
@@ -78,10 +82,13 @@
                 <!-- 咨询内容 -->
                 <p class="text-[18px] md:text-[24px] mt-[28px] md:mt-[24px] mb-[20px]">{{ $t('contact.consultTitle') }} <span>*</span></p>
                 <textarea v-model="form.message" required rows="4" :placeholder="$t('contact.messagePlaceholder')"
-                    class="w-full bg-[#131416] md:bg-[#1A1B1E] border border-[#2A2D33] rounded-[4px] p-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200 resize-y"></textarea>
+                    @blur="touched.message = true"
+                    :class="showError('message') ? 'border-[#FF6B6B]' : 'border-[#2A2D33]'"
+                    class="w-full bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] p-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200 resize-y"></textarea>
+                <p v-if="showError('message')" class="text-[14px] text-[#FF6B6B] mt-[4px]">{{ errors.message }}</p>
 
-                <button type="submit"
-                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200">
+                <button type="submit" :disabled="!isFormValid || submitting"
+                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200 disabled:opacity-60 disabled:cursor-not-allowed">
                     {{ $t('contact.submit') }}
                 </button>
             </form>
@@ -90,7 +97,23 @@
 </template>
 
 <script setup>
+
 const { t } = useI18n()
+import PocketBase from 'pocketbase';
+
+const pb = new PocketBase('https://api.adsmarch.bot.cd');
+
+// 业务领域中文映射（普通对象，避免 Nuxt i18n 代理包装）
+const areaZhLabels = {
+    internet_app_1: '泛互联网/应用 App',
+    ecommerce_dtc: '跨境电商/DTC品牌',
+    gaming: '游戏/泛娱乐',
+    education: '教育培训/在线教育',
+    b2b_manufacturing: 'B2B 制造与工业品出海',
+    saas_hitech: 'SaaS/高科技产品',
+    other: '其他行业'
+}
+
 
 const fields = computed(() => [
     { key: 'name', label: t('contact.fields.name.label'), placeholder: t('contact.fields.name.placeholder'), required: true },
@@ -101,11 +124,10 @@ const fields = computed(() => [
     { key: 'website', label: t('contact.fields.website.label'), placeholder: t('contact.fields.website.placeholder') }
 ])
 
-// 业务领域选项：id 作为表单值和 i18n 键，文案见 contact.businessAreas
+// 业务领域选项：id 作为表单值（稳定键），显示文案通过 $t() 翻译
 const businessAreas = [
     { id: 'internet_app_1' },
     { id: 'ecommerce_dtc' },
-    { id: 'internet_app_2' },
     { id: 'gaming' },
     { id: 'education' },
     { id: 'b2b_manufacturing' },
@@ -124,9 +146,81 @@ const form = reactive({
     message: ''
 })
 
-function onSubmit() {
-    // TODO: 接入表单提交接口
-    console.log('submit', { ...form })
+// 输入格式正则规则
+const patterns = {
+    phone: /^[\d+\-()\s]{5,20}$/,
+    email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
+    website: /^(https?:\/\/)?[\w-]+(\.[\w-]+)+(:\d+)?(\/[^\s]*)?$/i
+}
+
+const touched = reactive({})
+const submitted = ref(false)
+const submitting = ref(false)
+
+// 逐字段计算错误信息（无错误返回空字符串）
+function fieldError(key) {
+    const val = String(form[key] ?? '').trim()
+    if (key === 'areas') return ''
+    if (key === 'message') return !val ? t('contact.errors.required') : ''
+    if (key === 'website') return val && !patterns.website.test(val) ? t('contact.errors.website') : ''
+    const field = fields.value.find(f => f.key === key)
+    if (field?.required && !val) return t('contact.errors.required')
+    if (val && patterns[key] && !patterns[key].test(val)) return t(`contact.errors.${key}`)
+    return ''
+}
+
+const errors = computed(() => {
+    const e = {}
+    Object.keys(form).forEach(k => {
+        const msg = fieldError(k)
+        if (msg) e[k] = msg
+    })
+    return e
+})
+
+const isFormValid = computed(() => Object.keys(errors.value).length === 0)
+
+// 失焦（或尝试提交）后才显示该字段的错误
+function showError(key) {
+    return (touched[key] || submitted.value) && !!errors.value[key]
+}
+
+// XSS 防护：提交前转义特殊字符
+function sanitize(value) {
+    return String(value).replace(/[<>&"']/g, c => ({
+        '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;'
+    }[c]))
+}
+
+async function onSubmit() {
+    submitted.value = true
+    if (!isFormValid.value || submitting.value) return
+    submitting.value = true
+    try {
+        const record = await pb.collection('feedback').create({
+            name: sanitize(form.name),
+            phone: sanitize(form.phone),
+            email: sanitize(form.email),
+            company: sanitize(form.company),
+            position: sanitize(form.position),
+            website: sanitize(form.website),
+            // 固定传中文，不随页面语言变化
+            business_areas: form.areas.map(id => areaZhLabels[id] || id).join(','),
+            message: sanitize(form.message)
+        })
+        console.log('提交成功', record.id)
+        // 提交成功后清空表单，必填项为空使按钮恢复禁用状态
+        Object.assign(form, {
+            name: '', phone: '', email: '', company: '', position: '', website: '',
+            areas: [], message: ''
+        })
+        Object.keys(touched).forEach(k => { touched[k] = false })
+        submitted.value = false
+    } catch (err) {
+        console.error('提交失败', err)
+    } finally {
+        submitting.value = false
+    }
 }
 </script>
 

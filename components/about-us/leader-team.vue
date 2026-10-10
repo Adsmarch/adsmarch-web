@@ -126,29 +126,35 @@
 
     </div>
 </template>
-
+ 
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, nextTick, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation } from 'swiper/modules'
+import PocketBase from 'pocketbase'
 
 import 'swiper/css'
 
-const { t, tm } = useI18n()
+const pb = new PocketBase('https://api.adsmarch.bot.cd')
 
-// 成员照片（当前均为同一张占位图）
-const memberPhoto = 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/Frame_2117134140.png?v=1789986021'
+const members = ref([])
 
-const members = computed(() => {
-    const raw = tm('about.leaderTeam.members')
-    const len = Array.isArray(raw) ? raw.length : 0
-    return Array.from({ length: len }, (_, i) => ({
-        name: t(`about.leaderTeam.members.${i}.name`),
-        role: t(`about.leaderTeam.members.${i}.role`),
-        desc: t(`about.leaderTeam.members.${i}.desc`),
-        photo: memberPhoto
-    }))
+onMounted(async () => {
+    try {
+        const records = await pb.collection('leaders').getFullList({
+            sort: 'sort_order',
+            filter: 'is_active = true'
+        })
+        members.value = records.map(r => ({
+            name: r.name,
+            role: r.position,
+            desc: r.short_desc,
+            photo: `https://api.adsmarch.bot.cd/api/files/${r.collectionId}/${r.id}/${r.avatar}`
+        }))
+    } catch (e) {
+        console.error('Failed to fetch leaders:', e)
+    }
 })
 
 const swiperProgress = ref(0)

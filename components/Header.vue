@@ -249,7 +249,12 @@ const { t, locale, setLocale } = useI18n()
 const route = useRoute()
 
 const isItemActive = (item) => {
-  const match = (path) => route.path === path || route.path.startsWith(path + '/')
+  const match = (path) => {
+    if (path === '/insights') {
+      return route.path === path || route.path.startsWith('/insight/')
+    }
+    return route.path === path || route.path.startsWith(path + '/')
+  }
   if (item.children && item.children.length > 0) {
     return item.children.some(sub => match(sub.path))
   }
