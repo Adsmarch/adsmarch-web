@@ -250,7 +250,12 @@ const route = useRoute()
 
 // 当前路由是否命中该菜单项（有子菜单时匹配任一子项路径）
 const isItemActive = (item) => {
-  const match = (path) => route.path === path || route.path.startsWith(path + '/')
+  const match = (path) => {
+    if (path === '/insights') {
+      return route.path === path || route.path.startsWith('/insight/')
+    }
+    return route.path === path || route.path.startsWith(path + '/')
+  }
   if (item.children && item.children.length > 0) {
     return item.children.some(sub => match(sub.path))
   }

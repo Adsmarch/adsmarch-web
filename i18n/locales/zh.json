@@ -86,6 +86,41 @@
       }
     ]
   },
+  "insightFilter": {
+    "title": "我们的研究与洞察",
+    "filter": "筛选",
+    "sortBy": "按排序",
+    "sortOptions": {
+      "featured": "精选",
+      "latest": "最新",
+      "hottest": "最热"
+    },
+    "categories": {
+      "practical": "干货分享",
+      "research": "研究分析",
+      "industry": "行业报告"
+    },
+    "clearAll": "全部清除",
+    "showResults": "显示结果"
+  },
+  
+  "insights": {
+    "loadMore": "加载更多",
+    "items": [
+      { "date": "2026-01-20", "category": "行业报告", "title": "2025移动应用营销白皮书(非游戏)" },
+      { "date": "2026-01-20", "category": "干货分享", "title": "IAA 的本质，是持有一批会折旧的生产资料" },
+      { "date": "2026-01-20", "category": "干货分享", "title": "谷歌投放基础搭建避坑" },
+      { "date": "2026-01-20", "category": "干货分享", "title": "来简单聊一聊海外广告投放中的归因" },
+      { "date": "2026-01-20", "category": "干货分享", "title": "Meta最新广告算法HSNIN论文全解析" },
+      { "date": "2026-01-20", "category": "干货分享", "title": "Web Paywall：订阅与内容产品的新增长模式" }
+    ]
+  },
+   "insightDetail": {
+    "title": "返回集合"
+   },
+   "insightId": {
+    "title": "相关推荐"
+   },
    "about": {
     "top": {
       "titleLines": [
@@ -361,7 +396,6 @@
     "businessAreas": {
       "internet_app_1": "泛互联网/应用 App",
       "ecommerce_dtc": "跨境电商/DTC品牌",
-      "internet_app_2": "泛互联网/应用 App",
       "gaming": "游戏/泛娱乐",
       "education": "教育培训/在线教育",
       "b2b_manufacturing": "B2B 制造与工业品出海",
@@ -370,8 +404,15 @@
     },
     "consultTitle": "咨询内容",
     "messagePlaceholder": "请尽可能多地描述您当前的痛点、预算或目标，这能帮我们为您提供更合适的服务。",
-    "submit": "提交表单"
+    "submit": "提交表单",
+    "errors": {
+      "required": "此项为必填项",
+      "email": "请输入正确的邮箱格式",
+      "phone": "请输入正确的手机号",
+      "website": "请输入正确的网址"
+    }
   },
+  
   "footer": {
     "careers": "求贤",
     "about": "关于我们",
