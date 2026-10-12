@@ -243,13 +243,22 @@ function applyFilter() {
 </script>
 
 <style scoped>
-.insight-card:nth-child(3n),
-.insight-card:last-child {
-    padding-right: 0;
+@media screen and (min-width: 1024px) {
+    .insight-card:nth-child(3n){
+        padding-right: 0;
+    }
+    .insight-card:nth-child(3n) :deep(.col-line),
+    .insight-card:last-child :deep(.col-line) {
+        display: none;
+    }
 }
-
-.insight-card:nth-child(3n) :deep(.col-line),
-.insight-card:last-child :deep(.col-line) {
-    display: none;
+@media screen and (min-width: 768px) and (max-width: 1023px) {
+    .insight-card:nth-child(2n){
+        padding-right: 0;
+    }
+    .insight-card:nth-child(2n) :deep(.col-line),
+    .insight-card:last-child :deep(.col-line) {
+        display: none;
+    }
 }
 </style>

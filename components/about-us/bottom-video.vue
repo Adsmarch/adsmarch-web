@@ -1,22 +1,18 @@
 <template>
-    <div class="pb-12 lg:pb-20 px-[15px] lg:px-[120px] m-auto">
-
-        <!-- ========== 标题 ========== -->
+    <div class="pb-14 xl:pb-[120px] md:pb-[64px] px-[15px] lg:px-[120px] m-auto">
         <div class="flex items-start justify-end gap-3 mb-[32px] lg:mb-[64px]">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
                 <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
                 <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
             </svg>
-            <h2 class="text-[40px] lg:text-[96px] font-[600] text-right">
+            <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] text-right">
                 {{ $t('about.bottomVideo.title') }}
             </h2>
         </div>
 
-        <!-- ========== 视频区 ========== -->
         <div class="relative w-full aspect-[16/9] lg:aspect-[21/9] bg-gray-900 rounded-lg overflow-hidden">
 
-            <!-- 视频封面 / 视频 -->
             <img v-if="!cities[activeIndex].videoUrl" :src="cities[activeIndex].cover"
                 :alt="cities[activeIndex].name"
                 class="absolute inset-0 w-full h-full object-cover" />
@@ -31,28 +27,24 @@
                 @ended="isPlaying = false"
                 @waiting="console.warn('[video] waiting 等待数据')"></video>
 
-            <!-- 暗化遮罩 -->
             <div class="absolute inset-0 bg-black/20"></div>
 
-            <!-- 播放按钮（仅有视频时显示） -->
             <button v-if="cities[activeIndex].videoUrl" @click="togglePlay"
                 class="absolute inset-0 flex items-center justify-center group"
                 :aria-label="$t('about.bottomVideo.play')">
                 <span v-if="!isPlaying"
-                    class="w-16 h-16 lg:w-20 lg:h-20 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center group-hover:bg-black/60 transition">
+                    class="w-12 h-12 lg:w-16 lg:h-16 rounded-full bg-black/40 backdrop-blur-sm flex items-center justify-center group-hover:bg-black/60 transition">
                     <svg class="w-8 h-8 lg:w-10 lg:h-10 text-white translate-x-0.5" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M8 5v14l11-7z" />
                     </svg>
                 </span>
             </button>
 
-            <!-- 底部进度条 -->
-            <div class="absolute bottom-0 left-0 right-0 h-[3px] bg-gray-800/60">
+            <div class="absolute bottom-1 md:bottom-3 left-0 right-0 h-[3px] bg-white">
                 <div class="h-full bg-blue-600" :style="{ width: videoProgress + '%' }"></div>
             </div>
         </div>
 
-        <!-- ========== 城市列表（PC：横向排列） ========== -->
         <div class="hidden lg:grid grid-cols-5 gap-3 mt-[40px]">
             <div v-for="(city, index) in cities" :key="index"
                 @click="selectCity(index)"
@@ -77,7 +69,6 @@
             </div>
         </div>
 
-        <!-- ========== 城市详情（手机端：上方显示当前城市） ========== -->
         <div class="lg:hidden mt-[32px] mb-[24px]">
             <h3 class="text-[32px]  font-[600] mb-[8px] text-white">
                 {{ cities[activeIndex].name }}
@@ -87,10 +78,14 @@
             </p>
         </div>
 
-        <!-- ========== 城市切换（手机端：横向滚动） ========== -->
         <div class="lg:hidden mt-4">
             <Swiper :modules="[SwiperNavigation]" :slides-per-view="2.5" :space-between="8" :loop="false"
-           
+               :breakpoints="{
+                    768: {
+                        slidesPerView: 3.5,
+                        spaceBetween: 12
+                    }
+                }" 
                 class="w-full" @swiper="onSwiperInit" @slide-change="onSlideChange">
 
                 <SwiperSlide v-for="(city, index) in cities" :key="index">
@@ -117,7 +112,6 @@
 
             </Swiper>
 
-            <!-- 底部进度条 -->
             <div class="mt-4 h-[3px] bg-gray-800 rounded-full overflow-hidden">
                 <div class="h-full bg-blue-600 rounded-full transition-all duration-300"
                     :style="{ width: swiperProgress + '%' }"></div>
@@ -139,7 +133,6 @@ import 'swiper/css/navigation'
 
 const { t, tm } = useI18n()
 
-// 城市封面/视频 URL（保留硬编码，按顺序与 i18n 文案 zip）
 const cityMedia = [
     {
         cover: 'https://cdn.shopify.com/s/files/1/0702/5937/6290/files/11_5c23e45e-181d-431f-9f8d-06677bd08993.png?v=1789876538',
@@ -200,7 +193,6 @@ function togglePlay() {
     if (!video) return
 
     if (video.paused) {
-        // play() 是异步的，需等 Promise 结果，失败时回滚状态
         video.play()
             .then(() => { isPlaying.value = true })
             .catch((err) => {
@@ -229,14 +221,13 @@ function updateSwiperProgress(swiper) {
         swiperProgress.value = 100
         return
     }
-    // 初始已可见部分 + 滑动进度占剩余部分的比例
+
     const initialProgress = slidesPerView / total
     const currentMove = Math.min(swiper.activeIndex, maxMove)
     const moveProgress = currentMove / maxMove
     swiperProgress.value = (initialProgress + moveProgress * (1 - initialProgress)) * 100
 }
 
-// 初始化时先算一次，保证未滑动时进度条也有初始进度
 function onSwiperInit(swiper) {
     updateSwiperProgress(swiper)
     nextTick(() => {
@@ -251,7 +242,6 @@ function onSlideChange(swiper) {
 </script>
 
 <style scoped>
-/* PC 城市卡片：默认 / hover / 选中 */
 .city-card {
     border-top-color: #454C5F;
     background: #000;

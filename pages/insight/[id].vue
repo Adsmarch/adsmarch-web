@@ -10,7 +10,7 @@
         </NuxtLink>
 
         <div v-if="currentArticle">
-            <h1 class="text-[32px] sm:text-[48px] md:text-[60px] xl:text-[72px] font-semibold mb-[24px] md:mb-[32px] leading-[1.2] mt-[48px] md:mt-[64px]">
+            <h1 class="text-[40px] sm:text-[48px] md:text-[60px] xl:text-[72px] font-semibold mb-[24px] md:mb-[32px] leading-[1.2] mt-[48px] md:mt-[64px]">
                 {{ currentArticle.title }}
             </h1>
 

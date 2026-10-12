@@ -10,7 +10,7 @@
                 <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor" />
                 <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor" />
             </svg>
-            <span class="text-[#fff] md:text-[#7D86A1] md:text-[20px] text-[12px] group-hover:text-[#fff] leading-none">
+            <span class="text-[#fff] md:text-[#7D86A1] md:text-[20px] text-[12px] group-hover:text-[#fff] leading-none font-[600]">
                 {{ formattedDate }}
             </span>
         </div>

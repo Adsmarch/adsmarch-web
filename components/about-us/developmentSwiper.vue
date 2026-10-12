@@ -1,23 +1,19 @@
 <template>
-    <div class="px-[15px] md:px-[120px] m-auto">
-
-        <!-- ========== 关于麦炽 ========== -->
+    <div class="px-[15px] md:px-[40px] xl:px-[120px] m-auto">
         <div
-            class="relative flex min-[1120px]:flex-row flex-col justify-between pt-[56px] min-[1120px]:pt-[120px] min-[1120px]:pt-20 pb-8 overflow-hidden min-h-[420px] min-[1120px]:min-h-[380px]">
-            <!-- 左侧 -->
+            class="relative flex min-[1120px]:flex-row flex-col justify-between pt-[56px] min-[1120px]:pt-[120px] overflow-hidden min-h-[420px] min-[1120px]:min-h-[380px]">
             <div class="flex flex-col w-full min-[1120px]:w-[45%]">
 
                 <div class="z-10">
                     <div
-                        class=" rounded-full  flex items-center justify-center relative w-[78px] h-[78px] min-[1120px]:w-[162px] min-[1120px]:h-[162px]">
+                        class=" rounded-full  flex items-center justify-center relative w-[96px] h-[96px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 56" fill="none"
-                            class="w-[32px] min-[1120px]:w-[68px]">
+                            class="w-[32px] md:w-[54px] lg:w-[68px]">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M48.6947 21.78L67.504 8.27968V49.3586L59.0784 55.4455L59.0744 55.4404L59.0676 55.4455L59.0674 55.432L44.6406 37.4046L33.8718 47.8376L23.0305 37.4065L8.50313 55.4236V55.4455L8.49193 55.4374L8.48562 55.4455L0 49.3586L0.0105046 49.3431V8.27968L18.9207 21.7609L33.84 0L48.6947 21.78ZM53.4983 28.8234L59.0165 36.9141L58.9796 23.5134L53.4983 28.8234ZM8.55425 36.8812L14.0911 28.8052L8.59114 23.5134L8.55425 36.8812ZM29.5411 29.332L33.8718 32.4195L38.1775 29.3287L33.8769 23.955L29.5411 29.332Z"
                                 fill="#0043FF" />
                         </svg>
 
-                        <!-- 环绕文字（绕 Logo 旋转） -->
                         <svg xmlns="http://www.w3.org/2000/svg" width="187" height="183" viewBox="0 0 187 183"
                             fill="none" class="circular-text absolute inset-0 w-full h-full">
                             <path
@@ -27,26 +23,24 @@
                     </div>
                 </div>
 
-                <!-- 世界地图 PC -->
                 <div class="hidden min-[1120px]:block min-[1120px]:mt-[41px]">
                     <img src="https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643"
                         :alt="$t('about.development.mapAlt')" class="w-full" />
                 </div>
             </div>
 
-            <!-- 右侧 -->
             <div class="flex flex-col w-full min-[1120px]:w-[45%]">
-                <div class="relative z-10 flex flex-col min-[1120px]:flex-row min-[1120px]:items-start min-[1120px]:justify-end gap-4">
+                <div class="relative z-10 flex flex-col min-[1120px]:flex-row md:justify-start justify-end gap-4">
                     <h2
-                        class="text-[40px] w-full min-[1120px]:text-[96px] font-[600] min-[1120px]:text-left text-right min-[1120px]:mb-[64px] mb-[32px]">
+                        class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] min-[1120px]:text-left text-right min-[1120px]:mb-[64px] mb-[32px]">
                         {{ $t('about.development.aboutTitle') }}
                     </h2>
                 </div>
 
                 <img class="w-[24px]" src="/assets/Union.png" :alt="$t('about.development.decoAlt')" />
 
-                <div class="min-[1120px]:mt-[24px] mt-[16px] font-[400] text-[16px] min-[1120px]:text-[20px] leading-[1.5]">
-                    <p v-for="(para, i) in introParagraphs" :key="i">
+                <div class="min-[1120px]:mt-[24px] mt-[16px] font-[400] text-[16px] md:text-[18px] lg:text-[20px] leading-[1.5]">
+                    <p v-for="(para, i) in introParagraphs" :key="i" class="lg:mb-[32px] md:mb-[24px] mb-[16px]">
                         {{ para }}
                     </p>
                 </div>
@@ -59,8 +53,7 @@
         </div>
 
 
-        <!-- ========== 发展历程 ========== -->
-        <div class=" mb-[28px] md:mb-[120px]">
+        <div class=" mb-[28px] lg:mb-[120px] md:mb-[64px]">
             <div class="flex items-center justify-between mb-[32px] md:mb-[64px] md:mt-[120px] mt-[56px]">
 
                 <div class="flex items-start gap-3">
@@ -71,26 +64,26 @@
                         <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF" />
                     </svg>
 
-                    <h3 class="text-[40px] md:text-[96px] font-[600]">
+                    <h3 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
                         {{ $t('about.development.devTitle') }}
                     </h3>
                 </div>
                 <div class="flex items-center gap-[20px]">
 
                     <button id="dev-swiper-prev"
-                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px]  rounded bg-[#131416] text-white flex items-center justify-center hover:bg-gray-700 transition"
+                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px]  rounded bg-[#131416] text-white flex items-center justify-center hover:bg-[#103C93] transition group"
                         :aria-label="$t('about.development.prev')">
 
                         <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 40 40" fill="none">
                             <path
                                 d="M12.6675 19.2264H30L29.9779 20.7513H12.647L16.8952 25H14.9945L10 20.0109L15.0166 15H16.8731L12.6675 19.2264Z"
-                                fill="#7D86A1" />
+                                fill="#7D86A1" class="group-hover:fill-white" />
                         </svg>
                     </button>
 
                     <button id="dev-swiper-next"
-                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded bg-blue-600 text-white flex items-center justify-center hover:bg-blue-700 transition"
+                        class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded bg-[#0043FF] text-white flex items-center justify-center hover:bg-[#103C93] transition"
                         :aria-label="$t('about.development.next')">
                         <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 64 64" fill="none">
@@ -104,7 +97,6 @@
                 </div>
             </div>
             <div class="h-px bg-gray-800 mb-6"></div>
-            <!-- 时间线轮播 -->
             <div class="relative">
 
                 <Swiper ref="devSwiper" :modules="[SwiperNavigation]" :slides-per-view="1.25" :space-between="16"
@@ -142,11 +134,11 @@
                             </svg>
                             <div>
                                 <div
-                                    class="card-year text-[48px] md:text-[96px] font-[400] md:mb-[40px] mb-[32px] transition-colors duration-300">
+                                    class="card-year text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] leading-[1.2] font-[400] md:mb-[40px] mb-[32px] transition-colors duration-300">
                                     {{ item.year }}
                                 </div>
                                 <div
-                                    class="card-title text-[28px] md:text-[40px] font-[600] mb-[12px] md:mb-[20px] transition-colors duration-300">
+                                    class="card-title text-[28px] md:text-[34px] xl:text-[40px] leading-[1.2] font-[600] mb-[12px] md:mb-[20px] transition-colors duration-300">
                                     {{ item.title }}
                                 </div>
                                 <p
@@ -157,7 +149,6 @@
                         </div>
                     </SwiperSlide>
                 </Swiper>
-                <!-- ========== 进度条 ========== -->
                 <div class="mt-[32px] md:mt-[64px] h-[4px] md:h-[8px] bg-gray-800 rounded-full overflow-hidden">
                     <div class="h-full bg-blue-600 rounded-full" :style="{
                         width: `${swiperProgress}%`,
@@ -191,10 +182,6 @@ import 'swiper/css/navigation'
 
 
 const { t, tm } = useI18n()
-
-/* =========================================================
-   公司简介
-========================================================= */
 
 const introParagraphs = computed(() => {
     const raw = tm('about.development.intro')
@@ -276,7 +263,6 @@ function updateProgress(swiper) {
 
 
 <style scoped>
-/* 轮播到两端时按钮置灰 */
 #dev-swiper-prev.swiper-button-disabled,
 #dev-swiper-next.swiper-button-disabled {
     opacity: 0.4;
@@ -289,7 +275,6 @@ function updateProgress(swiper) {
     }
 }
 
-/* 卡片默认样式（不高亮） */
 .card-icon path {
     fill: #fff;
 }
@@ -306,7 +291,6 @@ function updateProgress(swiper) {
     color: #7D86A1;
 }
 
-/* 仅 hover 时高亮 */
 .timeline-card:hover {
     background: rgba(255, 255, 255, 0.04);
 }
@@ -327,7 +311,6 @@ function updateProgress(swiper) {
     color: #fff;
 }
 
-/* 环绕文字绕 Logo 旋转 */
 .circular-text {
     transform-origin: center;
     animation: circular-spin 12s linear infinite;

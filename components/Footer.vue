@@ -41,13 +41,13 @@
 
         <div class="flex items-center gap-4 md:gap-5 self-start lg:self-end mt-4 md:mt-0">
           <div class="flex flex-col items-center gap-2">
-            <img src="../assets/image/adsmarch.png" alt="麦炽科技二维码" class="w-20 h-20 md:w-[120px] md:h-[120px] bg-white rounded-[4px] object-contain" />
-            <span class="text-[12px] md:text-[20px] text-[#D9DDE8]">{{ $t('footer.qrTech') }}</span>
+            <img src="../assets/image/adsmarch.png" alt="麦炽科技二维码" class="w-[120px] h-[120px] bg-white rounded-[4px] object-contain" />
+            <span class="text-[14px] md:text-[20px] text-[#D9DDE8]">{{ $t('footer.qrTech') }}</span>
           </div>
 
           <div class="flex flex-col items-center gap-2">
-            <img src="../assets/image/adsmarch-cross-border.png" alt="麦炽跨境二维码" class="w-20 h-20 md:w-[120px] md:h-[120px] bg-white rounded-[4px] object-contain" />
-            <span class="text-[12px] md:text-[20px] text-[#D9DDE8]">{{ $t('footer.qrCrossBorder') }}</span>
+            <img src="../assets/image/adsmarch-cross-border.png" alt="麦炽跨境二维码" class="w-[120px] h-[120px] bg-white rounded-[4px] object-contain" />
+            <span class="text-[14px] md:text-[20px] text-[#D9DDE8]">{{ $t('footer.qrCrossBorder') }}</span>
           </div>
         </div>
 
