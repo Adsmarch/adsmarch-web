@@ -96,9 +96,9 @@
       "hottest": "最热"
     },
     "categories": {
-      "practical": "干货分享",
+      "tips": "干货分享",
       "research": "研究分析",
-      "industry": "行业报告"
+      "report": "行业报告"
     },
     "clearAll": "全部清除",
     "showResults": "显示结果"

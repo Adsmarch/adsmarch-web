@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-[#000] px-[15px] md:px-[120px] m-auto text-white">
+    <div class="bg-[#000] w-full px-[15px] md:px-[40px] xl:px-[120px] m-auto text-white">
 <InsightFilter />
     </div>
 </template>

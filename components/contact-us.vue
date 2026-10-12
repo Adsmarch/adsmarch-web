@@ -1,8 +1,6 @@
 <template>
     <div class="flex flex-col md:flex-row  md:gap-[80px] py-[56px] md:py-[120px]">
-
-        <!-- 左侧：标题与联系方式 -->
-        <div class="md:w-[40%] flex flex-col md:justify-between mb-[56px] md:md-[0px]">
+        <div class="md:w-[40%] flex flex-col md:justify-between mb-[56px] md:mb-[0px]">
             <div>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
@@ -11,21 +9,20 @@
                     <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
 
-                <h1 class="text-[40px] md:text-[96px] font-[600] leading-none mt-[8px] md:mt-[12px]">
+                <h1 class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2] mt-[8px] md:mt-[12px]">
                     {{ $t('contact.title') }}
                 </h1>
-                <p class="text-[28px] md:text-[40px] font-[600] leading-[1.4] mt-[8px] md:mt-[12px]">
+                <p class="text-[28px] sm:text-[32px] md:text-[36px] xl:text-[40px] font-semibold leading-[1.2] mt-[8px] md:mt-[12px]">
                     {{ $t('contact.subtitle') }}
                 </p>
 
                 <div
-                    class="mt-[32px] md:mt-[80px] space-y-[8px] md:space-y-[12px] text-[#7D86A1] text-[18px] md:text-[24px]">
+                    class="mt-[32px] md:mt-[80px] space-y-[8px] md:space-y-[12px] text-[#7D86A1] text-[18px] md:text-[20px] xl:text-[24px]">
                     <p>business@adsmarch.com</p>
                     <p>010-6295 6881</p>
                     <p>{{ $t('footer.locations') }}</p>
                 </div>
             </div>
-            <!-- 圆形 AdsMarch 徽标 -->
             <div class="z-10 mt-[32px] md:mt-[0px]">
                 <div
                     class=" rounded-full  flex items-center justify-center relative w-[78px] h-[78px] min-[1120px]:w-[162px] min-[1120px]:h-[162px]">
@@ -36,7 +33,6 @@
                             fill="#0043FF" />
                     </svg>
 
-                    <!-- 环绕文字（绕 Logo 旋转） -->
                     <svg xmlns="http://www.w3.org/2000/svg" width="187" height="183" viewBox="0 0 187 183" fill="none"
                         class="circular-text absolute inset-0 w-full h-full">
                         <path
@@ -50,45 +46,43 @@
         <!-- 右侧：表单（PC 带深色卡片背景，手机端直接平铺） -->
         <div class="md:flex-1 bg-[#131416] md:rounded-[8px] md:p-[40px] py-[24px] px-[20px]">
             <form @submit.prevent="onSubmit">
-                <div class="grid grid-cols-1 md:grid-cols-2 md:gap-x-[24px] md:gap-y-[24px]">
+                <div class="grid grid-cols-1 xl:grid-cols-2 md:gap-x-[24px] md:gap-y-[24px]">
                     <div v-for="field in fields" :key="field.key">
-                        <label class="block text-[18px] md:text-[24px] md:mb-[12px] mb-[8px]">
+                        <label class="block text-[18px]  md:text-[20px] xl:text-[24px] md:mb-[12px] mb-[8px]">
                             {{ field.label }}<span v-if="field.required"> *</span>
                         </label>
                         <input v-model="form[field.key]" :type="field.type || 'text'" :placeholder="field.placeholder"
                             :required="field.required" @blur="touched[field.key] = true"
                             :class="showError(field.key) ? 'border-[#FF6B6B]' : 'border-[#2A2D33]'"
-                            class="w-full h-[44px] mb-[20px] md:mb-[0px] md:h-[48px] bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] px-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200" />
-                        <p v-if="showError(field.key)" class="text-[14px] text-[#FF6B6B] -mt-[12px] mb-[20px] md:mb-[0px]">
+                            class="w-full h-[44px] mb-[20px] md:mb-[0px] md:h-[48px] bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] px-[12px] text-white text-[16px] md:text-[18px] xl:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200" />
+                        <p v-if="showError(field.key)" class="text-[14px] text-[#FF6B6B] mt-[12px] mb-[20px] md:mb-[0px]">
                             {{ errors[field.key] }}
                         </p>
                     </div>
                 </div>
 
-                <!-- 核心业务领域 -->
-                <p class="text-[18px] md:text-[24px]  md:mb-[12px] mb-[8px]">{{ $t('contact.businessTitle') }}</p>
+                <p class="text-[18px]  md:text-[20px] xl:text-[24px]  md:mb-[12px] mb-[8px] mt-[24px]">{{ $t('contact.businessTitle') }}</p>
                 <div class="flex md:flex-row flex-col flex-wrap md:gap-[12px] gap-[8px] md:gap-y-[12px] md:gap-x-[24px]">
                     <label v-for="area in businessAreas" :key="area.id"
                         class="flex items-center gap-[8px] cursor-pointer select-none">
                         <input type="checkbox" :value="area.id" v-model="form.areas"
-                            class="area-checkbox w-[16px] h-[16px] shrink-0" />
-                        <span class="text-[16px] md:text-[20px]"
-                            :class="form.areas.includes(area.id) ? 'text-white' : 'text-[#7D86A1]'">
+                            class="area-checkbox w-[16px] h-[16px] md:w-[20px] md:h-[20px] shrink-0" />
+                        <span class="text-[16px] md:text-[18px] xl:text-[20px]"
+                            :class="form.areas.includes(area.id) ? 'text-white' : 'text-[#454C5F]'">
                             {{ $t(`contact.businessAreas.${area.id}`) }}
                         </span>
                     </label>
                 </div>
 
-                <!-- 咨询内容 -->
                 <p class="text-[18px] md:text-[24px] mt-[28px] md:mt-[24px] mb-[20px]">{{ $t('contact.consultTitle') }} <span>*</span></p>
                 <textarea v-model="form.message" required rows="4" :placeholder="$t('contact.messagePlaceholder')"
                     @blur="touched.message = true"
                     :class="showError('message') ? 'border-[#FF6B6B]' : 'border-[#2A2D33]'"
-                    class="w-full bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] p-[12px] text-white text-[16px] md:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200 resize-y"></textarea>
+                    class="w-full bg-[#131416] md:bg-[#1A1B1E] border rounded-[4px] p-[12px] text-white text-[16px] md:text-[18px] xl:text-[20px] placeholder-[#454C5F] focus:border-[#0043FF] outline-none transition-colors duration-200 resize-y"></textarea>
                 <p v-if="showError('message')" class="text-[14px] text-[#FF6B6B] mt-[4px]">{{ errors.message }}</p>
 
                 <button type="submit" :disabled="!isFormValid || submitting"
-                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200 disabled:opacity-60 disabled:cursor-not-allowed">
+                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200 disabled:cursor-not-allowed">
                     {{ $t('contact.submit') }}
                 </button>
             </form>
@@ -103,7 +97,6 @@ import PocketBase from 'pocketbase';
 
 const pb = new PocketBase('https://api.adsmarch.bot.cd');
 
-// 业务领域中文映射（普通对象，避免 Nuxt i18n 代理包装）
 const areaZhLabels = {
     internet_app_1: '泛互联网/应用 App',
     ecommerce_dtc: '跨境电商/DTC品牌',
@@ -124,7 +117,6 @@ const fields = computed(() => [
     { key: 'website', label: t('contact.fields.website.label'), placeholder: t('contact.fields.website.placeholder') }
 ])
 
-// 业务领域选项：id 作为表单值（稳定键），显示文案通过 $t() 翻译
 const businessAreas = [
     { id: 'internet_app_1' },
     { id: 'ecommerce_dtc' },
@@ -146,7 +138,6 @@ const form = reactive({
     message: ''
 })
 
-// 输入格式正则规则
 const patterns = {
     phone: /^[\d+\-()\s]{5,20}$/,
     email: /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,
@@ -157,7 +148,6 @@ const touched = reactive({})
 const submitted = ref(false)
 const submitting = ref(false)
 
-// 逐字段计算错误信息（无错误返回空字符串）
 function fieldError(key) {
     const val = String(form[key] ?? '').trim()
     if (key === 'areas') return ''
@@ -180,12 +170,10 @@ const errors = computed(() => {
 
 const isFormValid = computed(() => Object.keys(errors.value).length === 0)
 
-// 失焦（或尝试提交）后才显示该字段的错误
 function showError(key) {
     return (touched[key] || submitted.value) && !!errors.value[key]
 }
 
-// XSS 防护：提交前转义特殊字符
 function sanitize(value) {
     return String(value).replace(/[<>&"']/g, c => ({
         '<': '&lt;', '>': '&gt;', '&': '&amp;', '"': '&quot;', "'": '&#39;'
@@ -204,12 +192,10 @@ async function onSubmit() {
             company: sanitize(form.company),
             position: sanitize(form.position),
             website: sanitize(form.website),
-            // 固定传中文，不随页面语言变化
             business_areas: form.areas.map(id => areaZhLabels[id] || id).join(','),
             message: sanitize(form.message)
         })
-        console.log('提交成功', record.id)
-        // 提交成功后清空表单，必填项为空使按钮恢复禁用状态
+        //console.log('提交成功', record.id)
         Object.assign(form, {
             name: '', phone: '', email: '', company: '', position: '', website: '',
             areas: [], message: ''
@@ -225,7 +211,6 @@ async function onSubmit() {
 </script>
 
 <style scoped>
-/* 环绕文字绕 Logo 旋转 */
 .circular-text {
     transform-origin: center;
     animation: circular-spin 12s linear infinite;
@@ -241,7 +226,6 @@ async function onSubmit() {
     }
 }
 
-/* 业务领域复选框：未选中态填充与卡片背景一致 */
 .area-checkbox {
     appearance: none;
     -webkit-appearance: none;
@@ -268,5 +252,18 @@ async function onSubmit() {
     border: solid #fff;
     border-width: 0 2px 2px 0;
     transform: rotate(45deg);
+}
+@media (min-width: 768px) {
+    .area-checkbox:checked::after {
+        content: '';
+        position: absolute;
+        left: 7.5px;
+        top: 0.5px;
+        width: 6px;
+        height: 15px;
+        border: solid #fff;
+        border-width: 0 2px 2px 0;
+        transform: rotate(45deg);
+    }
 }
 </style>

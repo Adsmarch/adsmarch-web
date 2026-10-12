@@ -3,7 +3,7 @@
     <div class="mx-auto p-6 md:p-12 xl:p-[120px] pt-14 pb-14 md:pt-16 md:pb-10 flex flex-col justify-between ">
       
       <div class="z-10 mb-14 md:mb-[120px]">
-        <svg class="h-8 md:h-10 w-auto" viewBox="0 0 338 56" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg class="h-10 md:h-14 w-auto" viewBox="0 0 338 56" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path fill-rule="evenodd" clip-rule="evenodd" d="M49.1816 21.9978L68.179 8.36247V49.8521L59.6692 56L59.6652 55.9948L59.6583 56L59.6581 55.9863L45.087 37.7787L34.2105 48.3159L23.2608 37.7806L8.58816 55.9778V56L8.57684 55.9917L8.57048 56L0 49.8521L0.0106097 49.8366V8.36247L19.1099 21.9785L34.1784 0L49.1816 21.9978ZM54.0333 29.1117L59.6067 37.2832L59.5694 23.7485L54.0333 29.1117ZM8.63979 37.25L14.232 29.0933L8.67705 23.7485L8.63979 37.25ZM29.8365 29.6253L34.2105 32.7437L38.5593 29.622L34.2157 24.1945L29.8365 29.6253Z" fill="white"/>
           <path d="M168.936 19.7731C171.476 19.5655 173.971 20.043 176.255 21.1459C178.54 22.2488 181.112 23.8498 179.205 26.5034C177.158 29.3497 175.578 26.8294 173.377 25.8955C171.44 25.0742 167.887 24.4902 166.399 26.3907C164.406 28.9316 167.593 30.1116 169.506 30.6957C174.105 32.0951 180.571 32.7919 181.118 38.9054C182.003 48.8171 169.884 50.7622 162.838 47.2962C160.738 46.2615 157.951 43.8894 159.728 41.4048C161.605 38.7751 162.802 40.5422 164.739 41.6363C167.365 43.1157 170.603 44.1622 173.517 42.7628C175.605 41.7607 175.795 39.5104 173.953 38.108C170.261 35.3032 162.291 36.3853 160.363 30.6601C158.278 24.4635 163.132 20.2475 168.942 19.7731H168.936Z" fill="white"/>
           <path fill-rule="evenodd" clip-rule="evenodd" d="M103.624 9.46424C105.02 7.43924 107.842 7.13971 109.191 9.38999C114.232 20.5498 120.027 31.3926 125.053 42.5554C126.039 44.7494 127.421 46.8247 124.447 48.236C122.617 49.1047 121.126 48.9417 120.14 47.0442L115.687 37.4883L115.533 37.3728H97.2733L97.2761 37.3787L92.7343 47.0442C91.5014 50.1335 85.9675 48.316 86.7547 45.1228C92.0837 33.118 98.0663 21.3771 103.624 9.46424ZM99.9557 31.7067H112.919L106.304 17.8519L99.9557 31.7067Z" fill="white"/>
@@ -18,7 +18,7 @@
 
       <div class="flex flex-col lg:flex-row justify-between items-end gap-[170px] md:gap-6 z-10">
         <div class="flex flex-col items-start gap-8 md:gap-16 w-full lg:max-w-[600px]">
-          <nav class="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-14 text-[20px] md:text-[24px] font-semibold text-white">
+          <nav class="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-14 text-[20px] md:text-[24px] text-white">
             <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.careers') }}</a>
             <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.about') }}</a>
             <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.contact') }}</a>
@@ -30,7 +30,8 @@
             <p>010-6295 6881</p>
           </div>
 
-          <div class="flex flex-col sm:flex-row items-start sm:items-center gap-1 sm:gap-5 text-[14px] md:text-[16px] text-[#D9DDE8]">
+          <div class="flex gap-1 sm:gap-5 text-[14px] md:text-[16px] text-[#D9DDE8]"
+          :class="locale === 'en' ? 'flex-col items-start' : 'flex-col sm:flex-row items-start sm:items-center sm:gap-5'">
             <p>{{ $t('footer.copyright') }}</p>
             <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer" class="hover:underline">
               {{ $t('footer.icp') }}
@@ -55,7 +56,9 @@
     </div>
   </footer>
 </template>
-
+<script setup>
+const { t, locale, setLocale } = useI18n()
+</script>
 <style scoped>
 .footer-bg {
   background-image: url('../assets/image/m-bg.png');

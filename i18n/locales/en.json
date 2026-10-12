@@ -96,9 +96,9 @@
       "hottest": "Hottest"
     },
     "categories": {
-      "practical": "Tips",
+      "tips": "Tips",
       "research": "Research",
-      "industry": "Industry Reports"
+      "report": "Industry Reports"
     },
     "clearAll": "Clear All",
     "showResults": "Show Results"
