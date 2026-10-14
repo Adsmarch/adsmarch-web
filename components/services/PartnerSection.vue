@@ -1,7 +1,7 @@
 <template>
   <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pb-[56px] md:pb-[120px] overflow-hidden select-none">
     <div class="flex flex-col md:flex-row items-stretch justify-between gap-10 md:gap-12 lg:gap-20">
-      <div class="w-full md:w-auto md:order-2 flex flex-col justify-between items-start shrink-0">
+      <div class="w-full md:w-auto md:order-2 flex flex-col justify-between items-start shrink-0 xl:gap-16">
         
         <div class="w-full flex items-center justify-between md:justify-start gap-6">
           
@@ -75,7 +75,7 @@
         <div 
         v-for="(logo, index) in partnerLogos" 
         :key="index"
-        class="w-[112px] h-[64px] md:w-[120px] md:h-[80px] lg:w-[200px] lg:h-[200px] xl:w-[160px] xl:h-[160px] 2xl:w-[200px] 2xl:h-[200px] relative overflow-hidden flex items-center justify-center group"
+        class="w-[112px] h-[64px] md:w-[120px] md:h-[60px] lg:w-[200px] lg:h-[100px] xl:w-[160px] xl:h-[80px] 2xl:w-[200px] 2xl:h-[100px] relative overflow-hidden flex items-center justify-center group"
         >
         <img 
             :src="logo" 

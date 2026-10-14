@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-black text-white px-[15px] md:px-[120px] m-auto">
+    <div class="bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pb-[64px] md:pb-[120px] m-auto">
 <Honors />
 <IndustryRecognition />
     </div>

@@ -1,5 +1,5 @@
 <template>
-    <div class=" pt-[56px] md:pt-[120px] pb-[29px] md:pb-[0px]">
+    <div class=" pt-[56px] md:pt-[120px] pb-[28px] md:pb-[0px]">
 
         <!-- 标题 -->
         <div class="flex items-start md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
@@ -9,13 +9,13 @@
                 <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
                 <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
             </svg>
-            <h2 class="text-[40px] md:text-[96px] font-[600] leading-none text-white">
+            <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
                 {{ $t('awards.honors.title') }}
             </h2>
         </div>
 
         <!-- ========== PC：左图 + 右侧两列网格 ========== -->
-        <div class="hidden md:flex items-start gap-[24px] lg:gap-[80px]">
+        <div class="hidden md:flex flex-col xl:flex-row xl:items-start gap-[24px] lg:gap-[80px]">
             <!-- 左侧奖杯图片 -->
             <div class="w-[42%] lg:w-[45%] shrink-0 rounded-[4px] md:rounded-[8px] overflow-hidden">
                 <img :src="honorImage" :alt="$t('awards.honors.title')" class="w-full object-cover" loading="lazy" />
@@ -28,7 +28,7 @@
                     <!-- 顶部：小图标 + 序号 -->
                     <div class="flex items-start justify-between group-hover:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                            class="w-[16px] h-[16px] shrink-0 text-[#0043FF] group-hover:text-white transition-colors duration-300">
+                            class="w-[16px] h-[16px] shrink-0 text-white transition-colors duration-300">
                             <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z"
                                 fill="currentColor" />
                             <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="currentColor" />
