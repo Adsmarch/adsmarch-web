@@ -1,13 +1,13 @@
 <template>
     <div class="w-full px-[15px] md:px-[40px] xl:px-[120px]  py-[56px] md:py-[120px] text-[#131416]">
-        <NuxtLink :to="localePath('/insights')" class="inline-block text-[#7D86A1] text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-[1]">
+        <button @click="goBack" class="inline-block text-[#7D86A1] text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-[1] text-left">
             <div class="flex gap-[8px] items-center">
                 <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path d="M0.00792897 6.0069L3.45614 12L6 12L2.54781 6L6 -2.62268e-07L3.45614 -1.51073e-07L0.00792897 5.9931L0 5.9931L0.00395105 6L0 6.0069L0.00792897 6.0069Z" fill="#7D86A1"/>
                 </svg>
                 {{ $t('insightDetail.title') }}
             </div>
-        </NuxtLink>
+        </button>
 
         <div v-if="currentArticle">
             <h1 class="text-[40px] sm:text-[48px] md:text-[60px] xl:text-[72px] font-semibold mb-[24px] md:mb-[32px] leading-[1.2] mt-[48px] md:mt-[64px]">
@@ -91,7 +91,7 @@
             <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">{{ $t('insightId.title') }}</p>
         </div>
         <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
-            <NuxtLink v-for="item in visibleList" :key="item.id" :to="`/insight/${item.slug || item.id}`"
+            <NuxtLink v-for="item in visibleList" :key="item.id" :to="`/articles/${item.slug || item.id}`"
                 class="bg-[#000] text-[#fff] flex flex-col justify-between h-full insight-card group  rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-[#454C5F] md:pb-[32px]">
                 <InsightItem v-if="item" :item="item" />
             </NuxtLink>
@@ -237,6 +237,16 @@ const visibleList = computed(() => {
     const diffCategoryList = otherArticles.filter(item => item.category !== currentArticle.value.category)
     return [...sameCategoryList, ...diffCategoryList].slice(0, 3)
 })
+
+const router = useRouter()
+
+function goBack() {
+    if (window.history.length > 1) {
+        router.back()
+    } else {
+        router.push('/')
+    }
+}
 </script>
 
 <style scoped>

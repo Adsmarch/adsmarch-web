@@ -63,7 +63,7 @@
         </div>
 
         <div v-if="!loading && visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
-            <NuxtLink v-for="item in visibleList" :key="item.id" :to="localePath(`/insight/${item.slug || item.id}`)"
+            <NuxtLink v-for="item in visibleList" :key="item.id" :to="localePath(`/articles/${item.slug || item.id}`)"
                 class="flex flex-col justify-between h-full insight-card group block bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]">
                 <InsightItem :item="item" />
             </NuxtLink>
