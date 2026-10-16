@@ -24,14 +24,23 @@
     </div>
 
     <div class="relative z-10 w-full mx-auto h-full flex flex-col justify-between ">
-      <div class="mt-[56px] md:mt-[120px] max-w-[980px]">
+      <div
+      v-motion
+      :initial="{ opacity: 0, y: 50 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }" 
+      class="mt-[56px] md:mt-[120px] max-w-[980px] opacity-0">
         <h1 class="text-[40px] sm:text-[48px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">
           {{ $t('homeBanner.title') }}
         </h1>
       </div>
 
       <div class="flex items-center md:flex-row md:items-end justify-between gap-8 mb-[56px] md:mb-[120px]">
-        <div class="shrink-0">
+        <div 
+          v-motion
+            :initial="{ opacity: 0, scale: 0.8 }"
+            :enter="{ opacity: 1, scale: 1, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+            class="shrink-0 opacity-0"
+          > 
           <div class="relative w-[80px] h-[80px] md:w-[200px] md:h-[200px] flex items-center justify-center">
             <svg 
               class="w-full h-full animate-[spin_12s_linear_infinite]" 
@@ -56,11 +65,19 @@
         </div>
 
         <div class="max-w-[520px] space-y-6 md:space-y-8">
-          <p class="text-[20px] sm:text-[24px] xl:text-[32px] text-white leading-[1.4] font-normal">
+          <p
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }" 
+          class="text-[20px] sm:text-[24px] xl:text-[32px] text-white leading-[1.4] font-normal opacity-0">
             {{ $t('homeBanner.subtitle') }}
           </p>
 
-          <div>
+          <div
+          v-motion
+          :initial="{ opacity: 0, y: 50 }"
+          :visible-once="{ opacity: 1, y: 0, transition: { duration: 500, ease: 'easeOut' } }" 
+          class="opacity-0">
             <NuxtLinkLocale
               to="/contact"
               class="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-8 sm:py-4 bg-[#0043FF] text-white text-[14px] sm:text-[20px] font-semibold rounded hover:bg-[#103C93] transition-colors duration-200 w-auto min-w-[120px] sm:w-[240px] h-[40px] sm:h-[64px]"

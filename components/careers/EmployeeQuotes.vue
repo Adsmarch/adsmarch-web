@@ -1,12 +1,16 @@
 <template>
     <div class="pt-[56px] md:pt-[0] pb-[0px] text-[#131416]">
-
-        <div class="flex flex-col items-center text-center pt-[0] md:pt-[120px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex flex-col items-center text-center pt-[0] md:pt-[120px]"
+        >
             <div class="flex items-start justify-center gap-3 mb-8 md:mb-0">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="shrink-0">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                    <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                    <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
+                    <path d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
+                    <path d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
                 <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[84px] 2xl:text-[96px] font-semibold leading-[1.2]">
                     {{ $t('careers.employeeQuotes.title') }}
@@ -14,14 +18,23 @@
             </div>
         </div>
 
-        <div class="hidden md:block relative pt-[32px] md:pt-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 40 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+            class="hidden md:block relative pt-[32px] md:pt-[64px]"
+        >
             <Swiper
-                :modules="[SwiperNavigation, SwiperPagination]"
+                :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
                 :slides-per-view="'auto'"
                 :centered-slides="true"
                 :space-between="32"
                 :loop="true"
                 :speed="600"
+                :autoplay="{
+                    delay: 5000,
+                    disableOnInteraction: false
+                }"
                 :observer="true"
                 :observe-parents="true"
                 :watch-slides-progress="true"
@@ -30,7 +43,7 @@
             >
                 <SwiperSlide v-for="(item, index) in loopQuotes" :key="index" class="!w-[680px] lg:!w-[780px] xl:!w-[1140px]">
                     <div class="quote-box-wrap">
-                        <div class="quote-content relative bg-white rounded-[12px] p-8 md:p-[52px] lg:p-[72px] flex flex-col justify-between z-10">
+                        <div class="quote-content relative bg-white rounded-[12px] p-8 md:p-[52px] lg:p-[72px] flex flex-col justify-between z-10 shadow-sm">
                             <div class="absolute top-[52px] left-[72px] text-[#E5E9F2] select-none pointer-events-none z-10">
                                 <svg width="84" height="56" viewBox="0 0 84 56" fill="currentColor">
                                     <path d="M42.3433 56C43.564 45.3333 46.0055 35.2 49.6676 25.6C53.4823 16 58.2888 7.46667 64.0872 0H84C80.3379 7.31429 77.3624 16.2286 75.0736 26.7429C72.9373 37.1048 71.8692 46.8571 71.8692 56H42.3433ZM0 56C1.22071 45.6381 3.66213 35.6571 7.32425 26.0571C10.9864 16.3048 15.7166 7.61905 21.515 0H41.6567C37.9945 7.16191 35.0191 16 32.7302 26.5143C30.594 37.0286 29.5259 46.8571 29.5259 56H0Z" fill="#D9DDE8"/>
@@ -51,20 +64,29 @@
             </Swiper>
         </div>
 
-        <div class="md:hidden w-full pb-8">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, delay: 200, ease: 'easeOut' } }"
+            class="md:hidden w-full pb-8 pt-4"
+        >
             <Swiper
-                :modules="[SwiperNavigation, SwiperPagination]"
+                :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
                 :slides-per-view="1"
                 :space-between="16"
                 :loop="true"
                 :speed="600"
+                :autoplay="{
+                    delay: 5000,
+                    disableOnInteraction: false
+                }"
                 :watch-slides-progress="true"
                 :pagination="{ clickable: true }"
                 class="quote-swiper-mobile w-full !overflow-visible"
             >
                 <SwiperSlide v-for="(item, index) in quotes" :key="index">
                     <div class="quote-box-wrap relative rounded-[4px] bg-white quote-box-wrap-mobile">
-                        <div class="quote-content relative bg-white rounded-[4px] p-6 flex flex-col justify-between h-full z-10 quote-content-mobile">
+                        <div class="quote-content relative bg-white rounded-[4px] p-6 flex flex-col justify-between h-full z-10 quote-content-mobile shadow-sm">
                             <div class="absolute top-[24px] left-[24px] text-[#E5E9F2] select-none pointer-events-none">
                                 <svg width="54" height="54" viewBox="0 0 84 56" fill="currentColor">
                                     <path d="M42.3433 56C43.564 45.3333 46.0055 35.2 49.6676 25.6C53.4823 16 58.2888 7.46667 64.0872 0H84C80.3379 7.31429 77.3624 16.2286 75.0736 26.7429C72.9373 37.1048 71.8692 46.8571 71.8692 56H42.3433ZM0 56C1.22071 45.6381 3.66213 35.6571 7.32425 26.0571C10.9864 16.3048 15.7166 7.61905 21.515 0H41.6567C37.9945 7.16191 35.0191 16 32.7302 26.5143C30.594 37.0286 29.5259 46.8571 29.5259 56H0Z" fill="#D9DDE8"/>
@@ -92,7 +114,7 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from 'swiper/modules'
+import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'

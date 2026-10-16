@@ -1,8 +1,13 @@
 <template>
     <div class="pb-14 xl:pb-[120px] md:pb-[64px] px-[15px] lg:px-[120px] m-auto">
-        <div class="flex items-start justify-end gap-3 mb-[32px] lg:mb-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex items-start justify-end gap-3 mb-[32px] lg:mb-[64px]"
+        >
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
+                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" fill="#0043FF" />
                 <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
                 <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
             </svg>
@@ -11,8 +16,12 @@
             </h2>
         </div>
 
-        <div class="relative w-full aspect-[16/9] lg:aspect-[21/9] bg-gray-900 rounded-lg overflow-hidden">
-
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 40 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 150, ease: 'easeOut' } }"
+            class="relative w-full aspect-[16/9] lg:aspect-[21/9] bg-gray-900 rounded-lg overflow-hidden"
+        >
             <img v-if="!cities[activeIndex].videoUrl" :src="cities[activeIndex].cover"
                 :alt="cities[activeIndex].name"
                 class="absolute inset-0 w-full h-full object-cover" />
@@ -48,13 +57,24 @@
         <div class="hidden lg:grid grid-cols-5 gap-3 mt-[40px]">
             <div v-for="(city, index) in cities" :key="index"
                 @click="selectCity(index)"
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 600, 
+                        delay: 300 + (index * 100),
+                        ease: 'easeOut' 
+                    } 
+                }"
                 class="city-card cursor-pointer p-5 transition-all border-t-2"
                 :class="{ 'active': activeIndex === index }">
                 <div class="flex items-start justify-between mb-3">
                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path class="card-mark" d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" />
-                        <path class="card-mark" d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" />
-                        <path class="card-mark" d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" />
+                        <path class="card-mark" d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" />
+                        <path class="card-mark" d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" />
+                        <path class="card-mark" d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" />
                     </svg>
                     <span class="card-num text-[20px] font-[600]">
                         0{{ index + 1 }}
@@ -68,53 +88,59 @@
                 </p>
             </div>
         </div>
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, delay: 300, ease: 'easeOut' } }"
+            class="lg:hidden"
+        >
+            <div class="mt-[32px] mb-[24px]">
+                <h3 class="text-[32px]  font-[600] mb-[8px] text-white">
+                    {{ cities[activeIndex].name }}
+                </h3>
+                <p class="text-[16px] font-[400] text-[#7D86A1]">
+                    {{ cities[activeIndex].address }}
+                </p>
+            </div>
 
-        <div class="lg:hidden mt-[32px] mb-[24px]">
-            <h3 class="text-[32px]  font-[600] mb-[8px] text-white">
-                {{ cities[activeIndex].name }}
-            </h3>
-            <p class="text-[16px] font-[400] text-[#7D86A1]">
-                {{ cities[activeIndex].address }}
-            </p>
-        </div>
+            <div class="mt-4">
+                <Swiper :modules="[SwiperNavigation]" :slides-per-view="2.5" :space-between="8" :loop="false"
+                   :breakpoints="{
+                        768: {
+                            slidesPerView: 3.5,
+                            spaceBetween: 12
+                        }
+                    }" 
+                    class="w-full" @swiper="onSwiperInit" @slide-change="onSlideChange">
 
-        <div class="lg:hidden mt-4">
-            <Swiper :modules="[SwiperNavigation]" :slides-per-view="2.5" :space-between="8" :loop="false"
-               :breakpoints="{
-                    768: {
-                        slidesPerView: 3.5,
-                        spaceBetween: 12
-                    }
-                }" 
-                class="w-full" @swiper="onSwiperInit" @slide-change="onSlideChange">
-
-                <SwiperSlide v-for="(city, index) in cities" :key="index">
-                    <div @click="selectCity(index)"
-                        class="cursor-pointer px-[8px] py-[16px] transition-all"
-                        :class="activeIndex === index
-                             ? 'border-t-[#0043FF] border-t-[2px] bg-[#131416]'
-                             : 'border-t-[#454C5F] border-t-[2px] bg-[#000] '">
-                        <div class="flex items-center justify-between mb-2">
-                            <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" class="w-[10px] h-[10px] ">
-                                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
-                                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
-                                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
-                            </svg>
-                            <span class="text-[14px]" :class="activeIndex === index ? 'text-[#fff]' : 'text-[#454C5F]'">
-                                0{{ index + 1 }}
-                            </span>
+                    <SwiperSlide v-for="(city, index) in cities" :key="index">
+                        <div @click="selectCity(index)"
+                            class="cursor-pointer px-[8px] py-[16px] transition-all"
+                            :class="activeIndex === index
+                                 ? 'border-t-[#0043FF] border-t-[2px] bg-[#131416]'
+                                 : 'border-t-[#454C5F] border-t-[2px] bg-[#000] '">
+                            <div class="flex items-center justify-between mb-2">
+                                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" class="w-[10px] h-[10px] ">
+                                    <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
+                                    <path d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
+                                    <path d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
+                                </svg>
+                                <span class="text-[14px]" :class="activeIndex === index ? 'text-[#fff]' : 'text-[#454C5F]'">
+                                    0{{ index + 1 }}
+                                </span>
+                            </div>
+                            <div class="text-[20px] font-[600]" :class="activeIndex === index ? 'text-[#0043FF]' : 'text-[#fff]'">
+                                {{ city.name }}
+                            </div>
                         </div>
-                        <div class="text-[20px] font-[600]" :class="activeIndex === index ? 'text-[#0043FF]' : 'text-[#fff]'">
-                            {{ city.name }}
-                        </div>
-                    </div>
-                </SwiperSlide>
+                    </SwiperSlide>
 
-            </Swiper>
+                </Swiper>
 
-            <div class="mt-4 h-[3px] bg-gray-800 rounded-full overflow-hidden">
-                <div class="h-full bg-blue-600 rounded-full transition-all duration-300"
-                    :style="{ width: swiperProgress + '%' }"></div>
+                <div class="mt-4 h-[3px] bg-gray-800 rounded-full overflow-hidden">
+                    <div class="h-full bg-blue-600 rounded-full transition-all duration-300"
+                        :style="{ width: swiperProgress + '%' }"></div>
+                </div>
             </div>
         </div>
 

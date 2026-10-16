@@ -1,11 +1,15 @@
 <template>
     <div class="px-[15px] md:px-[40px] xl:px-[120px] m-auto">
-        <div
-            class="relative flex min-[1120px]:flex-row flex-col justify-between pt-[56px] min-[1120px]:pt-[120px] overflow-hidden min-h-[420px] min-[1120px]:min-h-[380px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 40 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }"
+            class="relative flex min-[1120px]:flex-row flex-col justify-between pt-[56px] min-[1120px]:pt-[120px] overflow-hidden min-h-[420px] min-[1120px]:min-h-[380px]"
+        >
             <div class="flex flex-col w-full min-[1120px]:w-[45%]">
 
                 <div class="z-10">
-                    <div
+                    <div 
                         class=" rounded-full  flex items-center justify-center relative w-[96px] h-[96px] md:w-[160px] md:h-[160px] lg:w-[200px] lg:h-[200px]">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 56" fill="none"
                             class="w-[32px] md:w-[54px] lg:w-[68px]">
@@ -52,10 +56,14 @@
             </div>
         </div>
 
-
-        <div class=" mb-[28px] lg:mb-[120px] md:mb-[64px]">
-            <div class="flex items-center justify-between mb-[32px] md:mb-[64px] md:mt-[120px] mt-[56px]">
-
+        <div class="mb-[28px] lg:mb-[120px] md:mb-[64px]">
+            
+            <div 
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+                class="flex items-center justify-between mb-[32px] md:mb-[64px] md:mt-[120px] mt-[56px]"
+            >
                 <div class="flex items-start gap-3 xl:gap-6">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"
                         class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
@@ -68,12 +76,11 @@
                         {{ $t('about.development.devTitle') }}
                     </h3>
                 </div>
+                
                 <div class="flex items-center gap-[20px]">
-
                     <button id="dev-swiper-prev"
                         class="w-[40px] h-[40px] md:w-[64px] md:h-[64px]  rounded bg-[#131416] text-white flex items-center justify-center hover:bg-[#103C93] transition group"
                         :aria-label="$t('about.development.prev')">
-
                         <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 40 40" fill="none">
                             <path
@@ -87,45 +94,62 @@
                         :aria-label="$t('about.development.next')">
                         <svg xmlns="http://www.w3.org/2000/svg" class=" w-[40px] h-[40px] md:w-[64px] md:h-[64px]"
                             viewBox="0 0 64 64" fill="none">
-
                             <path
                                 d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z"
                                 fill="white" />
                         </svg>
                     </button>
-
                 </div>
             </div>
-            <div class="h-px bg-gray-800 mb-6"></div>
-            <div class="relative">
 
-                <Swiper ref="devSwiper" :modules="[SwiperNavigation]" :slides-per-view="1.25" :space-between="16"
-                    :loop="false" :speed="600" :watch-slides-progress="true" :navigation="{
+            <div class="h-px bg-gray-800 mb-6"></div>
+
+            <div class="relative">
+                <Swiper 
+                    ref="devSwiper" 
+                    :modules="[SwiperNavigation, SwiperAutoplay, SwiperPagination]" 
+                    :slides-per-view="1.25" 
+                    :space-between="16"
+                    :loop="false" 
+                    :speed="600" 
+                    :watch-slides-progress="true" 
+                    :autoplay="{
+                        delay: 5000,
+                        disableOnInteraction: false
+                    }"
+                    :pagination="{
+                        el: '.custom-dev-pagination',
+                        clickable: true
+                    }"
+                    :navigation="{
                         prevEl: '#dev-swiper-prev',
                         nextEl: '#dev-swiper-next'
-                    }" :breakpoints="{
-                        '640': {
-                            slidesPerView: 2.1,
-                            spaceBetween: 16
-                        },
-                        '999': {
-                            slidesPerView: 3,
-                            spaceBetween: 20
-                        },
-                        '1250': {
-                            slidesPerView: 3.6,
-                            spaceBetween: 20
-                        },
-                        '1450': {
-                            slidesPerView: 4.2,
-                            spaceBetween: 20
-                        }
-                    }" class="w-full" @swiper="onSwiper" @slide-change="onSlideChange">
-
+                    }" 
+                    :breakpoints="{
+                        '640': { slidesPerView: 2.1, spaceBetween: 16 },
+                        '999': { slidesPerView: 3, spaceBetween: 20 },
+                        '1250': { slidesPerView: 3.6, spaceBetween: 20 },
+                        '1450': { slidesPerView: 4.2, spaceBetween: 20 }
+                    }" 
+                    class="w-full" 
+                    @swiper="onSwiper" 
+                    @slide-change="onSlideChange"
+                >
                     <SwiperSlide v-for="(item, index) in timeline" :key="index">
-
                         <div
-                            class="swiper-progress timeline-card border-l-[#454C5F] border-l-[1px] py-[24px] pl-[8px] pr-[20px] md:py-[40px] md:pl-[12px] md:pr-[32px] md:p-6 h-[320px] md:h-[460px] justify-between flex flex-col transition-all">
+                            v-motion
+                            :initial="{ opacity: 0, y: 40 }"
+                            :visible-once="{ 
+                                opacity: 1, 
+                                y: 0, 
+                                transition: { 
+                                    duration: 600, 
+                                    delay: index * 100,
+                                    ease: 'easeOut' 
+                                } 
+                            }"
+                            class="swiper-progress timeline-card border-l-[#454C5F] border-l-[1px] py-[24px] pl-[8px] pr-[20px] md:py-[40px] md:pl-[12px] md:pr-[32px] md:p-6 h-[320px] md:h-[460px] justify-between flex flex-col transition-all"
+                        >
                             <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"
                                 class="card-icon">
                                 <path d="M3.93909 5.74298L0.0406091 8V6.33865L3.93909 4.08163V5.74298Z" />
@@ -149,17 +173,10 @@
                         </div>
                     </SwiperSlide>
                 </Swiper>
-                <div class="mt-[32px] md:mt-[64px] h-[4px] md:h-[8px] bg-gray-800 rounded-full overflow-hidden">
-                    <div class="h-full bg-blue-600 rounded-full" :style="{
-                        width: `${swiperProgress}%`,
-                        transition: 'width 0.6s ease'
-                    }"></div>
-                </div>
 
+                <div class="custom-dev-pagination flex items-center justify-center gap-2  md:gap-[12px] mt-[32px] md:mt-[64px]"></div>
             </div>
-
         </div>
-
     </div>
 </template>
 
@@ -174,11 +191,14 @@ import {
 } from 'swiper/vue'
 
 import {
-    Navigation as SwiperNavigation
+    Navigation as SwiperNavigation,
+    Autoplay as SwiperAutoplay,
+    Pagination as SwiperPagination
 } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 
 const { t, tm } = useI18n()
@@ -323,6 +343,26 @@ function updateProgress(swiper) {
 
     to {
         transform: rotate(360deg);
+    }
+}
+:deep(.custom-dev-pagination .swiper-pagination-bullet) {
+    width: 12px;
+    height: 12px;
+    background-color: #454C5F;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+:deep(.custom-dev-pagination .swiper-pagination-bullet-active) {
+    background-color: #0043FF;
+}
+@media screen and (max-width: 767px) {
+    :deep(.custom-dev-pagination .swiper-pagination-bullet) {
+        width: 6px;
+        height: 6px;
     }
 }
 </style>

@@ -1,6 +1,11 @@
 <template>
   <section class="relative w-full bg-black text-white pb-[56px] md:pb-[120px] overflow-hidden select-none">
-    <div class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] justify-center">
+    <div 
+      v-motion
+      :initial="{ opacity: 0, y: 30 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+      class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] justify-center"
+    >
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-[#0043FF]">
         <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
         <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
@@ -11,14 +16,27 @@
       </h2>
     </div>
 
-    <div class="relative w-full">
+    <div 
+      v-motion
+      :initial="{ opacity: 0, y: 40 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+      class="relative w-full"
+    >
       <Swiper
-        :modules="[SwiperNavigation]"
+        :modules="[SwiperPagination, SwiperAutoplay]"
         :slides-per-view="'auto'"
         :space-between="16"
         :centered-slides="true"
         :initial-slide="1"
-        :loop="false"
+        :speed="600"
+        :autoplay="{
+            delay: 5000,
+            disableOnInteraction: false
+        }"
+        :pagination="{
+            el: '.classic-pagination',
+            clickable: true
+        }"
         :breakpoints="{
           '640': { spaceBetween: 20 },
           '1024': { spaceBetween: 24 },
@@ -82,46 +100,7 @@
         </SwiperSlide>
       </Swiper>
 
-      <div class="flex items-center justify-center space-x-4 mt-8 md:mt-16">
-        <button 
-          @click="slidePrev" 
-          class="flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
-          aria-label="Previous"
-        >
-          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" class="w-10 h-10 md:w-16 md:h-16">
-            <rect 
-              width="64" 
-              height="64" 
-              rx="4" 
-              class="fill-[#131416] group-hover:fill-[#103C93] transition-colors duration-200"
-            />
-            <path 
-              d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" 
-              fill="#7D86A1"
-              class="group-hover:fill-white transition-colors duration-200"
-            />
-          </svg>
-        </button>
-        
-        <button 
-          @click="slideNext" 
-          class="flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
-          aria-label="Next"
-        >
-          <svg width="56" height="56" viewBox="0 0 64 64" fill="none" class="w-10 h-10 md:w-16 md:h-16">
-            <rect 
-              width="64" 
-              height="64" 
-              rx="4" 
-              class="fill-[#0043FF] group-hover:fill-[#103C93] transition-colors duration-200"
-            />
-            <path 
-              d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" 
-              fill="white"
-            />
-          </svg>
-        </button>
-      </div>
+      <div class="classic-pagination flex items-center justify-center gap-[8px] md:gap-[12px] mt-[32px] md:mt-[64px]"></div>
     </div>
 
     <Teleport to="body">
@@ -134,7 +113,7 @@
           <div class="relative w-full max-w-7xl bg-[#131416]">
             <button 
               @click="closeVideoModal"
-              class="absolute top-[-32px] right-[0]  md:top-[0] md:right-[-64px] z-20 w-8 h-8 md:w-16 md:h-16 bg-[#0043FF] hover:bg-[#103C93] flex items-center justify-center transition-colors cursor-pointer"
+              class="absolute top-[-32px] right-[0] md:top-[0] md:right-[-64px] z-20 w-8 h-8 md:w-16 md:h-16 bg-[#0043FF] hover:bg-[#103C93] flex items-center justify-center transition-colors cursor-pointer"
               aria-label="Close"
             >
               <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 md:w-8 md:h-8">
@@ -162,9 +141,10 @@
 <script setup>
 import { ref } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation } from 'swiper/modules'
+import { Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
+import 'swiper/css/pagination'
 
 import case01 from '@/assets/image/case-01.png'
 import case02 from '@/assets/image/case-02.png'
@@ -213,13 +193,6 @@ const onSwiper = (swiper) => {
   swiperRef.value = swiper
 }
 
-const slidePrev = () => {
-  swiperRef.value?.slidePrev()
-}
-
-const slideNext = () => {
-  swiperRef.value?.slideNext()
-}
 
 const handleMediaClick = (item) => {
   if (item.type === 'video') {
@@ -273,5 +246,26 @@ const caseList = [
 .fade-enter-from,
 .fade-leave-to {
   opacity: 0;
+}
+:deep(.classic-pagination .swiper-pagination-bullet) {
+    width: 12px;
+    height: 12px;
+    background-color: #454C5F;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+:deep(.classic-pagination .swiper-pagination-bullet-active) {
+    background-color: #0043FF;
+}
+@media (max-width: 768px) {
+  :deep(.classic-pagination .swiper-pagination-bullet) {
+        width: 6px;
+        height: 6px;
+        border-radius: 1px;
+    }
 }
 </style>

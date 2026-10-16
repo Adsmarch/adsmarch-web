@@ -1,6 +1,11 @@
 <template>
   <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pb-[56px] md:pb-[120px] overflow-hidden">
-    <div class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px]">
+    <div 
+      v-motion
+      :initial="{ opacity: 0, y: 30 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+      class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px]"
+    >
       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" class="w-6 h-6 shrink-0">
         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
@@ -10,12 +15,26 @@
         {{ $t('appService.title') }}
       </h2>
     </div>
-
-    <div class="relative w-full">
+    <div 
+      v-motion
+      :initial="{ opacity: 0, y: 40 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+      class="relative w-full"
+    >
       <Swiper
-        :modules="[SwiperNavigation]"
+        :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
         :slides-per-view="1.2"
         :space-between="16"
+        :loop="true"
+        :speed="600"
+        :autoplay="{
+            delay: 5000,
+            disableOnInteraction: false
+        }"
+        :pagination="{
+            el: '.service-pagination',
+            clickable: true
+        }"
         :breakpoints="{
           '640': { slidesPerView: 2, spaceBetween: 20 },
           '1024': { slidesPerView: 2.8, spaceBetween: 24 },
@@ -63,45 +82,48 @@
         </SwiperSlide>
       </Swiper>
 
-        <div class="flex items-center justify-end space-x-3 mt-6">
-        <button 
-            @click="slidePrev" 
-            class=" w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
-            aria-label="Previous"
-        >
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect 
-                width="64" 
-                height="64" 
-                rx="4" 
-                class="fill-[#131416] group-hover:fill-[#103C93] transition-colors duration-200"
-            />
-            <path 
-                d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" 
-                fill="#7D86A1"
-            />
-            </svg>
-        </button>
-        
-        <button 
-            @click="slideNext" 
-            class=" w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
-            aria-label="Next"
-        >
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <rect 
-                width="64" 
-                height="64" 
-                rx="4" 
-                class="fill-[#0043FF] group-hover:fill-[#103C93] transition-colors duration-200"
-            />
-            <path 
-                d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" 
-                fill="white"
-            />
-            </svg>
-        </button>
+      <div class="flex items-end justify-between mt-8 md:mt-[64px]">
+        <div class="service-pagination flex items-center gap-[8px] md:gap-[12px]"></div>
+        <div class="flex items-center space-x-3">
+          <button 
+              @click="slidePrev" 
+              class="w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
+              aria-label="Previous"
+          >
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect 
+                  width="64" 
+                  height="64" 
+                  rx="4" 
+                  class="fill-[#131416] group-hover:fill-[#103C93] transition-colors duration-200"
+              />
+              <path 
+                  d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" 
+                  fill="#7D86A1"
+              />
+              </svg>
+          </button>
+          
+          <button 
+              @click="slideNext" 
+              class="w-10 h-10 xl:w-16 xl:h-16 flex items-center justify-center rounded-xs group transition cursor-pointer focus:outline-none"
+              aria-label="Next"
+          >
+              <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect 
+                  width="64" 
+                  height="64" 
+                  rx="4" 
+                  class="fill-[#0043FF] group-hover:fill-[#103C93] transition-colors duration-200"
+              />
+              <path 
+                  d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" 
+                  fill="white"
+              />
+              </svg>
+          </button>
         </div>
+      </div>
 
     </div>
   </section>
@@ -110,9 +132,11 @@
 <script setup>
     import { ref } from 'vue'
     import { Swiper, SwiperSlide } from 'swiper/vue'
-    import { Navigation as SwiperNavigation } from 'swiper/modules'
+    import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
     import 'swiper/css'
+    import 'swiper/css/navigation'
+    import 'swiper/css/pagination'
 
     import img1 from '@/assets/image/app-1.png'
     import img2 from '@/assets/image/app-2.png'
@@ -195,5 +219,26 @@
   .service-card:hover .card-title {
     color: #0043FF !important;
   }
+}
+:deep(.service-pagination .swiper-pagination-bullet) {
+    width: 12px;
+    height: 12px;
+    background-color: #454C5F;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+
+:deep(.service-pagination .swiper-pagination-bullet-active) {
+    background-color: #0043FF;
+}
+@media (max-width: 768px) {
+    :deep(.service-pagination .swiper-pagination-bullet) {
+        width: 6px;
+        height: 6px;
+        border-radius: 1px;
+    }
 }
 </style>

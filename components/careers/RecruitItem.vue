@@ -1,7 +1,11 @@
 <template>
     <div class="pt-[56px] md:pt-[120px] pb-[0] md:pb-[0]">
-        
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pt-[0] md:pt-[120px] mb-[32px] md:mb-[48px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 pt-[0] md:pt-[120px] mb-[32px] md:mb-[48px]"
+        >
             <div class="flex items-start gap-3 xl:gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="shrink-0 mt-1 md:mt-2">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -16,9 +20,20 @@
 
         <div v-if="!loading && visibleList.length > 0" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
             <NuxtLink 
-                v-for="item in visibleList" 
+                v-for="(item, index) in visibleList" 
                 :key="item.id"
                 :to="localePath(`/articles/${item.slug || item.id}`)"
+                v-motion
+                :initial="{ opacity: 0, y: 40 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 600, 
+                        delay: (index % 3) * 120,
+                        ease: 'easeOut' 
+                    } 
+                }"
                 class="group bg-[#F2F4F7] md:bg-white md:border-l md:border-[#D9DDE8] p-4 mb-3 md:px-4 md:py-6 xl:px-6 xl:py-8 flex flex-col justify-between transition cursor-pointer relative"
             >
                 <div>
@@ -54,7 +69,22 @@
         </div>
 
         <div v-else class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 animate-pulse">
-            <div v-for="i in 3" :key="i" class="p-4 bg-[#F2F4F7] md:bg-white rounded-[4px]">
+            <div 
+                v-for="i in 3" 
+                :key="i"
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 500, 
+                        delay: (i - 1) * 100, 
+                        ease: 'easeOut' 
+                    } 
+                }"
+                class="p-4 bg-[#F2F4F7] md:bg-white rounded-[4px]"
+            >
                 <div class="w-full aspect-[16/10] bg-[#E5E9F0] rounded-[4px] mb-5"></div>
                 <div class="h-[24px] bg-[#E5E9F0] rounded-[4px] w-[80%] mb-2"></div>
                 <div class="h-[24px] bg-[#E5E9F0] rounded-[4px] w-[50%]"></div>

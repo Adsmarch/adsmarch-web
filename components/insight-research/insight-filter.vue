@@ -1,13 +1,23 @@
 <template>
     <div class="py-[56px] md:py-[120px]">
-        <div class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]"
+        >
             <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
             <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">
                 {{ $t('insightFilter.title') }}
             </p>
         </div>
 
-        <div class="border-t border-b border-[#454C5F] my-[32px] md:my-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, delay: 150, ease: 'easeOut' } }"
+            class="border-t border-b border-[#454C5F] my-[32px] md:my-[64px]"
+        >
             <div class="flex items-center justify-between md:py-[32px] py-[20px]">
                 <button type="button" @click="expanded = !expanded"
                     class="flex items-center md:gap-[8px] gap-[4px] text-white text-[16px] md:text-[24px]">
@@ -63,16 +73,44 @@
         </div>
 
         <div v-if="!loading && visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
-            <NuxtLink v-for="item in visibleList" :key="item.id" :to="localePath(`/articles/${item.slug || item.id}`)"
-                class="flex flex-col justify-between h-full insight-card group block bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]">
+            <NuxtLink 
+                v-for="(item, index) in visibleList" 
+                :key="item.id" 
+                :to="localePath(`/articles/${item.slug || item.id}`)"
+                v-motion
+                :initial="{ opacity: 0, y: 40 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 600, 
+                        delay: (index % 3) * 120,
+                        ease: 'easeOut' 
+                    } 
+                }"
+                class="flex flex-col justify-between h-full insight-card group block bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
+            >
                 <InsightItem :item="item" />
             </NuxtLink>
         </div>
 
         <div v-else class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start animate-pulse">
-            <div v-for="i in 6" :key="i"
-                class="flex flex-col justify-between h-full insight-card bg-[#131416] p-[16px] md:p-0 rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]">
-                
+            <div 
+                v-for="i in 6" 
+                :key="i"
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 500, 
+                        delay: (i - 1) * 80, 
+                        ease: 'easeOut' 
+                    } 
+                }"
+                class="flex flex-col justify-between h-full insight-card bg-[#131416] p-[16px] md:p-0 rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
+            >
                 <div class="flex flex-col flex-1">
                     <div class="flex items-center justify-between mb-[16px]">
                         <div class="h-[18px] bg-[#26282C] rounded-[2px] w-[80px]"></div>
@@ -100,7 +138,7 @@
             </div>
         </div>
 
-        <hr class="border-[#454C5F] my-[32px] md:hidden">
+        <hr class="border-[#454C5F] my-[32px] md:hidden">      
         <div v-if="hasMore" class="flex justify-center mt-[40px] md:mt-[64px]">
             <button type="button" @click="loadMore"
                 class="px-[56px] py-[16px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200">

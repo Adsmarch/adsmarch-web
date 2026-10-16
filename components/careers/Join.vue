@@ -1,7 +1,13 @@
 <template>
     <div class="pt-[56px] md:pt-[120px] pb-[0] md:pb-[0]">
         <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-[32px] lg:gap-[64px]">
-            <div class="flex-1 flex flex-col max-w-[960px]">
+            
+            <div 
+                v-motion
+                :initial="{ opacity: 0, y: 40 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }"
+                class="flex-1 flex flex-col max-w-[960px]"
+            >
                 <div class="flex items-start gap-3 md:gap-6 mb-[32px] md:mb-[48px] xl:mb-[64px]">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" class="shrink-0  w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
                         <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -28,7 +34,12 @@
                 </div>
             </div>
 
-            <div class="flex justify-end shrink-0">
+            <div 
+                v-motion
+                :initial="{ opacity: 0, scale: 0.95, y: 30 }"
+                :visible-once="{ opacity: 1, scale: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+                class="flex justify-end shrink-0"
+            >
                 <img :src="mascotImage" alt="Hello Mascot" class="w-[156px] sm:w-[220px] lg:w-[280px] xl:w-[363px] h-auto object-contain select-none" loading="lazy" />
             </div>
 

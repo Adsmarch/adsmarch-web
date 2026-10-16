@@ -1,6 +1,11 @@
 <template>
-    <div class="pt-[56px] md:pt-[0] pb-[0px] text-[#131416]">
-        <div class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8 pt-[0] md:pt-[120px] mb-[32px]">
+    <div class="pt-[56px] md:pt-[120px] pb-[0] md:pb-[0] text-[#131416]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8 pt-[0] md:pt-[120px] mb-[32px]"
+        >
             <div class="flex items-start gap-3 xl:gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="shrink-0 mt-2">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -16,14 +21,23 @@
             </p>
         </div>
 
-        <div class="hidden md:block relative overflow-hidden pt-[32px] md:pt-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 40 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+            class="hidden md:block relative overflow-hidden pt-[32px] md:pt-[64px]"
+        >
             <Swiper
-                :modules="[SwiperNavigation, SwiperPagination]"
+                :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
                 :slides-per-view="1.4"
                 :centered-slides="true"
                 :space-between="24"
                 :loop="true"
                 :speed="600"
+                :autoplay="{
+                    delay: 5000,
+                    disableOnInteraction: false
+                }"
                 :observer="true"
                 :observe-parents="true"
                 :watch-slides-progress="true"
@@ -70,13 +84,22 @@
 
         <div id="worklife-swiper-pagination" class="hidden md:flex !relative justify-center gap-3 lg:mt-[64px] mt-[56px]"></div>
 
-        <div class="md:hidden w-full relative pt-2">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, delay: 200, ease: 'easeOut' } }"
+            class="md:hidden w-full relative pt-2"
+        >
             <Swiper
-                :modules="[SwiperNavigation, SwiperPagination]"
+                :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
                 :slides-per-view="1"
                 :space-between="16"
                 :loop="false"
                 :speed="600"
+                :autoplay="{
+                    delay: 5000,
+                    disableOnInteraction: false
+                }"
                 :watch-slides-progress="true"
                 :pagination="{
                     el: '#worklife-m-swiper-pagination',
@@ -121,7 +144,7 @@
 import { ref, computed } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from 'swiper/modules'
+import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'

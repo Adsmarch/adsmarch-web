@@ -1,7 +1,12 @@
 <template>
     <div class="flex flex-col md:flex-row  md:gap-[80px] py-[56px] md:py-[120px]">
         <div class="md:w-[40%] flex flex-col md:justify-between mb-[56px] md:mb-[0px]">
-            <div>
+            <div 
+            v-motion
+            :initial="{ opacity: 0, y: 50 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 200, ease: 'easeOut' } }" 
+            class="opacity-0"
+            >
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -25,7 +30,10 @@
             </div>
             <div class="z-10 mt-[32px] md:mt-[0px]">
                 <div
-                    class=" rounded-full  flex items-center justify-center relative w-[78px] h-[78px] min-[1120px]:w-[162px] min-[1120px]:h-[162px]">
+                 v-motion
+                :initial="{ opacity: 0, scale: 0.8 }"
+                :enter="{ opacity: 1, scale: 1, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+                    class=" rounded-full  flex items-center justify-center relative w-[78px] h-[78px] min-[1120px]:w-[162px] min-[1120px]:h-[162px] opacity-0">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 68 56" fill="none"
                         class="w-[32px] min-[1120px]:w-[68px]">
                         <path fill-rule="evenodd" clip-rule="evenodd"
@@ -43,8 +51,7 @@
             </div>
         </div>
 
-        <!-- 右侧：表单（PC 带深色卡片背景，手机端直接平铺） -->
-        <div class="md:flex-1 bg-[#131416] md:rounded-[8px] md:p-[40px] py-[24px] px-[20px]">
+        <div  class="md:flex-1 bg-[#131416] md:rounded-[8px] md:p-[40px] py-[24px] px-[20px]">
             <form @submit.prevent="onSubmit">
                 <div class="grid grid-cols-1 xl:grid-cols-2 md:gap-x-[24px] md:gap-y-[24px]">
                     <div v-for="field in fields" :key="field.key">

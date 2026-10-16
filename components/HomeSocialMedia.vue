@@ -1,6 +1,10 @@
 <template>
   <section class="relative w-full bg-black text-white py-[56px] md:pt-[120px] md:pb-[120px] overflow-hidden">
-    <div class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-12 md:mb-[120px] px-[15px] md:px-[40px] xl:px-[120px]">
+    <div
+    v-motion
+    :initial="{ opacity: 0, y: 50 }"
+    :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }" 
+    class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-12 md:mb-[120px] px-[15px] md:px-[40px] xl:px-[120px]">
       
       <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
         {{ $t('homeSocialMedia.title') }}

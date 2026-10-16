@@ -1,8 +1,12 @@
 <template>
     <div class="pb-[28px] md:pb-[120px] px-[15px] md:px-[40px] xl:px-[120px] m-auto">
-        <!-- 桌面端 -->
         <div class="hidden md:grid xl:grid-cols-4 md:grid-cols-3 gap-[24px]">
-            <div class="col-span-2 md:col-span-1 xl:col-span-2 pr-10 md:pr-4">
+            <div 
+                v-motion
+                :initial="{ opacity: 0, y: 30 }"
+                :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+                class="col-span-2 md:col-span-1 xl:col-span-2 pr-10 md:pr-4"
+            >
                 <div class="flex items-start gap-3 ">
                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
                         <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -19,7 +23,20 @@
             </div>
 
             <template v-for="(member, index) in members" :key="index">
-                <div class="team-card bg-[#131416] border border-transparent transition-colors duration-300">
+                <div 
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{ 
+                        opacity: 1, 
+                        y: 0, 
+                        transition: { 
+                            duration: 600, 
+                            delay: (index + 1) * 100, 
+                            ease: 'easeOut' 
+                        } 
+                    }"
+                    class="team-card bg-[#131416] border border-transparent transition-colors duration-300"
+                >
                     <div class="aspect-[1/1] overflow-hidden">
                         <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover"
                             loading="lazy" />
@@ -31,7 +48,6 @@
                         <div class="md:text-[20px] text-[16px] leading-[1.2] font-[600] text-[#0043FF] mb-[16px] md:mb-[24px]">
                             {{ member.role }}
                         </div>
-                        <!-- 修复：将 mmd 改为 md -->
                         <p class="md:text-[20px] text-[16px] leading-[1.5] text-[#FFFFFF]">
                             {{ member.desc }}
                         </p>
@@ -40,8 +56,12 @@
             </template>
         </div>
 
-        <!-- 移动端 -->
-        <div class="md:hidden py-[28px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="md:hidden py-[28px]"
+        >
             <div class="flex items-start gap-3 mb-[20px]">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                     <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
@@ -56,7 +76,6 @@
                 {{ $t('about.leaderTeam.desc') }}
             </p>
 
-            <!-- 恢复移动端切换按钮 -->
             <div class="flex items-center justify-end gap-[20px] mb-[32px]">
                 <button id="team-swiper-prev"
                     class="w-[40px] h-[40px] rounded bg-[#131416] flex items-center justify-center transition hover:bg-[#103C93] group"
@@ -119,7 +138,6 @@ import { Navigation as SwiperNavigation } from 'swiper/modules'
 
 import 'swiper/css'
 
-// 统一使用 Nuxt 插件注入的 $pb
 const { $pb } = useNuxtApp()
 const { locale } = useI18n()
 

@@ -1,8 +1,11 @@
 <template>
     <div class="pt-[28px] md:pt-[120px]">
-
-        <!-- 标题 + 左右切换按钮 -->
-        <div class="flex items-center justify-between mb-[32px] md:mb-[48px] xl:mb-[64px]">
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 30 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+            class="flex items-center justify-between mb-[32px] md:mb-[48px] xl:mb-[64px]"
+        >
             <div class="flex items-start md:gap-[24px] gap-[12px]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[20px] h-[20px] md:w-[28px] md:h-[28px] shrink-0">
@@ -37,44 +40,59 @@
             </div>
         </div>
 
-        <Swiper :modules="[SwiperScrollbar, SwiperPagination]" :space-between="12" :loop="false" :speed="600"
-            :breakpoints="{ 0: { slidesPerView: 1, spaceBetween: 24 }, 768: { slidesPerView: 2.1, spaceBetween: 16 } }"
-            :scrollbar="{ el: '.industry-scrollbar', draggable: true }"
-            :pagination="{ el: '.industry-pagination', clickable: true }" @swiper="onSwiper" class="w-full">
-            <SwiperSlide v-for="(item, index) in recognitions" :key="index">
-                <div class="h-full rounded-[4px] overflow-hidden bg-[#1A1B1E] flex flex-col">
-                    <img :src="item.image" :alt="item.desc" class="w-full aspect-[16/9] object-cover" loading="lazy" />
-                    <div class="px-[16px] py-[20px] md:px-[24px] md:py-[30px] xl:px-[32px] xl:py-[40px] flex flex-col">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                            class="w-[8px] h-[8px] md:w-[16px] md:h-[16px] shrink-0">
-                            <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#fff" />
-                            <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#fff" />
-                            <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#fff" />
-                        </svg>
-                        <!-- 年份 -->
-                        <span class="text-[#0043FF] text-[24px] md:text-[32px] xl:text-[40px] font-[600] leading-[1.2] mt-[24px] md:mb-[12px] mb-[8px]">
-                            {{ item.year }}
-                        </span>
-                        <!-- 说明文字 -->
-                        <p class="text-white text-[18px] md:text-[24px] xl:text-[32px] font-[600]  leading-[1.2]">
-                            {{ item.desc }}
-                        </p>
+        <div 
+            v-motion
+            :initial="{ opacity: 0, y: 40 }"
+            :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+            class="w-full"
+        >
+            <Swiper 
+                :modules="[SwiperPagination, SwiperAutoplay]" 
+                :space-between="12" 
+                :loop="true" 
+                :speed="600"
+                :autoplay="{
+                    delay: 5000,
+                    disableOnInteraction: false
+                }"
+                :pagination="{
+                    el: '.industry-pagination',
+                    clickable: true
+                }"
+                :breakpoints="{ 0: { slidesPerView: 1, spaceBetween: 24 }, 768: { slidesPerView: 2.1, spaceBetween: 16 } }"
+                @swiper="onSwiper" 
+                class="w-full"
+            >
+                <SwiperSlide v-for="(item, index) in recognitions" :key="index">
+                    <div class="h-full rounded-[4px] overflow-hidden bg-[#1A1B1E] flex flex-col">
+                        <img :src="item.image" :alt="item.desc" class="w-full aspect-[16/9] object-cover" loading="lazy" />
+                        <div class="px-[16px] py-[20px] md:px-[24px] md:py-[30px] xl:px-[32px] xl:py-[40px] flex flex-col">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
+                                class="w-[8px] h-[8px] md:w-[16px] md:h-[16px] shrink-0">
+                                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#fff" />
+                                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#fff" />
+                                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#fff" />
+                            </svg>
+                            <span class="text-[#0043FF] text-[24px] md:text-[32px] xl:text-[40px] font-[600] leading-[1.2] mt-[24px] md:mb-[12px] mb-[8px]">
+                                {{ item.year }}
+                            </span>
+                            <p class="text-white text-[18px] md:text-[24px] xl:text-[32px] font-[600] leading-[1.2]">
+                                {{ item.desc }}
+                            </p>
+                        </div>
                     </div>
-                </div>
-            </SwiperSlide>
-        </Swiper>
+                </SwiperSlide>
+            </Swiper>
+        </div>
 
-        <!-- PC 轮播进度条 -->
-        <div class="industry-scrollbar hidden md:block md:mt-[64px]"></div>
-        <!-- 手机端分页圆点 -->
-        <div class="industry-pagination mt-[32px] flex justify-center md:hidden"></div>
+        <div class="industry-pagination flex items-center justify-center gap-[8px] md:gap-[12px] mt-[32px] md:mt-[64px]"></div>
     </div>
 </template>
 
 <script setup>
 import { computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Scrollbar as SwiperScrollbar, Pagination as SwiperPagination } from 'swiper/modules'
+import {  Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 import img1 from '@/assets/image/recognition-1.png'
 import img2 from '@/assets/image/recognition-2.png'
 import img3 from '@/assets/image/recognition-3.png'
@@ -98,10 +116,8 @@ function slideNext() {
 }
 const { t, tm } = useI18n()
 
-// 行业认可图片（按顺序与 i18n 文案 zip）
 const recognitionImages = [img1, img2, img3, img4]
 
-// 行业认可列表（图片为占位，后续可替换为真实证书/奖杯图）
 const recognitions = computed(() => {
     const raw = tm('awards.industry.recognitions')
     const len = Array.isArray(raw) ? raw.length : 0
@@ -114,36 +130,33 @@ const recognitions = computed(() => {
 </script>
 
 <style scoped>
-/* 轮播进度条 */
-.industry-scrollbar {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    right: auto !important;
-    width: 100% !important;
-    height: 4px !important;
-    border-radius: 2px !important;
-    background: #26282C !important;
-    opacity: 1 !important;
-}
-
-:deep(.industry-scrollbar .swiper-scrollbar-drag) {
-    background: #0043FF;
-    border-radius: 2px;
-}
-
-/* 手机端分页圆点 */
 :deep(.industry-pagination .swiper-pagination-bullet) {
-    width: 6px;
-    height: 6px;
-    border-radius: 1px;
-    background: #454C5F;
+    width: 12px;
+    height: 12px;
+    background-color: #454C5F;
+    border-radius: 4px;
     opacity: 1;
-    margin: 0 4px !important;
-    transition: background 0.3s;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
 }
 
 :deep(.industry-pagination .swiper-pagination-bullet-active) {
-    background: #0043FF;
+    background-color: #0043FF;
+}
+
+@media screen and (max-width: 768px) {
+    :deep(.industry-pagination .swiper-pagination-bullet) {
+        width: 6px;
+        height: 6px;
+        border-radius: 2px;
+        background: #454C5F;
+        opacity: 1;
+        transition: background 0.3s;
+    }
+
+    :deep(.industry-pagination .swiper-pagination-bullet-active) {
+        background: #0043FF;
+    }
 }
 </style>

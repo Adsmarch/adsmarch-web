@@ -1,8 +1,12 @@
 <template>
   <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pb-[56px] md:pb-[120px] overflow-hidden select-none">
     <div class="flex flex-col md:flex-row items-stretch justify-between gap-10 md:gap-12 lg:gap-20">
-      <div class="w-full md:w-auto md:order-2 flex flex-col justify-between items-start shrink-0 xl:gap-16">
-        
+      <div 
+        v-motion
+        :initial="{ opacity: 0, y: 40 }"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
+        class="w-full md:w-auto md:order-2 flex flex-col justify-between items-start shrink-0 xl:gap-16"
+      >
         <div class="w-full flex items-center justify-between md:justify-start gap-6">
           
           <div class="block md:hidden shrink-0">
@@ -67,24 +71,40 @@
             </div>
           </div>
         </div>
-
+        
       </div>
 
-    <div class="w-full md:w-[62%] md:order-1">
-    <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8 border-y border-[#454C5F]">
-        <div 
-        v-for="(logo, index) in partnerLogos" 
-        :key="index"
-        class="w-[112px] h-[64px] md:w-[120px] md:h-[60px] lg:w-[200px] lg:h-[100px] xl:w-[160px] xl:h-[80px] 2xl:w-[200px] 2xl:h-[100px] relative overflow-hidden flex items-center justify-center group"
-        >
-        <img 
-            :src="logo" 
-            :alt="`Partner ${index + 1}`" 
-            class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300" 
-        />
+      <div 
+        v-motion
+        :initial="{ opacity: 0, y: 30 }"
+        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+        class="w-full md:w-[62%] md:order-1"
+      >
+        <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8 border-y border-[#454C5F]">
+            <div 
+              v-for="(logo, index) in partnerLogos" 
+              :key="index"
+              v-motion
+              :initial="{ opacity: 0, scale: 0.9 }"
+              :visible-once="{ 
+                  opacity: 1, 
+                  scale: 1, 
+                  transition: { 
+                      duration: 500, 
+                      delay: (index % 5) * 60, 
+                      ease: 'easeOut' 
+                  } 
+              }"
+              class="w-[112px] h-[64px] md:w-[120px] md:h-[60px] lg:w-[200px] lg:h-[100px] xl:w-[160px] xl:h-[80px] 2xl:w-[200px] 2xl:h-[100px] relative overflow-hidden flex items-center justify-center group"
+            >
+              <img 
+                  :src="logo" 
+                  :alt="`Partner ${index + 1}`" 
+                  class="w-full h-full object-cover object-center group-hover:scale-110 transition-transform duration-300" 
+              />
+            </div>
         </div>
-    </div>
-    </div>
+      </div>
 
     </div>
   </section>

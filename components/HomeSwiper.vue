@@ -1,6 +1,12 @@
 <template>
-  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] overflow-hidden select-none">
-    <div class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px]">
+  <section 
+    class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] overflow-hidden select-none"
+  >
+    <div
+    v-motion
+    :initial="{ opacity: 0, y: 50 }"
+    :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }" 
+    class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px]">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 mt-2">
         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
@@ -11,11 +17,19 @@
       </h2>
     </div>
     
-    <div>
+    <div 
+      @mouseenter="stopAutoplay"
+      @mouseleave="startAutoplay"
+    >
       <Swiper
-        :modules="[SwiperNavigation]"
+        :modules="[SwiperNavigation, SwiperAutoplay]"
         :slides-per-view="1.2"
         :space-between="16"
+        :autoplay="{
+          delay: 5000,
+          disableOnInteraction: false
+        }"
+        :loop="true"
         :breakpoints="{
           '640': { slidesPerView: 2.2, spaceBetween: 20 },
           '1024': { slidesPerView: 3.2, spaceBetween: 24 },
@@ -45,13 +59,27 @@
         </template>
 
         <template v-else>
+          <!-- 卡片列表：利用 v-motion 和 index 产生依次错开的入场动画 -->
           <SwiperSlide 
             v-for="(item, index) in cardConfigs" 
             :key="item.id" 
             v-slot="{ isActive }"
             class="h-auto"
           >
-            <div :class="['transition-all duration-300', index % 2 === 1 ? 'md:mt-[80px]' : 'mt-0']">
+            <div 
+              v-motion
+              :initial="{ opacity: 0, y: 40 }"
+              :visible-once="{ 
+                opacity: 1, 
+                y: 0, 
+                transition: { 
+                  duration: 600, 
+                  delay: index * 120, 
+                  ease: 'easeOut' 
+                } 
+              }"
+              :class="['transition-all duration-300', index % 2 === 1 ? 'md:mt-[80px]' : 'mt-0']"
+            >
               <NuxtLinkLocale
                 :to="`/services/${item.id}`"
                 :class="[
@@ -191,7 +219,7 @@
 <script setup>
 import { ref, computed, onMounted } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation } from 'swiper/modules'
+import { Navigation as SwiperNavigation, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/navigation'
@@ -205,6 +233,18 @@ const { $pb } = useNuxtApp()
 
 const onSwiper = (swiper) => {
   swiperRef.value = swiper
+}
+
+const stopAutoplay = () => {
+  if (swiperRef.value && swiperRef.value.autoplay) {
+    swiperRef.value.autoplay.stop()
+  }
+}
+
+const startAutoplay = () => {
+  if (swiperRef.value && swiperRef.value.autoplay) {
+    swiperRef.value.autoplay.start()
+  }
 }
 
 const slidePrev = () => {
