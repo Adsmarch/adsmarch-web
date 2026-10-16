@@ -56,9 +56,9 @@
         <div class=" mb-[28px] lg:mb-[120px] md:mb-[64px]">
             <div class="flex items-center justify-between mb-[32px] md:mb-[64px] md:mt-[120px] mt-[56px]">
 
-                <div class="flex items-start gap-3">
+                <div class="flex items-start gap-3 xl:gap-6">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none"
-                        class="w-[16px] h-[16px] md:w-[32px] h-[32px]">
+                        class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
                         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF" />
                         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF" />
                         <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF" />

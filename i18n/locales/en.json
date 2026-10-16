@@ -443,5 +443,29 @@
   },
   "partner": {
     "title": "Empowering\nGlobal Growth"
+  },
+  "careers": {
+    "join": {
+      "title": "Join Us",
+      "desc": "We are always looking for talented individuals to join our team. If you are interested in working with us, please submit your application below.",
+      "button": "Apply Now"
+    },
+    "worklife": {
+      "title": "Work Life",
+      "desc": "We value diversity, inclusivity, and respect in our work environment. We are committed to providing a professional and flat management structure that allows our employees to grow and excel."
+    },
+    "employeeQuotes": {
+      "title": "Employee Quotes"
+    },
+    "recruitItem": {
+      "title": "Recruitment News",
+      "loadMore": "Load More"
+    },
+    "contact": {
+      "title": "Contact Us",
+      "emailLabel": "Recruitment Email",
+      "wechatLabel": "Recruitment Wechat",
+      "xiaohongshuLabel": "Xiaohongshu Account"
+    }
   }
 }

@@ -12,5 +12,12 @@ export default defineNuxtConfig({
     langDir: 'locales',
     defaultLocale: 'zh',
     strategy: 'prefix_except_default' 
+  },
+  app: {
+    head: {
+      link: [
+        { rel: 'icon', type: 'image/png', href: '/favicon.png' }
+      ]
+    }
   }
 })

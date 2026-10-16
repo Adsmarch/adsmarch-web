@@ -1,5 +1,5 @@
 <template>
-    <div class=" pt-[56px] md:pt-[120px] pb-[28px] md:pb-[0px]">
+    <div class="pt-[56px] md:pt-[120px] pb-[28px] md:pb-[0px]">
 
         <!-- 标题 -->
         <div class="flex items-start md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">

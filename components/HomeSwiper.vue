@@ -55,7 +55,7 @@
               <NuxtLinkLocale
                 :to="`/services/${item.id}`"
                 :class="[
-                  'group relative block h-[396px] xl:h-[520px] rounded-md overflow-hidden transition-all duration-500 border border-[#232730]',
+                  'group gradient-card relative block h-[396px] xl:h-[520px] rounded-md overflow-hidden transition-all duration-500 border border-[#232730]',
                   isActive ? 'active-gradient-card md:!bg-[#101216] md:hover:active-gradient-card' : 'bg-[#101216] hover:active-gradient-card'
                 ]"
               >
@@ -246,7 +246,8 @@ const cardConfigs = computed(() => {
 </script>
 
 <style scoped>
-.active-gradient-card {
+.active-gradient-card,
+.gradient-card:hover {
   background: 
     linear-gradient(180deg, #131416 0%, #000000 100%) padding-box,
     linear-gradient(180deg, #0043FF 0%, #131416 100%) border-box !important;
