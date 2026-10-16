@@ -363,8 +363,9 @@
   "floatWidget": {
     "consult": "Contact",
     "consultQr": "Contact QR Code",  
-    "follow": "Follow Us",
-    "followQr": "Follow Us QR Code"
+    "follow": "Follow",
+    "followQr": "Follow Us QR Code",
+    "top": "Top"
   },
   "appBanner": {
     "title": "App Globalization",

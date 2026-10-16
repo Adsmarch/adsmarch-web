@@ -365,7 +365,8 @@
     "consult": "1对1咨询",
     "consultQr": "1对1咨询二维码",  
     "follow": "关注我们",
-    "followQr": "关注我们二维码"
+    "followQr": "关注我们二维码",
+    "top": "返回顶部"
   },
   "appBanner": {
     "title": "APP出海",
