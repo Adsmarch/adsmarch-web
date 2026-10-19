@@ -29,7 +29,7 @@
                     </svg>
                 </button>
                 <button type="button" :aria-label="$t('awards.industry.next')" @click="slideNext"
-                    class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded-[4px] bg-[#0043FF] flex items-center justify-center text-white hover:bg-[#0037D4] transition-colors duration-300 group">
+                    class="w-[40px] h-[40px] md:w-[64px] md:h-[64px] rounded-[4px] bg-[#0043FF] flex items-center justify-center text-white hover:bg-[#103C93] transition-colors duration-300 group">
                     <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" fill="none">
                         <rect width="64" height="64" rx="4" class="fill-[#0043FF] group-hover:fill-[#103C93] transition-colors duration-200"/>
                         <path

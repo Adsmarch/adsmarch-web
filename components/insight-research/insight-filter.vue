@@ -65,7 +65,7 @@
                         {{ $t('insightFilter.clearAll') }}
                     </button>
                     <button type="button" @click="applyFilter"
-                        class="h-[40px] px-[24px] bg-[#0043FF] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition">
+                        class="h-[40px] px-[24px] bg-[#0043FF] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition">
                         {{ $t('insightFilter.showResults') }}
                     </button>
                 </div>
@@ -141,7 +141,7 @@
         <hr class="border-[#454C5F] my-[32px] md:hidden">      
         <div v-if="hasMore" class="flex justify-center mt-[40px] md:mt-[64px]">
             <button type="button" @click="loadMore"
-                class="px-[56px] py-[16px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200">
+                class="px-[56px] py-[16px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition duration-200">
                 {{ $t('insights.loadMore') }}
             </button>
         </div>

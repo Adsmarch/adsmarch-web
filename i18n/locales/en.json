@@ -468,5 +468,20 @@
       "wechatLabel": "Recruitment Wechat",
       "xiaohongshuLabel": "Xiaohongshu Account"
     }
+  },
+  "jobs": {
+    "title": "Join Us",
+    "filter": "Filter",
+    "clear": "Clear",
+    "city": "City",
+    "type": "Job Type",
+    "search": "Search Jobs",
+    "jobsList": "Job List",
+    "noJobs": "No related jobs found",
+    "reset": "Reset",
+    "confirm": "Confirm",
+    "backToList": "Back to List",
+    "apply": "Apply",
+    "showResults": "Show Results"
   }
 }

@@ -35,7 +35,7 @@
 
             <div v-if="currentArticle.reportFileUrl" class="mt-[48px] md:mt-[64px] min-w-[160px] md:min-w-[240px]">
                 <a :href="currentArticle.reportFileUrl" target="_blank" download
-                    class="inline-flex items-center gap-[8px] px-[32px] py-[12px] md:px-[48px] md:py-[16px] bg-[#0043FF] text-white text-[16px] md:text-[18px] lg:text-[20px] font-semibold rounded-[2px] md:rounded-[4px] hover:bg-[#0037D4] transition-all h-[40px] md:h-[64px]">
+                    class="inline-flex items-center gap-[8px] px-[32px] py-[12px] md:px-[48px] md:py-[16px] bg-[#0043FF] text-white text-[16px] md:text-[18px] lg:text-[20px] font-semibold rounded-[2px] md:rounded-[4px] hover:bg-[#103C93] transition-all h-[40px] md:h-[64px]">
                     <span>{{ locale === 'en' ? 'Read Full Report' : '阅读完整报告' }}</span>
                     <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.99207 6.0069L2.54386 12L0 12L3.45219 6L0 -2.62268e-07L2.54386 -1.51073e-07L5.99207 5.9931L6 5.9931L5.99605 6L6 6.0069L5.99207 6.0069Z" fill="white"/>
@@ -49,7 +49,7 @@
 
             <div v-if="currentArticle.reportFileUrl" class="mt-[48px] md:mt-[64px] min-w-[160px] md:min-w-[240px]">
                 <a :href="currentArticle.reportFileUrl" target="_blank" download
-                    class="inline-flex items-center gap-[8px] px-[32px] py-[12px] md:px-[48px] md:py-[16px] bg-[#0043FF] text-white text-[16px] md:text-[18px] lg:text-[20px] font-semibold rounded-[2px] md:rounded-[4px] hover:bg-[#0037D4] transition-all h-[40px] md:h-[64px]">
+                    class="inline-flex items-center gap-[8px] px-[32px] py-[12px] md:px-[48px] md:py-[16px] bg-[#0043FF] text-white text-[16px] md:text-[18px] lg:text-[20px] font-semibold rounded-[2px] md:rounded-[4px] hover:bg-[#103C93] transition-all h-[40px] md:h-[64px]">
                     <span>{{ locale === 'en' ? 'Read Full Report' : '阅读完整报告' }}</span>
                     <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M5.99207 6.0069L2.54386 12L0 12L3.45219 6L0 -2.62268e-07L2.54386 -1.51073e-07L5.99207 5.9931L6 5.9931L5.99605 6L6 6.0069L5.99207 6.0069Z" fill="white"/>

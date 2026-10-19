@@ -469,5 +469,19 @@
         "wechatLabel": "招聘公众号",
         "xiaohongshuLabel": "小红书账号"
       }
+    },
+    "jobs": {
+      "title": "加入我们",
+      "search": "搜索职位",
+      "filter": "筛选",
+      "clear": "清除",
+      "city": "城市",
+      "type": "职位类型",
+      "jobsList": "职位列表",
+      "noJobs": "暂无相关职位",
+      "confirm": "确定",
+      "backToList": "返回列表",
+      "apply": "投递",
+      "showResults": "显示结果"
     }
 }

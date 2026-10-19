@@ -89,7 +89,7 @@
                 <p v-if="showError('message')" class="text-[14px] text-[#FF6B6B] mt-[4px]">{{ errors.message }}</p>
 
                 <button type="submit" :disabled="!isFormValid || submitting"
-                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#0037D4] active:scale-[0.98] transition duration-200 disabled:cursor-not-allowed">
+                    class="w-full md:w-[175px] h-[48px] mt-[28px] md:mt-[20px] bg-[#0043FF] text-white text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition duration-200 disabled:cursor-not-allowed">
                     {{ $t('contact.submit') }}
                 </button>
             </form>

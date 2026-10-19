@@ -42,7 +42,7 @@
                     <span class="text-[24px] md:text-[32px] xl:text-[40px] text-[#131416] font-semibold mb-3 md:mb-6">
                         {{ $t('careers.contact.wechatLabel') }}
                     </span>
-                    <div class="w-[100px] h-[100px] md:w-[160px] md:h-[160px] xl:w-[200px] xl:h-[200px] bg-white rounded-[4px] md:rounded-[8px] flex items-center justify-center">
+                    <div class="w-[120px] h-[120px] md:w-[160px] md:h-[160px] xl:w-[200px] xl:h-[200px] bg-white rounded-[4px] md:rounded-[8px] flex items-center justify-center">
                         <img :src="wechatQr" :alt="$t('careers.contact.wechatLabel')" class="w-full h-full object-contain select-none" draggable="false" />
                     </div>
                 </div>
@@ -51,7 +51,7 @@
                     <span class="text-[24px] md:text-[32px] xl:text-[40px] text-[#131416] font-semibold mb-3 md:mb-6">
                         {{ $t('careers.contact.xiaohongshuLabel') }}
                     </span>
-                    <div class="w-[100px] h-[100px] md:w-[160px] md:h-[160px] xl:w-[200px] xl:h-[200px] bg-white rounded-[4px] md:rounded-[8px] flex items-center justify-center">
+                    <div class="w-[120px] h-[120px] md:w-[160px] md:h-[160px] xl:w-[200px] xl:h-[200px] bg-white rounded-[4px] md:rounded-[8px] flex items-center justify-center">
                         <img :src="xiaohongshuQr" :alt="$t('careers.contact.xiaohongshuLabel')" class="w-full h-full object-contain select-none" draggable="false" />
                     </div>
                 </div>
