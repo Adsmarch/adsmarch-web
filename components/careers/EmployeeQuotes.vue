@@ -7,10 +7,10 @@
             class="flex flex-col items-center text-center pt-[0] md:pt-[120px]"
         >
             <div class="flex items-start justify-center gap-3 mb-8 md:mb-0">
-                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="shrink-0">
-                    <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                    <path d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                    <path d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" fill="#0043FF" />
+                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
+                    <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
+                    <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
                 </svg>
                 <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[84px] 2xl:text-[96px] font-semibold leading-[1.2]">
                     {{ $t('careers.employeeQuotes.title') }}

@@ -9,9 +9,9 @@
             <div class="flex items-start md:gap-[24px] gap-[12px]">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
                     class="w-[20px] h-[20px] md:w-[28px] md:h-[28px] shrink-0">
-                    <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                    <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                    <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
+                    <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" fill="#0043FF" />
+                    <path d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
+                    <path d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" fill="#0043FF" />
                 </svg>
                 <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
                     {{ $t('awards.industry.title') }}
@@ -40,7 +40,18 @@
             </div>
         </div>
 
+        <div v-if="isLoading" class="w-full">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-[16px]">
+                <div v-for="i in 2" :key="i" class="rounded-[4px] bg-[#1A1B1E] p-[20px] md:p-[32px] animate-pulse">
+                    <div class="w-full aspect-[16/9] bg-[#26282C] rounded-[4px] mb-[20px]"></div>
+                    <div class="w-8 h-4 bg-[#26282C] rounded mb-[24px]"></div>
+                    <div class="w-3/4 h-8 bg-[#26282C] rounded"></div>
+                </div>
+            </div>
+        </div>
+
         <div 
+            v-else
             v-motion
             :initial="{ opacity: 0, y: 40 }"
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
@@ -63,15 +74,14 @@
                 @swiper="onSwiper" 
                 class="w-full"
             >
-                <SwiperSlide v-for="(item, index) in recognitions" :key="index">
+                <SwiperSlide v-for="(item, index) in recognitions" :key="item.id || index">
                     <div class="h-full rounded-[4px] overflow-hidden bg-[#1A1B1E] flex flex-col">
                         <img :src="item.image" :alt="item.desc" class="w-full aspect-[16/9] object-cover" loading="lazy" />
                         <div class="px-[16px] py-[20px] md:px-[24px] md:py-[30px] xl:px-[32px] xl:py-[40px] flex flex-col">
-                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                                class="w-[8px] h-[8px] md:w-[16px] md:h-[16px] shrink-0">
-                                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#fff" />
-                                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#fff" />
-                                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#fff" />
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M7.87817 11.486L0.0812183 16V12.6773L7.87817 8.16327V11.486Z" fill="white"/>
+                                <path d="M7.79695 3.4611L0 8.16327V4.70217L7.79695 0V3.4611Z" fill="white"/>
+                                <path d="M16 3.4611L7.87817 8.16327V4.70217L16 0V3.4611Z" fill="white"/>
                             </svg>
                             <span class="text-[#0043FF] text-[24px] md:text-[32px] xl:text-[40px] font-[600] leading-[1.2] mt-[24px] md:mb-[12px] mb-[8px]">
                                 {{ item.year }}
@@ -90,19 +100,16 @@
 </template>
 
 <script setup>
-import { computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
+import { useI18n } from '#imports'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import {  Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
-import img1 from '@/assets/image/recognition-1.png'
-import img2 from '@/assets/image/recognition-2.png'
-import img3 from '@/assets/image/recognition-3.png'
-import img4 from '@/assets/image/recognition-4.png'
-
-
+import { Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
 import 'swiper/css/scrollbar'
 import 'swiper/css/pagination'
+
+import defaultRecognitionImg from '@/assets/image/recognition-1.png'
 
 let swiperInstance = null
 function onSwiper(swiper) {
@@ -114,18 +121,48 @@ function slidePrev() {
 function slideNext() {
     swiperInstance?.slideNext()
 }
-const { t, tm } = useI18n()
 
-const recognitionImages = [img1, img2, img3, img4]
+const rawList = ref([])
+const isLoading = ref(true)
+const { locale } = useI18n()
+const { $pb } = useNuxtApp()
+
+const fetchRecognitions = async () => {
+    isLoading.value = true
+    try {
+        const records = await $pb.collection('industry_recognition').getFullList({
+            sort: '+created',
+        })
+        rawList.value = records || []
+    } catch (error) {
+        console.error('获取行业认可数据失败:', error)
+    } finally {
+        isLoading.value = false
+    }
+}
+
+onMounted(() => {
+    fetchRecognitions()
+})
 
 const recognitions = computed(() => {
-    const raw = tm('awards.industry.recognitions')
-    const len = Array.isArray(raw) ? raw.length : 0
-    return Array.from({ length: len }, (_, i) => ({
-        year: t(`awards.industry.recognitions.${i}.year`),
-        desc: t(`awards.industry.recognitions.${i}.desc`),
-        image: recognitionImages[i]
-    }))
+    const isEn = locale.value === 'en'
+    return rawList.value.map(item => {
+        const name = isEn ? (item.certificate_name_en || item.certificate_name) : item.certificate_name
+
+        let imageUrl = defaultRecognitionImg
+        if (item.image) {
+            const baseUrl = $pb.baseUrl || ''
+            imageUrl = `${baseUrl}/api/files/${item.collectionId || 'industry_recognition'}/${item.id}/${item.image}`
+        }
+
+        return {
+            id: item.id,
+            year: item.time,
+            desc: name,
+            image: imageUrl
+        }
+    })
 })
 </script>
 
