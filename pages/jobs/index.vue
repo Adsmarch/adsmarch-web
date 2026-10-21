@@ -42,7 +42,7 @@
         </div>
 
         <div v-else class="flex flex-col md:flex-row md:gap-[32px] lg:gap-[48px] items-start justify-between">
-            <div class="hidden md:block shrink-0 w-[26%] lg:w-[25%] xl:w-[35%]">
+            <div class="hidden md:block shrink-0 w-[26%] lg:w-[25%] xl:w-[26%]">
                 <div class="flex items-center justify-between pb-[32px] mb-[32px] border-b border-[#D9DDE8]">
                     <span class="text-[18px] md:text-[24px] xl:text-[32px] font-semibold text-[#131416]">{{ $t('jobs.filter') }}</span>
                     <button @click="resetFilter" class="text-[12px] md:text-[18px] xl:text-[24px] font-semibold text-[#7D86A1] flex items-center gap-[4px]">
@@ -101,7 +101,7 @@
                 <NuxtLink 
                     v-for="item in filteredCareers" 
                     :key="item.id" 
-                    :to="`/jobs/${item.id}`"
+                    :to="localePath(`/jobs/${item.id}`)"
                     class="group block p-[20px] transition-all duration-200 cursor-pointer md:border-b-[1px] bg-[#EBF0FF] md:bg-white hover:bg-[#EBF0FF] hover:border-[#EBF0FF]"
                 >
                     <div>
@@ -184,6 +184,7 @@ import { useI18n } from '#imports'
 import ContactSection from '~/components/careers/ContactSection.vue';
 
 const { locale } = useI18n()
+const localePath = useLocalePath()
 const { $pb } = useNuxtApp()
 
 const rawList = ref([])
@@ -210,22 +211,29 @@ onMounted(() => {
 })
 
 const dynamicCities = computed(() => {
+    const isEn = locale.value === 'en'
     const citiesSet = new Set()
+    
     rawList.value.forEach(item => {
-        if (Array.isArray(item.city)) {
-            item.city.forEach(c => c && citiesSet.add(c))
-        } else if (item.city) {
-            citiesSet.add(item.city)
+        const targetCity = isEn ? (item.city_en || item.city) : item.city
+        
+        if (Array.isArray(targetCity)) {
+            targetCity.forEach(c => c && citiesSet.add(c))
+        } else if (targetCity) {
+            citiesSet.add(targetCity)
         }
     })
     return Array.from(citiesSet)
 })
 
 const dynamicTypes = computed(() => {
+    const isEn = locale.value === 'en'
     const typesSet = new Set()
+    
     rawList.value.forEach(item => {
-        if (item.type) {
-            typesSet.add(item.type)
+        const targetType = isEn ? (item.type_en || item.type) : item.type
+        if (targetType) {
+            typesSet.add(targetType)
         }
     })
     return Array.from(typesSet)
@@ -239,16 +247,19 @@ const resetFilter = () => {
 
 const filteredCareers = computed(() => {
     const isEn = locale.value === 'en'
+    
     return rawList.value.map(item => ({
         id: item.id,
         title: isEn ? (item.job_title_en || item.job_title) : item.job_title,
-        city: item.city || [],
-        type: item.type || '',
+        city: isEn ? (item.city_en || item.city || []) : (item.city || []),
+        type: isEn ? (item.type_en || item.type || '') : (item.type || ''),
     })).filter(item => {
         const matchKeyword = !searchKeyword.value || item.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
+        
         const matchCity = selectedCities.value.length === 0 || selectedCities.value.some(c => 
             Array.isArray(item.city) ? item.city.includes(c) : item.city === c
         )
+        
         const matchType = selectedTypes.value.length === 0 || selectedTypes.value.includes(item.type)
 
         return matchKeyword && matchCity && matchType

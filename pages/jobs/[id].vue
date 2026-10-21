@@ -24,16 +24,15 @@
             </div>
 
             <div class="jobs_description mb-[32px] md:mb-[64px] text-[#454C5F] leading-[1.5] md:text-[24px] text-[16px] prose max-w-none" v-html="career.description"></div>
-            <a 
-                :href="career.submissionLink || 'mailto:hr@example.com'" 
-                target="_blank"
-                class="inline-flex items-center justify-center md:px-[48px] md:py-[16px] bg-[#0043FF] text-white font-semibold md:text-[20px] rounded-[4px] hover:bg-[#103C93] transition-colors md:min-w-[280px] md:h-[64px] gap-[8px] min-w-[200px] h-[40px] px-[40px] mpy-[12px] text-[14px]"
+            <NuxtLink 
+                :to="localePath(`/resume?jobId=${career.id}`)"
+                class="inline-flex items-center justify-center md:px-[48px] md:py-[16px] bg-[#0043FF] text-white font-semibold md:text-[20px] rounded-[4px] hover:bg-[#103C93] transition-colors md:min-w-[280px] md:h-[64px] gap-[8px] min-w-[200px] h-[40px] px-[40px] text-[14px]"
             >
-                {{ $t('jobs.apply') }}
+                <span>{{ $t('jobs.apply') }}</span>
                 <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-[4px] h-[8px] md:w-[6px] md:h-[12px]">
                     <path d="M5.99207 6.0069L2.54386 12L0 12L3.45219 6L0 -2.62268e-07L2.54386 -1.51073e-07L5.99207 5.9931L6 5.9931L5.99605 6L6 6.0069L5.99207 6.0069Z" fill="white"/>
                 </svg>
-            </a>
+            </NuxtLink>
         </template>
         <ContactSection />
     </div>
@@ -41,11 +40,12 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
-import { useRoute, useI18n } from '#imports'
+import { useRoute, useI18n, useLocalePath } from '#imports'
 import ContactSection from '~/components/careers/ContactSection.vue';
 
 const route = useRoute()
 const { locale } = useI18n()
+const localePath = useLocalePath()
 const { $pb } = useNuxtApp()
 
 const career = ref(null)
@@ -55,11 +55,21 @@ const fetchDetail = async () => {
     isLoading.value = true
     try {
         const record = await $pb.collection('jobs').getOne(route.params.id)
-        const isEn = locale.value === 'en'
+        
+        // 判断是否为英文环境（兼容路径包含 /en 的情况）
+        const isEn = locale.value === 'en' || route.path.startsWith('/en')
+
+        // 1. 类型处理：英文下优先读取 type_en，没有则 fallback 回 type
+        const typeValue = isEn ? (record.type_en || record.type) : record.type
+
+        // 2. 城市处理：英文下优先读取 city_en，没有则 fallback 回 city
+        let rawCity = isEn ? (record.city_en || record.city) : record.city
+
         career.value = {
+            id: record.id || '',
             title: isEn ? (record.job_title_en || record.job_title) : record.job_title,
-            city: record.city || [],
-            type: record.type || '',
+            type: typeValue || '',
+            city: rawCity || [],
             description: isEn ? (record.description_en || record.description) : record.description,
             submissionLink: record.submission_link || ''
         }
