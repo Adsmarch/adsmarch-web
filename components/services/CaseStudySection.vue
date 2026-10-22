@@ -1,6 +1,11 @@
 <template>
   <section class="relative w-full bg-black text-white pb-[56px] md:pb-[120px] overflow-hidden select-none">
-    <div class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] justify-center">
+    <div v-if="loading" class="w-[300px] md:w-[450px] h-[48px] md:h-[80px] bg-[#2A2F3D] rounded animate-pulse mb-8 md:mb-[64px]"></div>
+    <div v-else 
+    v-motion
+    :initial="{ opacity: 0, y: 50 }"
+    :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }"
+     class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] justify-center opacity-0">
       <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#0043FF]">
         <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
         <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
@@ -24,9 +29,9 @@
     <div 
       v-else 
       v-motion
-      :initial="{ opacity: 0, scale: 0.98, y: 30 }"
-      :visible-once="{ opacity: 1, scale: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
-      class="relative w-full"
+      :initial="{ opacity: 0, y: 30 }"
+      :visible-once="{ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
+      class="relative w-full opacity-0"
     >
       <Swiper
         :modules="[SwiperPagination, SwiperAutoplay]"

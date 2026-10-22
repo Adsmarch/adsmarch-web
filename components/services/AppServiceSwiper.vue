@@ -2,7 +2,11 @@
   <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pb-[56px] md:pb-[120px] overflow-hidden">
     
     <div v-if="loading" class="w-[300px] md:w-[450px] h-[48px] md:h-[80px] bg-[#2A2F3D] rounded animate-pulse mb-8 md:mb-[64px]"></div>
-    <div v-else class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px]">
+    <div v-else 
+    v-motion
+    :initial="{ opacity: 0, y: 50 }"
+    :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }"
+    class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] opacity-0">
       <svg width="24" height="24" viewBox="0 0 32 32" fill="none" class="w-6 h-6 shrink-0">
         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>

@@ -59,7 +59,6 @@
         </template>
 
         <template v-else>
-          <!-- 卡片列表：利用 v-motion 和 index 产生依次错开的入场动画 -->
           <SwiperSlide 
             v-for="(item, index) in cardConfigs" 
             :key="item.id" 
