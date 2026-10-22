@@ -19,9 +19,17 @@
       <div class="flex flex-col lg:flex-row justify-between items-end gap-[170px] md:gap-6 z-10">
         <div class="flex flex-col items-start gap-8 md:gap-16 w-full lg:max-w-[600px]">
           <nav class="flex flex-col md:flex-row items-start md:items-center gap-5 md:gap-14 text-[20px] md:text-[24px] text-white">
-            <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.careers') }}</a>
-            <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.about') }}</a>
-            <a href="#" @click.prevent class="hover:text-[#0043FF] transition-colors">{{ $t('footer.contact') }}</a>
+            <NuxtLink :to="localePath('/careers')" class="hover:text-[#0043FF] transition-colors">
+              {{ $t('footer.careers') }}
+            </NuxtLink>
+
+            <NuxtLink :to="localePath('/about')" class="hover:text-[#0043FF] transition-colors">
+              {{ $t('footer.about') }}
+            </NuxtLink>
+
+            <NuxtLink :to="localePath('/contact')" class="hover:text-[#0043FF] transition-colors">
+              {{ $t('footer.contact') }}
+            </NuxtLink>
           </nav>
 
           <div class="flex flex-col gap-1 text-[16px] md:text-[20px] text-[#D9DDE8] leading-[1.5]">
@@ -58,6 +66,7 @@
 </template>
 <script setup>
 const { t, locale, setLocale } = useI18n()
+const localePath = useLocalePath()
 </script>
 <style scoped>
 .footer-bg {
