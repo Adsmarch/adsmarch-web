@@ -71,10 +71,10 @@
               </h3>
 
               <ul class="card-points space-y-2 text-[16px] md:text-[16px] lg:text-[18px] xl:text-[24px] text-[#7D86A1] group-hover:text-white transition-colors duration-300">
-                <li v-if="getPoint(item, 1)" class="line-clamp-1">{{ getPoint(item, 1) }}</li>
-                <li v-if="getPoint(item, 2)" class="line-clamp-1">{{ getPoint(item, 2) }}</li>
-                <li v-if="getPoint(item, 3)" class="line-clamp-1">{{ getPoint(item, 3) }}</li>
-                <li v-if="getPoint(item, 4)" class="line-clamp-1">{{ getPoint(item, 4) }}</li>
+                <li v-if="getPoint(item, 1)">{{ getPoint(item, 1) }}</li>
+                <li v-if="getPoint(item, 2)">{{ getPoint(item, 2) }}</li>
+                <li v-if="getPoint(item, 3)">{{ getPoint(item, 3) }}</li>
+                <li v-if="getPoint(item, 4)">{{ getPoint(item, 4) }}</li>
               </ul>
             </div>
           </div>
