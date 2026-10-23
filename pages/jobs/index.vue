@@ -197,7 +197,9 @@ const isMobileDrawerOpen = ref(false)
 const fetchCareers = async () => {
     isLoading.value = true
     try {
-        const records = await $pb.collection('jobs').getFullList()
+        const records = await $pb.collection('jobs').getFullList({
+            sort: '-urgent,-created'
+        })
         rawList.value = records || []
     } catch (error) {
         console.error('获取职位列表失败:', error)
@@ -253,6 +255,7 @@ const filteredCareers = computed(() => {
         title: isEn ? (item.job_title_en || item.job_title) : item.job_title,
         city: isEn ? (item.city_en || item.city || []) : (item.city || []),
         type: isEn ? (item.type_en || item.type || '') : (item.type || ''),
+        urgent: item.urgent || false,
     })).filter(item => {
         const matchKeyword = !searchKeyword.value || item.title.toLowerCase().includes(searchKeyword.value.toLowerCase())
         
@@ -263,6 +266,6 @@ const filteredCareers = computed(() => {
         const matchType = selectedTypes.value.length === 0 || selectedTypes.value.includes(item.type)
 
         return matchKeyword && matchCity && matchType
-    })
+    }).sort((a, b) => (b.urgent ? 1 : 0) - (a.urgent ? 1 : 0))
 })
 </script>
