@@ -74,10 +74,12 @@
 
             <div v-if="hasMore" class="flex justify-center mt-[40px] md:mt-[64px]">
                 <button 
+                    type="button" 
                     @click="loadMore"
-                    class="md:px-[56px] md:py-[16px] w-[160px] h-[40px] md:w-[240px] md:h-[64px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93]"
+                    :disabled="loadingMore"
+                    class="md:px-[56px] md:py-[16px] w-[160px] h-[40px] md:w-[240px] md:h-[64px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93] disabled:cursor-not-allowed"
                 >
-                    {{ loadingMore ? $t('insights.loading'): $t('insights.loadMore') }}
+                    {{ loadingMore ? $t('insights.loading') : $t('insights.loadMore') }}
                 </button>
             </div>
         </div>
@@ -117,38 +119,47 @@ const localePath = useLocalePath()
 
 const rawList = ref([])
 const loading = ref(false)
-const currentPage = ref(1)
+const loadingMore = ref(false)
+const page = ref(1)
 const totalPages = ref(1)
 const fallbackImage = 'https://via.placeholder.com/600x400/131416/ffffff?text=AdsMarch'
 
-async function fetchBlogs(page = 1) {
-    if (page === 1) {
+async function fetchBlogs(isLoadMore = false) {
+    if (isLoadMore) {
+        loadingMore.value = true
+    } else {
         loading.value = true
     }
+
     try {
-       const result = await $pb.collection('recruit_blogs').getList(page, 3, {
+        const targetPage = isLoadMore ? page.value + 1 : 1
+        const result = await $pb.collection('recruit_blogs').getList(targetPage, 3, {
             filter: 'status = "published"',
             sort: '-top,-publish_date',
             requestKey: null
         })
         
-        if (page === 1) {
-            rawList.value = result.items
-        } else {
+        if (isLoadMore) {
             rawList.value = [...rawList.value, ...result.items]
+            page.value = targetPage 
+        } else {
+            rawList.value = result.items
+            page.value = 1
         }
         totalPages.value = result.totalPages
     } catch (e) {
         console.error('获取博客列表失败:', e)
     } finally {
-        if (page === 1) {
+        if (isLoadMore) {
+            loadingMore.value = false
+        } else {
             loading.value = false
         }
     }
 }
 
 onMounted(() => {
-    fetchBlogs(1)
+    fetchBlogs(false)
 })
 
 const visibleList = computed(() => {
@@ -163,14 +174,12 @@ const visibleList = computed(() => {
     }))
 })
 
-const hasMore = computed(() => {
-    return currentPage.value < totalPages.value
-})
+const hasMore = computed(() => page.value < totalPages.value)
 
 function loadMore() {
-    if (currentPage.value < totalPages.value) {
-        currentPage.value++
-        fetchBlogs(currentPage.value)
+    if (loadingMore.value || loading.value) return
+    if (hasMore.value) {
+        fetchBlogs(true)
     }
 }
 </script>
