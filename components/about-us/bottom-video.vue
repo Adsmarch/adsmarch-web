@@ -6,11 +6,12 @@
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
             class="flex items-start justify-end gap-3 mb-[32px] lg:mb-[64px]"
         >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" fill="#0043FF" />
-                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
+                <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
+                <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
             </svg>
+
             <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] text-right">
                 {{ $t('about.bottomVideo.title') }}
             </h2>
@@ -22,12 +23,12 @@
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 150, ease: 'easeOut' } }"
             class="relative w-full aspect-[16/9] lg:aspect-[21/9] bg-gray-900 rounded-lg overflow-hidden"
         >
-            <img v-if="!cities[activeIndex].videoUrl" :src="cities[activeIndex].cover"
-                :alt="cities[activeIndex].name"
+            <img v-if="!cities[activeIndex]?.videoUrl" :src="cities[activeIndex]?.cover"
+                :alt="cities[activeIndex]?.name"
                 class="absolute inset-0 w-full h-full object-cover" />
 
-            <video v-else :key="cities[activeIndex].videoUrl" ref="videoRef"
-                :src="cities[activeIndex].videoUrl"
+            <video v-else :key="cities[activeIndex]?.videoUrl" ref="videoRef"
+                :src="cities[activeIndex]?.videoUrl"
                 playsinline preload="metadata"
                 class="absolute inset-0 w-full h-full object-cover"
                 @timeupdate="onVideoTimeUpdate"
@@ -38,7 +39,7 @@
 
             <div class="absolute inset-0 bg-black/20"></div>
 
-            <button v-if="cities[activeIndex].videoUrl" @click="togglePlay"
+            <button v-if="cities[activeIndex]?.videoUrl" @click="togglePlay"
                 class="absolute inset-0 flex items-center justify-center group"
                 :aria-label="$t('about.bottomVideo.play')">
                 <span v-if="!isPlaying"
@@ -71,10 +72,10 @@
                 class="city-card cursor-pointer p-5 transition-all border-t-2"
                 :class="{ 'active': activeIndex === index }">
                 <div class="flex items-start justify-between mb-3">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none">
-                        <path class="card-mark" d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" />
-                        <path class="card-mark" d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" />
-                        <path class="card-mark" d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" />
+                    <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                        <path class="card-mark" d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z"/>
+                        <path class="card-mark" d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z"/>
+                        <path class="card-mark" d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z"/>
                     </svg>
                     <span class="card-num text-[20px] font-[600]">
                         0{{ index + 1 }}
@@ -96,10 +97,10 @@
         >
             <div class="mt-[32px] mb-[24px]">
                 <h3 class="text-[32px]  font-[600] mb-[8px] text-white">
-                    {{ cities[activeIndex].name }}
+                    {{ cities[activeIndex]?.name }}
                 </h3>
                 <p class="text-[16px] font-[400] text-[#7D86A1]">
-                    {{ cities[activeIndex].address }}
+                    {{ cities[activeIndex]?.address }}
                 </p>
             </div>
 
@@ -120,11 +121,12 @@
                                  ? 'border-t-[#0043FF] border-t-[2px] bg-[#131416]'
                                  : 'border-t-[#454C5F] border-t-[2px] bg-[#000] '">
                             <div class="flex items-center justify-between mb-2">
-                                <svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 24 24" fill="none" class="w-[10px] h-[10px] ">
-                                    <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449L17.2289Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
-                                    <path d="M11.6954 5.19165L0 12.2449L7.05325L11.6954 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
-                                    <path d="M24 5.19165L11.8173 12.2449L7.05325L24 0V5.19165Z" :fill="activeIndex === index ? '#fff' : '#0043FF'" />
+                                <svg width="8" height="8" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M3.93909 5.74298L0.0406091 8V6.33865L3.93909 4.08163V5.74298Z" :fill="activeIndex === index ? '#fff' : '#0043FF'"/>
+                                    <path d="M3.89848 1.73055L0 4.08163V2.35108L3.89848 0V1.73055Z" :fill="activeIndex === index ? '#fff' : '#0043FF'"/>
+                                    <path d="M8 1.73055L3.93909 4.08163V2.35108L8 0V1.73055Z" :fill="activeIndex === index ? '#fff' : '#0043FF'"/>
                                 </svg>
+
                                 <span class="text-[14px]" :class="activeIndex === index ? 'text-[#fff]' : 'text-[#454C5F]'">
                                     0{{ index + 1 }}
                                 </span>
@@ -149,7 +151,7 @@
 
 
 <script setup>
-import { ref, computed, nextTick } from 'vue'
+import { ref, onMounted, nextTick } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation } from 'swiper/modules'
 
@@ -157,40 +159,24 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 
 
-const { t, tm } = useI18n()
+const { $pb } = useNuxtApp()
+const cities = ref([])
 
-const cityMedia = [
-    {
-        cover: 'https://cdn.shopify.com/s/files/1/0702/5937/6290/files/11_5c23e45e-181d-431f-9f8d-06677bd08993.png?v=1789876538',
-        videoUrl: 'https://cdn.shopify.com/videos/c/o/v/1e8f2fae04424e0f82379b10610a0da1.mp4'
-    },
-    {
-        cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
-        videoUrl: ''
-    },
-    {
-        cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
-        videoUrl: ''
-    },
-    {
-        cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
-        videoUrl: ''
-    },
-    {
-        cover: 'https://cdn.shopify.com/s/files/1/0827/4552/4457/files/image_298.png?v=1789637643',
-        videoUrl: ''
+onMounted(async () => {
+    try {
+        const records = await $pb.collection('office_locations').getFullList({
+            sort: 'created',
+            requestKey: null
+        })
+        cities.value = records.map(r => ({
+            name: r.city,
+            address: r.address,
+            cover: r.image ? $pb.files.getUrl(r, r.image) : '',
+            videoUrl: (r.has_video && r.video) ? $pb.files.getUrl(r, r.video) : ''
+        }))
+    } catch (e) {
+        console.error('Failed to fetch office locations:', e)
     }
-]
-
-const cities = computed(() => {
-    const raw = tm('about.bottomVideo.cities')
-    const len = Array.isArray(raw) ? raw.length : 0
-    return Array.from({ length: len }, (_, i) => ({
-        name: t(`about.bottomVideo.cities.${i}.name`),
-        address: t(`about.bottomVideo.cities.${i}.address`),
-        cover: cityMedia[i].cover,
-        videoUrl: cityMedia[i].videoUrl
-    }))
 })
 
 
@@ -241,6 +227,7 @@ function onVideoTimeUpdate() {
 
 function updateSwiperProgress(swiper) {
     const total = cities.value.length
+    if (!total) return
     const slidesPerView = Number(swiper.params.slidesPerView)
     const maxMove = total - slidesPerView
     if (maxMove <= 0) {

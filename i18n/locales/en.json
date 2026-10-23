@@ -105,6 +105,7 @@
   },
    "insights": {
     "loadMore": "Load More",
+    "loading": "Loading...",
     "items": [
       { "date": "2026-01-20", "category": "Industry Reports", "title": "2025 Mobile App Marketing Whitepaper (Non-Gaming)" },
       { "date": "2026-01-20", "category": "Tips", "title": "The Essence of IAA: Holding a Batch of Depreciating Means of Production" },

@@ -72,7 +72,7 @@
             </div>
         </div>
 
-        <div v-if="!loading && visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
+        <div v-if="visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
             <NuxtLink 
                 v-for="(item, index) in visibleList" 
                 :key="item.id" 
@@ -88,13 +88,13 @@
                         ease: 'easeOut' 
                     } 
                 }"
-                class="flex flex-col justify-between h-full insight-card group block bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
+                class="flex flex-col justify-between h-full insight-card group  bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
             >
                 <InsightItem :item="item" />
             </NuxtLink>
         </div>
 
-        <div v-else class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start animate-pulse">
+        <div v-else-if="loading" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start animate-pulse">
             <div 
                 v-for="i in 6" 
                 :key="i"
@@ -140,11 +140,15 @@
 
         <hr class="border-[#454C5F] my-[32px] md:hidden">      
         <div v-if="hasMore" class="flex justify-center mt-[40px] md:mt-[64px]">
-            <button type="button" @click="loadMore"
-                class="px-[56px] py-[16px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition duration-200">
-                {{ $t('insights.loadMore') }}
-            </button>
-        </div>
+        <button 
+            type="button" 
+            @click="loadMore"
+            :disabled="loadingMore"
+            class="md:px-[56px] md:py-[16px] w-[160px] h-[40px] md:w-[240px] md:h-[64px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93]"
+        >
+            {{ loadingMore ? $t('insights.loading'): $t('insights.loadMore') }}
+        </button>
+</div>
     </div>
 </template>
 
@@ -170,18 +174,17 @@ const rawList = ref([])
 const page = ref(1)
 const totalPages = ref(1)
 const loading = ref(false)
+const loadingMore = ref(false)
 
-const isMobile = ref(false)
-if (process.client) {
-    isMobile.value = window.innerWidth < 768
-    window.addEventListener('resize', () => {
-        isMobile.value = window.innerWidth < 768
-    })
-}
-const perPage = computed(() => isMobile.value ? 5 : 6)
+const perPage = 6
 
 async function fetchBlogs(isLoadMore = false) {
-    loading.value = true
+    if (isLoadMore) {
+        loadingMore.value = true
+    } else {
+        loading.value = true
+    }
+
     try {
         let filterStr = 'status = "published"'
         
@@ -201,12 +204,13 @@ async function fetchBlogs(isLoadMore = false) {
 
         const currentPage = isLoadMore ? page.value + 1 : 1
         
-        const resultList = await $pb.collection('blogs').getList(currentPage, perPage.value, {
+        const resultList = await $pb.collection('blogs').getList(currentPage, perPage, {
             filter: filterStr,
             sort: sortStr
         })
 
         if (isLoadMore) {
+            // 🚀 原有数据保留，新的 6 条直接 push 追加到末尾
             rawList.value = [...rawList.value, ...resultList.items]
             page.value = currentPage
         } else {
@@ -219,6 +223,7 @@ async function fetchBlogs(isLoadMore = false) {
         console.error('获取博客列表失败:', e)
     } finally {
         loading.value = false
+        loadingMore.value = false
     }
 }
 

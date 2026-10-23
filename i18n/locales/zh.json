@@ -106,6 +106,7 @@
   
   "insights": {
     "loadMore": "加载更多",
+    "loading": "加载中...",
     "items": [
       { "date": "2026-01-20", "category": "行业报告", "title": "2025移动应用营销白皮书(非游戏)" },
       { "date": "2026-01-20", "category": "干货分享", "title": "IAA 的本质，是持有一批会折旧的生产资料" },
