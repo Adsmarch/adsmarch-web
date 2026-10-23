@@ -4,7 +4,7 @@
             v-motion
             :initial="{ opacity: 0, y: 30 }"
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-            class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8 pt-[0] md:pt-[120px] mb-[32px]"
+            class="flex flex-col xl:flex-row xl:items-end xl:justify-between gap-8 pt-[0] md:pt-[120px] mb-[32px] opacity-0"
         >
             <div class="flex items-start gap-3 xl:gap-6">
                 <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" class="shrink-0 mt-2">
@@ -21,11 +21,24 @@
             </p>
         </div>
 
+        <div v-if="loading" class="hidden md:block relative overflow-hidden pt-[32px] md:pt-[64px]">
+            <div class="w-full flex gap-6 px-[10%]">
+                <div class="w-full aspect-[16/10] bg-[#E5E7EB] rounded-[8px] animate-pulse relative overflow-hidden">
+                    <div class="absolute top-6 left-6 w-24 h-16 bg-[#D1D5DB] rounded animate-pulse"></div>
+                    <div class="absolute left-0 bottom-16 w-[560px] h-32 bg-[#D1D5DB]/80 animate-pulse"></div>
+                </div>
+            </div>
+            <div class="flex justify-center gap-3 mt-[64px]">
+                <div v-for="i in 3" :key="i" class="w-3 h-3 bg-[#E5E7EB] rounded-[2px]"></div>
+            </div>
+        </div>
+
         <div 
+            v-else
             v-motion
             :initial="{ opacity: 0, y: 40 }"
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 200, ease: 'easeOut' } }"
-            class="hidden md:block relative overflow-hidden pt-[32px] md:pt-[64px]"
+            class="hidden md:block relative overflow-hidden pt-[32px] md:pt-[64px] opacity-0"
         >
             <Swiper
                 :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
@@ -84,11 +97,28 @@
 
         <div id="worklife-swiper-pagination" class="hidden md:flex !relative justify-center gap-3 lg:mt-[64px] mt-[56px]"></div>
 
+        <div v-if="loading" class="md:hidden w-full relative pt-2">
+            <div class="rounded-[4px] overflow-hidden bg-[#F2F4F7]">
+                <div class="aspect-[4/3] bg-[#E5E7EB] animate-pulse"></div>
+                <div class="p-4 bg-[#F2F4F7] flex items-center gap-6">
+                    <div class="w-12 h-12 bg-[#D1D5DB] rounded animate-pulse"></div>
+                    <div class="flex-1 space-y-2">
+                        <div class="h-6 bg-[#D1D5DB] rounded w-3/4 animate-pulse"></div>
+                        <div class="h-4 bg-[#D1D5DB] rounded w-full animate-pulse"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="flex justify-center gap-2 mt-[32px]">
+                <div v-for="i in 3" :key="i" class="w-2 h-2 bg-[#E5E7EB] rounded-full"></div>
+            </div>
+        </div>
+
         <div 
+            v-else
             v-motion
             :initial="{ opacity: 0, y: 30 }"
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, delay: 200, ease: 'easeOut' } }"
-            class="md:hidden w-full relative pt-2"
+            class="md:hidden w-full relative pt-2 opacity-0"
         >
             <Swiper
                 :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
@@ -141,7 +171,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
@@ -150,54 +180,49 @@ import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
 
-import LifeImg01 from '~/assets/image/life_02.png'
-import LifeImg02 from '~/assets/image/life_03.png'
-import LifeImg03 from '~/assets/image/life_04.png'
-import LifeImg04 from '~/assets/image/life_05.png'
-import LifeImg05 from '~/assets/image/life_01.png'
-
 const { t, locale } = useI18n()
+const { $pb } = useNuxtApp()
+
+const loading = ref(true)
+const rawData = ref([])
+
+const fetchCareerLifeData = async () => {
+    try {
+        loading.value = true
+        const records = await $pb.collection('career_life').getList(1, 50, {
+            requestKey: null
+        })
+        rawData.value = records.items || []
+    } catch (e) {
+        console.error('获取 career_life 失败:', e)
+        rawData.value = []
+    } finally {
+        loading.value = false
+    }
+}
+
+onMounted(() => {
+    fetchCareerLifeData()
+})
 
 const slides = computed(() => {
     const isEn = locale.value === 'en'
-    return [
-        {
-            number: '01',
-            title: isEn ? 'Transparent Promotion Mechanism' : '透明公平的晋升机制',
-            subtitle: isEn ? 'Intern - Specialist - Supervisor - Manager - Department Head - Partner' : '实习生-专员-主管-经理-部门负责人-合伙人',
-            image: LifeImg01
-        },
-        {
-            number: '02',
-            title: isEn ? 'Transparent Promotion Mechanism' : '透明公平的晋升机制',
-            subtitle: isEn ? 'Intern - Specialist - Supervisor - Manager - Department Head - Partner' : '实习生-专员-主管-经理-部门负责人-合伙人',
-            image: LifeImg02
-        },
-        {
-            number: '03',
-            title: isEn ? 'Transparent Promotion Mechanism' : '透明公平的晋升机制',
-            subtitle: isEn ? 'Intern - Specialist - Supervisor - Manager - Department Head - Partner' : '实习生-专员-主管-经理-部门负责人-合伙人',
-            image: LifeImg03
-        },
-        {
-            number: '04',
-            title: isEn ? 'Transparent Promotion Mechanism' : '透明公平的晋升机制',
-            subtitle: isEn ? 'Intern - Specialist - Supervisor - Manager - Department Head - Partner' : '实习生-专员-主管-经理-部门负责人-合伙人',
-            image: LifeImg04
-        },
-        {
-            number: '05',
-            title: isEn ? 'Transparent Promotion Mechanism' : '透明公平的晋升机制',
-            subtitle: isEn ? 'Intern - Specialist - Supervisor - Manager - Department Head - Partner' : '实习生-专员-主管-经理-部门负责人-合伙人',
-            image: LifeImg05
-        }
-    ]
+    if (!rawData.value || rawData.value.length === 0) {
+        return []
+    }
+    return rawData.value.map((item, index) => ({
+        number: String(index + 1).padStart(2, '0'),
+        title: isEn ? (item.title_en || item.title) : item.title,
+        subtitle: isEn ? (item.description_en || item.description) : item.description,
+        image: item.image ? $pb.files.getUrl(item, item.image) : ''
+    }))
 })
 
-const loopSlides = computed(() => [...slides.value, ...slides.value])
+const loopSlides = computed(() => slides.value.length > 0 ? [...slides.value, ...slides.value] : [])
 
 function renderPagination(swiper) {
     const real = slides.value.length
+    if (real === 0) return ''
     const active = swiper.realIndex % real
     let html = ''
     for (let i = 0; i < real; i++) {

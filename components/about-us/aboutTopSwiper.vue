@@ -61,7 +61,7 @@
           </div>
         </SwiperSlide>
       </Swiper>
-      <button id="about-swiper-next" class="hidden md:flex px-[10px] py-[10px] absolute right-[7.5%] top-1/2 -translate-y-1/2 z-10 lg:w-[64px] lg:h-[64px] md:w-[48px] md:h-[48px] rounded-lg bg-blue-600 text-white items-center justify-center hover:bg-blue-700 transition">
+      <button id="about-swiper-next" class="hidden md:flex px-[10px] py-[10px] absolute right-[7.5%] top-1/2 -translate-y-1/2 z-10 lg:w-[64px] lg:h-[64px] md:w-[48px] md:h-[48px] rounded-[4px] bg-[#0043FF] text-white items-center justify-center hover:bg-[#103C93] transition">
         <svg xmlns="http://www.w3.org/2000/svg" width="32" height="16" viewBox="0 0 32 16" fill="none"><path d="M27.7321 6.76219H0L0.0353947 9.20206H27.7649L20.9676 16H24.0088L32 8.01745L23.9735 0H21.003L27.7321 6.76219Z" fill="white" /></svg>
       </button>
     </div>
@@ -113,7 +113,7 @@ function renderPagination(swiper) {
 :deep(.about-swiper .swiper-wrapper) { align-items: stretch; }
 :deep(.about-swiper .swiper-slide) { height: auto; }
 :deep(.swiper-pagination-bullet) { width: 12px; height: 12px; background: #454C5F; opacity: 1; border-radius: 2px; transition: all 0.3s; }
-:deep(.swiper-pagination-bullet-active) { background: #2563eb; }
+:deep(.swiper-pagination-bullet-active) { background: #0043FF; }
 :deep(strong) {
   font-weight: 600;
   color: #fff;

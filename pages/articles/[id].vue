@@ -10,18 +10,20 @@
         </button>
 
         <div v-if="currentArticle">
-            <h1 class="text-[40px] sm:text-[48px] md:text-[60px] xl:text-[72px] font-semibold mb-[24px] md:mb-[32px] leading-[1.2] mt-[48px] md:mt-[64px]">
+            <h1 v-if="currentArticle.title" class="text-[40px] sm:text-[48px] md:text-[60px] xl:text-[72px] font-semibold mb-[24px] md:mb-[32px] leading-[1.2] mt-[48px] md:mt-[64px]">
                 {{ currentArticle.title }}
             </h1>
 
-            <div class="flex items-center flex-wrap gap-[8px] md:gap-[16px] text-[#131416] mb-[48px] md:mb-[64px] text-[18px] md:text-[20px] lg:text-[24px] border-b-[1px] border-[#D9DDE8] pb-[48px] md:pb-[64px] font-semibold">
-                <span>{{ $t(`insightFilter.categories.${currentArticle.category}`) }}</span>
+            <div v-if="currentArticle.category || currentArticle.author || currentArticle.date" class="flex items-center flex-wrap gap-[8px] md:gap-[16px] text-[#131416] mb-[48px] md:mb-[64px] text-[18px] md:text-[20px] lg:text-[24px] border-b-[1px] border-[#D9DDE8] pb-[48px] md:pb-[64px] font-semibold">
+                <span v-if="currentArticle.category">{{ $t(`insightFilter.categories.${currentArticle.category}`) }}</span>
                 <template v-if="currentArticle.author">
-                    <span>|</span>
+                    <span v-if="currentArticle.category">|</span>
                     <span>{{ locale === 'en' ? `Author: ${currentArticle.author_en || currentArticle.author}` : `作者:${currentArticle.author}` }}</span>
                 </template>
-                <span>|</span>
-                <span>{{ currentArticle.date }}</span>
+                <template v-if="currentArticle.date">
+                    <span v-if="currentArticle.category || currentArticle.author">|</span>
+                    <span>{{ currentArticle.date }}</span>
+                </template>
             </div>
 
             <div v-if="currentArticle.shortdesc" class="mb-[56px] md:mb-[72px]">
@@ -43,7 +45,7 @@
                 </a>
             </div>
 
-            <div class="blog-rich-content text-[16px] md:text-[20px] lg:text-[24px] leading-[1.6]"
+            <div v-if="currentArticle.sections_zh || currentArticle.sections_en" class="blog-rich-content text-[16px] md:text-[20px] lg:text-[24px] leading-[1.6]"
                 v-html="locale === 'en' && currentArticle.sections_en ? currentArticle.sections_en : currentArticle.sections_zh">
             </div>
 
@@ -85,13 +87,13 @@
         </div>
     </div>
 
-    <div class="bg-[#000] text-[#fff] py-[56px] w-full px-[15px] md:px-[40px] xl:px-[120px]">
+    <div v-if="visibleList.length > 0" class="bg-[#000] text-[#fff] py-[56px] w-full px-[15px] md:px-[40px] xl:px-[120px]">
         <div class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
             <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
             <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">{{ $t('insightId.title') }}</p>
         </div>
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
-            <NuxtLink v-for="item in visibleList" :key="item.id" :to="`/articles/${item.slug || item.id}`"
+        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-y-[32px] gap-y-[12px] md:items-start">
+            <NuxtLink v-for="item in visibleList" :key="item.id" :to="{ path: localePath(`/articles/${item.slug || item.id}`), query: { collection: $route.query.collection || 'blogs' } }"
                 class="bg-[#000] text-[#fff] flex flex-col justify-between h-full insight-card group  rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-[#454C5F] md:pb-[32px]">
                 <InsightItem v-if="item" :item="item" />
             </NuxtLink>
@@ -172,46 +174,51 @@ watch([currentArticle, locale], async () => {
 onMounted(async () => {
     try {
         const targetIdOrSlug = route.params.id
-        const records = await $pb.collection('blogs').getFullList({
+        const collectionName = route.query.collection || 'blogs'
+
+        const records = await $pb.collection(collectionName).getList(1, 200, {
             filter: 'status = "published"',
-            sort: '-publish_date'
+            sort: '-publish_date',
+            requestKey: null
         })
 
-        allRecords.value = records
+        allRecords.value = records.items
 
-        const rawCurrent = records.find(r => r.id === targetIdOrSlug || r.slug === targetIdOrSlug)
-        console.log(rawCurrent)
+        const rawCurrent = records.items.find(r => r.id === targetIdOrSlug || r.slug === targetIdOrSlug)
         if (rawCurrent) {
             const isEn = locale.value === 'en'
-            const d = rawCurrent.publish_date ? new Date(rawCurrent.publish_date) : new Date(rawCurrent.created)
-            const formattedDate = !isNaN(d.getTime()) 
+            const rawDate = rawCurrent.publish_date || rawCurrent.created
+            const d = rawDate ? new Date(rawDate) : null
+            const formattedDate = (d && !isNaN(d.getTime())) 
                 ? `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}` 
                 : ''
 
             currentArticle.value = {
                 id: rawCurrent.id,
-                slug: rawCurrent.slug,
+                slug: rawCurrent.slug || '',
                 date: formattedDate,
-                category: rawCurrent.category,
-                title: isEn && rawCurrent.title_en ? rawCurrent.title_en : rawCurrent.title,
+                category: rawCurrent.category || '',
+                title: isEn && rawCurrent.title_en ? rawCurrent.title_en : (rawCurrent.title || ''),
                 shortdesc: rawCurrent.shortdesc || '',
                 shortdesc_en: rawCurrent.shortdesc_en || '',
                 author: rawCurrent.author || '',
                 author_en: rawCurrent.author_en || '',
-                // 严格只读取富文本字段，不作任何旧 JSON 兼容
                 sections_zh: rawCurrent.sections_zh || '',
                 sections_en: rawCurrent.sections_en || '',
                 reportFileUrl: rawCurrent.report_file 
-                    ? `https://api.adsmarch.bot.cd/api/files/${rawCurrent.collectionId}/${rawCurrent.id}/${rawCurrent.report_file}`
+                    ? `https://api.adsmarch.bot.cd/api/files/${rawCurrent.collectionId || collectionName}/${rawCurrent.id}/${rawCurrent.report_file}`
                     : ''
             }
 
-            await $pb.collection('blogs').update(rawCurrent.id, {
-                "views+": 1
-            })
+            try {
+                await $pb.collection(collectionName).update(rawCurrent.id, {
+                    "views+": 1
+                })
+            } catch (err) {
+            }
         }
     } catch (e) {
-        console.error('获取博客详情失败:', e)
+        console.error('获取文章详情失败:', e)
     }
 })
 
@@ -220,22 +227,28 @@ const visibleList = computed(() => {
     const targetIdOrSlug = route.params.id
     const mappedList = allRecords.value.map(r => {
         const isEn = locale.value === 'en'
-        const d = r.publish_date ? new Date(r.publish_date) : new Date(r.created)
+        const rawDate = r.publish_date || r.created
+        const d = rawDate ? new Date(rawDate) : null
         return {
             id: r.id,
-            slug: r.slug,
-            date: !isNaN(d.getTime()) ? `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}` : '',
-            category: r.category,
-            title: isEn && r.title_en ? r.title_en : r.title,
-            shortdesc: isEn && r.shortdesc_en ? r.shortdesc_en : r.shortdesc,
-            image: r.cover_image ? `https://api.adsmarch.bot.cd/api/files/${r.collectionId}/${r.id}/${r.cover_image}` : ''
+            slug: r.slug || '',
+            date: (d && !isNaN(d.getTime())) ? `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}` : '',
+            category: r.category || '',
+            title: isEn && r.title_en ? r.title_en : (r.title || ''),
+            shortdesc: isEn && r.shortdesc_en ? r.shortdesc_en : (r.shortdesc || ''),
+            image: r.cover_image ? `https://api.adsmarch.bot.cd/api/files/${r.collectionId || route.query.collection || 'blogs'}/${r.id}/${r.cover_image}` : ''
         }
     })
 
     const otherArticles = mappedList.filter(item => item.id !== targetIdOrSlug && item.slug !== targetIdOrSlug)
-    const sameCategoryList = otherArticles.filter(item => item.category === currentArticle.value.category)
-    const diffCategoryList = otherArticles.filter(item => item.category !== currentArticle.value.category)
-    return [...sameCategoryList, ...diffCategoryList].slice(0, 3)
+    
+    if (currentArticle.value.category) {
+        const sameCategoryList = otherArticles.filter(item => item.category === currentArticle.value.category)
+        const diffCategoryList = otherArticles.filter(item => item.category !== currentArticle.value.category)
+        return [...sameCategoryList, ...diffCategoryList].slice(0, 3)
+    } else {
+        return otherArticles.slice(0, 3)
+    }
 })
 
 const router = useRouter()
