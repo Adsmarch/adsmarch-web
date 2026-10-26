@@ -70,15 +70,29 @@
                   <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
                   <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
                 </svg>
-                <h3 class="text-[28px] sm:text-[38px] md:text-[42px] lg:text-[48px] xl:text-[56px] font-semibold leading-[1.2] text-white max-w-[320px]">
+                <h3 
+                  class="text-[28px] sm:text-[38px] md:text-[42px] lg:text-[48px] xl:text-[56px] font-semibold leading-[1.2] text-white"
+                  :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"
+                >
                   {{ displayTitle(item) }}
                 </h3>
               </div>
-              <div class="w-[100%] mb-4 md:w-[70%] md:mb-0">
-                <h4 class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold text-white mb-4 leading-snug">
+
+              <div 
+                v-if="displaySubtitle(item) || displayDescription(item)" 
+                class="w-[100%] mb-4 md:w-[70%] md:mb-0"
+              >
+                <h4 
+                  v-if="displaySubtitle(item)" 
+                  class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold text-white mb-4 leading-snug"
+                >
                   {{ displaySubtitle(item) }}
                 </h4>
-                <p class="text-[16px] sm:text-[20px] text-[#7D86A1] leading-[1.5] mt-auto">
+                
+                <p 
+                  v-if="displayDescription(item)" 
+                  class="text-[16px] sm:text-[20px] text-[#7D86A1] leading-[1.5] mt-auto"
+                >
                   {{ displayDescription(item) }}
                 </p>
               </div>
