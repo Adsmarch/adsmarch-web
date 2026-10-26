@@ -51,7 +51,7 @@
               </div>
 
               <div>
-                <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-4 leading-tight transition-colors duration-300 text-white">
+                <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-3 leading-tight transition-colors duration-300 text-white">
                   {{ displayTitle(item) }}
                 </h3>
                 <ul class="space-y-2 md:text-[16px] lg:text-[18px] xl:text-[24px] text-[#7D86A1] group-hover:text-white transition-colors duration-300">
@@ -78,10 +78,10 @@
               </svg>
             </div>
             <div>
-              <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-4 leading-tight transition-colors duration-300 text-white">
+              <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-3 leading-tight transition-colors duration-300 text-white">
                 {{ displayTitle(item) }}
               </h3>
-              <ul class="space-y-2 md:text-[16px] lg:text-[18px] xl:text-[24px] text-[#7D86A1] group-hover:text-white transition-colors duration-300">
+              <ul class="space-y-3 md:text-[16px] lg:text-[18px] xl:text-[24px] text-[#7D86A1] group-hover:text-white transition-colors duration-300">
                 <template v-for="n in 5" :key="n">
                   <li v-if="getPoint(item, n)">{{ getPoint(item, n) }}</li>
                 </template>
