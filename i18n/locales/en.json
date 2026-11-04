@@ -518,5 +518,13 @@
       "operate": "XXXX Operation",
       "TipsMaxUpload": "You can upload up to 3 files, please upload PDF files only",
       "PositionPleaseSelect": "Please select your position of interest"
+    },
+    "seoMeta": {
+      "title": "AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
+      "description": "AdsMarch is an AI-powered, expert-led global growth partner that combines AI agents, SaaS technology, and experienced growth teams to help businesses analyze, strategize, execute, and continuously optimize their marketing efforts across international markets.",
+      "insights_title": "AdsMarch Insights {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
+      "contact_title": "Contact Us {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
+      "about_title": "About Us {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
+      "awards_title": "Awards and Recognition {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth"
     }
 }

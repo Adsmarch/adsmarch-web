@@ -33,6 +33,7 @@
 import { ref, computed, watch, onMounted } from 'vue'
 import { useRoute } from '#imports'
 import PocketBase from 'pocketbase'
+const { t, locale } = useI18n()
 
 import AppBanner from '@/components/services/AppBanner.vue'
 import AppServiceSwiper from '@/components/services/AppServiceSwiper.vue'
@@ -55,6 +56,25 @@ const partnerLogos = ref([])
 
 const currentSlug = computed(() => route.params.slug || 'app')
 
+useSeoMeta({
+  title: () => {
+    const isEn = locale.value === 'en'
+    const currentTitle = isEn 
+      ? (pageData.value.title_en || pageData.value.title) 
+      : pageData.value.title
+      
+    return currentTitle ? `${currentTitle} | ${t('seoMeta.title')}` : t('seoMeta.title')
+  },
+  description: () => {
+    const isEn = locale.value === 'en'
+    const currentSubtitle = isEn 
+      ? (pageData.value.subtitle_en || pageData.value.subtitle) 
+      : pageData.value.subtitle
+      
+    return currentSubtitle || t('seoMeta.description')
+  }
+})
+
 const fetchPageData = async () => {
   bannerLoading.value = true
   itemsLoading.value = true
@@ -74,6 +94,21 @@ const fetchPageData = async () => {
 
     if (record) {
       pageData.value = record
+
+      if (typeof window !== 'undefined') {
+      const isEn = locale.value === 'en'
+      const recordTitle = isEn ? (record.title_en || record.title) : record.title
+      const recordSubtitle = isEn ? (record.subtitle_en || record.subtitle) : record.subtitle
+
+      if (recordTitle) {
+        document.title = `${recordTitle} | ${t('seoMeta.title')}`
+      }
+      
+      let metaDesc = document.querySelector('meta[name="description"]')
+      if (metaDesc) {
+        metaDesc.setAttribute('content', recordSubtitle || t('seoMeta.description'))
+      }
+    }
 
       if (record.expand?.icon && record.expand.icon.media_file) {
         bannerIconUrl.value = pb.files.getUrl(record.expand.icon, record.expand.icon.media_file)

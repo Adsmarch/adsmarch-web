@@ -6,4 +6,9 @@
 
 <script setup>
 import ResumeForm from '~/components/resume/resume-form.vue';
+const { t } = useI18n()
+useSeoMeta({
+  title: () => `${t('resume.title')} | ${t('seoMeta.title')}`,
+  description: () => t('seoMeta.description')
+})
 </script>

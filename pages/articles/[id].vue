@@ -114,6 +114,18 @@ const localePath = useLocalePath()
 const allRecords = ref([])
 const currentArticle = ref(null)
 
+useSeoMeta({
+  title: () => {
+    if (!currentArticle.value) return t('seoMeta.title')
+    const isEn = locale.value === 'en'
+    const dynamicTitle = isEn 
+      ? (currentArticle.value.title_en || currentArticle.value.title) 
+      : currentArticle.value.title
+    return `${dynamicTitle} | ${t('seoMeta.title')}`
+  },
+  description: () => t('seoMeta.description')
+})
+
 const initRichTextAccordions = async () => {
     await nextTick()
     const container = document.querySelector('.blog-rich-content')
@@ -208,6 +220,22 @@ onMounted(async () => {
                 reportFileUrl: rawCurrent.report_file 
                     ? `https://api.adsmarch.bot.cd/api/files/${rawCurrent.collectionId || collectionName}/${rawCurrent.id}/${rawCurrent.report_file}`
                     : ''
+            }
+
+            if (typeof window !== 'undefined') {
+                const isEn = locale.value === 'en'
+                const dynamicTitle = isEn 
+                ? (currentArticle.value.title_en || currentArticle.value.title) 
+                : currentArticle.value.title
+
+                if (dynamicTitle) {
+                    document.title = `${dynamicTitle} | ${t('seoMeta.title')}`
+                }
+                
+                let metaDesc = document.querySelector('meta[name="description"]')
+                if (metaDesc) {
+                    metaDesc.setAttribute('content', t('seoMeta.description'))
+                }
             }
 
             try {

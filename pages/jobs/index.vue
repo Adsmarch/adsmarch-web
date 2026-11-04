@@ -183,9 +183,14 @@ import { ref, computed, onMounted } from 'vue'
 import { useI18n } from '#imports'
 import ContactSection from '~/components/careers/ContactSection.vue';
 
-const { locale } = useI18n()
+const { locale , t } = useI18n()
 const localePath = useLocalePath()
 const { $pb } = useNuxtApp()
+
+useSeoMeta({
+  title: () => `${t('jobs.title')} | ${t('seoMeta.title')}`,
+  description: () => t('seoMeta.description')
+})
 
 const rawList = ref([])
 const isLoading = ref(true)

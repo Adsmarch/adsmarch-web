@@ -17,6 +17,12 @@ import LeaderTeam from '~/components/about-us/leader-team.vue'
 const { $pb } = useNuxtApp()
 const loading = ref(true)
 const aboutData = ref({})
+const { t } = useI18n()
+
+useSeoMeta({
+  title: () => t('seoMeta.about_title'),
+  description: () => t('seoMeta.description')
+})
 
 onMounted(async () => {
     try {

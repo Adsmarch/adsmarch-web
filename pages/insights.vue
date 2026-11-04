@@ -6,8 +6,10 @@
 
 <script setup>
 import InsightFilter from '~/components/insight-research/insight-filter.vue';
+const { t } = useI18n()
+
+useSeoMeta({
+  title: () => t('seoMeta.insights_title'),
+  description: () => t('seoMeta.description')
+})
 </script>
-
-<style scoped>
-
-</style>

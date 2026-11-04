@@ -44,25 +44,36 @@ import { useRoute, useI18n, useLocalePath } from '#imports'
 import ContactSection from '~/components/careers/ContactSection.vue';
 
 const route = useRoute()
-const { locale } = useI18n()
+const { locale , t } = useI18n()
 const localePath = useLocalePath()
 const { $pb } = useNuxtApp()
 
 const career = ref(null)
 const isLoading = ref(true)
+useSeoMeta({
+  title: () => {
+    if (!career.value) return t('seoMeta.title')
+    const isEn = locale.value === 'en'
+    const currentTitle = isEn 
+      ? (career.value.title_en || career.value.title) 
+      : career.value.title
+      
+    return currentTitle 
+      ? `${currentTitle} | ${t('seoMeta.title')}` 
+      : t('seoMeta.title')
+  },
+  description: () => t('seoMeta.description')
+})
 
 const fetchDetail = async () => {
     isLoading.value = true
     try {
         const record = await $pb.collection('jobs').getOne(route.params.id)
         
-        // 判断是否为英文环境（兼容路径包含 /en 的情况）
         const isEn = locale.value === 'en' || route.path.startsWith('/en')
 
-        // 1. 类型处理：英文下优先读取 type_en，没有则 fallback 回 type
         const typeValue = isEn ? (record.type_en || record.type) : record.type
 
-        // 2. 城市处理：英文下优先读取 city_en，没有则 fallback 回 city
         let rawCity = isEn ? (record.city_en || record.city) : record.city
 
         career.value = {
@@ -73,6 +84,22 @@ const fetchDetail = async () => {
             description: isEn ? (record.description_en || record.description) : record.description,
             submissionLink: record.submission_link || ''
         }
+
+       if (typeof window !== 'undefined' && career.value) {
+        const isEn = locale.value === 'en'
+        const currentTitle = isEn 
+        ? (career.value.title_en || career.value.title) 
+        : career.value.title
+
+        if (currentTitle) {
+            document.title = `${currentTitle} | ${t('seoMeta.title')}`
+        }
+        
+        let metaDesc = document.querySelector('meta[name="description"]')
+        if (metaDesc) {
+            metaDesc.setAttribute('content', t('seoMeta.description'))
+        }
+    }
     } catch (error) {
         console.error('获取职位详情失败:', error)
     } finally {

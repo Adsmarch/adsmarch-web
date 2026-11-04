@@ -14,4 +14,10 @@ import Life from '~/components/careers/Life.vue';
 import EmployeeQuotes from '~/components/careers/EmployeeQuotes.vue';
 import RecruitItem from '~/components/careers/RecruitItem.vue';
 import ContactSection from '~/components/careers/ContactSection.vue';
+const { t } = useI18n()
+
+useSeoMeta({
+  title: () => t('careers.join.title'),
+  description: () => t('careers.join.desc')
+})
 </script>

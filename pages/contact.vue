@@ -6,4 +6,10 @@
 
 <script setup>
 import ContactUs from '~/components/contact-us.vue';
+const { t } = useI18n()
+
+useSeoMeta({
+  title: () => t('seoMeta.contact_title'),
+  description: () => t('contact.subtitle')
+})
 </script>
