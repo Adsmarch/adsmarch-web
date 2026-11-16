@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full px-[15px] md:px-[40px] xl:px-[120px]  py-[56px] md:py-[120px] text-[#131416]">
+    <div class="w-full px-[15px] md:px-[40px] xl:px-[120px]  py-[56px] md:py-[120px] text-[#131416] max-w-site mx-auto">
         <button @click="goBack" class="inline-block text-[#7D86A1] text-[16px] md:text-[18px] lg:text-[20px] font-[600] leading-[1] text-left">
             <div class="flex gap-[8px] items-center">
                 <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -87,16 +87,18 @@
         </div>
     </div>
 
-    <div v-if="visibleList.length > 0" class="bg-[#000] text-[#fff] py-[56px] w-full px-[15px] md:px-[40px] xl:px-[120px]">
-        <div class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
-            <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
-            <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">{{ $t('insightId.title') }}</p>
-        </div>
-        <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-y-[32px] gap-y-[12px] md:items-start">
-            <NuxtLink v-for="item in visibleList" :key="item.id" :to="{ path: localePath(`/articles/${item.slug || item.id}`), query: { collection: $route.query.collection || 'blogs' } }"
-                class="bg-[#000] text-[#fff] flex flex-col justify-between h-full insight-card group  rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-[#454C5F] md:pb-[32px]">
-                <InsightItem v-if="item" :item="item" />
-            </NuxtLink>
+    <div v-if="visibleList.length > 0" class="bg-[#000] text-[#fff] py-[56px] w-full">
+        <div class="max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px]">
+            <div class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
+                <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
+                <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">{{ $t('insightId.title') }}</p>
+            </div>
+            <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-y-[32px] gap-y-[12px] md:items-start">
+                <NuxtLink v-for="item in visibleList" :key="item.id" :to="{ path: localePath(`/articles/${item.slug || item.id}`), query: { collection: $route.query.collection || 'blogs' } }"
+                    class="bg-[#000] text-[#fff] flex flex-col justify-between h-full insight-card group  rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-[#454C5F] md:pb-[32px]">
+                    <InsightItem v-if="item" :item="item" :hide-mobile-image="true" />
+                </NuxtLink>
+            </div>
         </div>
     </div>
 </template>

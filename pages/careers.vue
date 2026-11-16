@@ -21,3 +21,4 @@ useSeoMeta({
   description: () => t('careers.join.desc')
 })
 </script>
+<style scoped></style>

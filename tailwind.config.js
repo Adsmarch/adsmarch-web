@@ -11,6 +11,9 @@ export default {
       spacing: {
         'safe-pc': '120px',
         'safe-m': '15px',
+      },
+      maxWidth: {
+        'site': '1920px'
       }
     },
   },

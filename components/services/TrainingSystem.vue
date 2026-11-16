@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] py-[56px] md:py-[120px] overflow-hidden">
+  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] py-[56px] md:py-[120px] overflow-hidden max-w-site mx-auto">
     
     <div v-if="loading" class="mx-auto w-[300px] md:w-[450px] h-[48px] md:h-[80px] bg-[#2A2F3D] rounded animate-pulse mb-8 md:mb-[64px]"></div>
     <div v-else 
@@ -20,7 +20,7 @@
       </div>
     </div>
 
-    <div v-if="loading" class="grid grid-cols-1 md:grid-cols-3 gap-6 animate-pulse">
+    <div v-if="loading" class="grid grid-cols-1 md:grid-cols-2 gap-6 animate-pulse">
       <div v-for="i in 3" :key="i" class="h-[380px] bg-[#131416]/50 border-l border-[#454C5F] p-6 flex flex-col justify-between">
         <div class="w-5 h-5 bg-[#2A2F3D] rounded"></div>
         <div class="space-y-4">
@@ -68,8 +68,13 @@
 
       <div class="hidden md:block w-full">
         
-        <div v-if="items.length <= 3" class="grid grid-cols-1 md:grid-cols-3 gap-[24px]">
-          <div v-for="item in items" :key="item.id" class="training-card flex flex-col h-full min-h-[420px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300">
+        <div v-if="items.length <= 3" class="grid grid-cols-2 gap-[24px]">
+          <div 
+            v-for="(item, index) in items" 
+            :key="item.id" 
+            class="training-card flex flex-col h-full min-h-[420px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
+            :class="{ 'col-span-2': items.length === 3 && index === 2 }"
+          >
             <div class="mb-8">
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#0043FF] w-5 h-5">
                 <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
@@ -93,7 +98,7 @@
         <template v-else>
           <Swiper
             :modules="[SwiperNavigation, SwiperPagination]"
-            :slides-per-view="3"
+            :slides-per-view="2"
             :space-between="24"
             :pagination="{ el: '.training-pagination-pc', clickable: true }"
             class="w-full !overflow-visible"
@@ -154,14 +159,12 @@ const getPoint = (item, index) => {
 </script>
 
 <style scoped>
-/* PC端悬停（Hover）背景变灰色 */
 @media (min-width: 1024px) {
   .training-card:hover {
     background-color: #131416 !important;
   }
 }
 
-/* 移动端（M端）swiper active 状态下背景变灰色 */
 @media (max-width: 1023px) {
   :deep(.swiper-slide-active) .training-card {
     background-color: #131416 !important;

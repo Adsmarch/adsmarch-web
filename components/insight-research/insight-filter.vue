@@ -72,7 +72,9 @@
             </div>
         </div>
 
-        <div v-if="visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start">
+        <div v-if="visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start md:gap-x-[24px]"
+            :class="{'mt-[120px]': sortOpen}"
+            >
             <NuxtLink 
                 v-for="(item, index) in visibleList" 
                 :key="item.id" 
@@ -88,7 +90,7 @@
                         ease: 'easeOut' 
                     } 
                 }"
-                class="flex flex-col justify-between h-full insight-card group  bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
+                class="flex flex-col justify-between h-full insight-card group  bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:border-b md:border-[#454C5F] md:pb-[32px]"
             >
                 <InsightItem :item="item" />
             </NuxtLink>
@@ -109,7 +111,7 @@
                         ease: 'easeOut' 
                     } 
                 }"
-                class="flex flex-col justify-between h-full insight-card bg-[#131416] p-[16px] md:p-0 rounded-[4px] md:rounded-none md:bg-transparent md:relative md:pr-[24px] md:border-b md:border-[#454C5F] md:pb-[32px]"
+                class="flex flex-col justify-between h-full insight-card bg-[#131416] p-[16px] md:p-0 rounded-[4px] md:rounded-none md:bg-transparent md:relative md:border-b md:border-[#454C5F] md:pb-[32px]"
             >
                 <div class="flex flex-col flex-1">
                     <div class="flex items-center justify-between mb-[16px]">
@@ -162,7 +164,7 @@ const { $pb } = useNuxtApp()
 const localePath = useLocalePath()
 
 const sortOptions = ['featured', 'latest', 'hottest']
-const categories = ref(['tips', 'research', 'report'])
+const categories = ref(['tips', 'research'])
 
 const expanded = ref(false)
 const sortOpen = ref(false)
@@ -287,9 +289,9 @@ function applyFilter() {
 
 <style scoped>
 @media screen and (min-width: 1024px) {
-    .insight-card:nth-child(3n){
+    /* .insight-card:nth-child(3n){
         padding-right: 0;
-    }
+    } */
     .insight-card:nth-child(3n) :deep(.col-line),
     .insight-card:last-child :deep(.col-line) {
         display: none;

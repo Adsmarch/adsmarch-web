@@ -156,3 +156,4 @@ onMounted(() => {
   fetchPageData()
 })
 </script>
+<style scoped></style>

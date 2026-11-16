@@ -1,6 +1,6 @@
 <template>
   <section class="relative w-full bg-black text-white py-[56px] md:pt-[120px] md:pb-[120px] overflow-hidden">
-    <div v-if="loading" class="flex flex-col md:flex-row md:items-start justify-between gap-8 lg:gap-16 xl:gap-[120px] px-[15px] md:px-[40px] xl:px-[120px] animate-pulse">
+    <div v-if="loading" class="flex flex-col md:flex-row md:items-start justify-between gap-8 lg:gap-16 xl:gap-[120px] px-[15px] md:px-[40px] xl:px-[120px] animate-pulse max-w-site mx-auto">
       <div class="flex items-start gap-3 xl:gap-6 shrink-0 w-full md:w-[40%]">
         <div class="w-8 h-8 bg-[#2A2F3D] rounded shrink-0 mt-2"></div>
         <div class="w-full h-24 bg-[#2A2F3D] rounded"></div>
@@ -17,7 +17,7 @@
       v-motion
       :initial="{ opacity: 0, y: 50 }"
       :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }"
-      class="flex flex-col md:flex-row md:items-start justify-between gap-8 lg:gap-16 xl:gap-[120px] px-[15px] md:px-[40px] xl:px-[120px] opacity-0"
+      class="flex flex-col md:flex-row md:items-start justify-between gap-8 lg:gap-16 xl:gap-[120px] px-[15px] md:px-[40px] xl:px-[120px] opacity-0 max-w-site mx-auto"
     >
       <div class="flex items-start gap-3 xl:gap-6 shrink-0">
         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="w-6 h-6 md:w-8 md:h-8 shrink-0 mt-2">
@@ -66,3 +66,4 @@ const displayTitle = computed(() => isEn.value ? (props.data.title_en || props.d
 const displaySubtitle = computed(() => isEn.value ? (props.data.subtitle_en || props.data.subtitle) : props.data.subtitle)
 const displayDescription = computed(() => isEn.value ? (props.data.description_en || props.data.description) : props.data.description)
 </script>
+<style scoped></style>

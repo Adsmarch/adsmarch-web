@@ -23,7 +23,7 @@
                 <div class="w-full h-8 bg-[#282B33] rounded"></div>
                 <div class="w-2/3 h-8 bg-[#282B33] rounded"></div>
             </div>
-            <div class="w-full aspect-[16/10] bg-[#282B33] rounded mt-8"></div>
+            <div class="w-full aspect-[4.9/3.3] bg-[#282B33] rounded mt-8"></div>
         </div>
     </div>
 
@@ -51,9 +51,13 @@
                 {{ item?.title }}
             </h3>
 
-            <div v-if="formattedDate" class="text-[#7D86A1] text-[12px] font-[400]">
+            <div v-if="formattedDate" class="text-[#7D86A1] text-[12px] font-[400]"
+                :class="hideMobileImage ? '' : 'mb-[16px]'">
                 {{ formattedDate }}
             </div>
+
+            <img v-if="!hideMobileImage" :src="item?.image || fallbackImage" :alt="item?.title" loading="lazy"
+                class="w-full object-cover object-left rounded-[4px] aspect-[4.9/3.3]" />
         </div>
 
         <div class="hidden md:flex flex-col justify-between h-full">
@@ -86,7 +90,7 @@
                 </div>
 
                 <img :src="item?.image || fallbackImage" :alt="item?.title" loading="lazy"
-                    class="w-full aspect-[3/2] object-cover rounded-[4px] mt-[24px] md:mt-[64px] pt-[32px] md:pt-0 md:aspect-auto md:h-[calc((100vw_-_240px)/2*0.625_-_15px)] lg:h-[calc((100vw_-_240px)/3*0.625_-_15px)] md:group-hover:mt-[130px] transition-[margin] duration-300" />
+                    class="w-full object-cover object-left rounded-[4px] mt-[24px] md:mt-[64px] pt-[32px] md:pt-0 aspect-[4.9/3.3] md:group-hover:mt-[130px] transition-[margin] duration-300" />
             </div>
         </div>
 
@@ -102,6 +106,10 @@ const props = defineProps({
         default: () => ({})
     },
     loading: {
+        type: Boolean,
+        default: false
+    },
+    hideMobileImage: {
         type: Boolean,
         default: false
     }

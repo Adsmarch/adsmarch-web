@@ -13,3 +13,4 @@ useSeoMeta({
   description: () => t('contact.subtitle')
 })
 </script>
+<style scoped></style>

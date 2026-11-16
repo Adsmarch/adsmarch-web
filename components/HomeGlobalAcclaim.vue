@@ -1,11 +1,11 @@
 <template>
   <section ref="sectionRef" class="relative w-full bg-black text-white min-h-[100vh]">
-    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[120px] md:pb-[120px]">
+    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[120px] md:pb-[120px] max-w-site mx-auto">
       <div 
         class="flex flex-col items-center transition-transform duration-700 ease-out z-20 gap-3 xl:gap-6"
         :class="[
           isScrolled 
-            ? '-translate-y-6 md:-translate-y-12' 
+            ? '-translate-y-4 md:-translate-y-8' 
             : 'translate-y-[120px] md:translate-y-[180px]'
         ]"
       >
@@ -18,30 +18,36 @@
         </h2>
       </div>
 
-      <div class="w-full mt-8 md:mt-[24px] z-10">      
+      <div class="w-full max-w-site mx-auto mt-6 md:mt-[24px] z-10">      
         <div v-if="loading" class="w-full">
           <div class="hidden md:grid grid-cols-3 gap-6">
-            <div v-for="i in 3" :key="i" class="p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[360px] xl:h-[460px] bg-[#131416]/40 animate-pulse">
+            <div v-for="i in 3" :key="i" class="p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[460px] xl:h-[540px] bg-[#131416]/40 animate-pulse">
               <div class="flex justify-between items-center">
                 <div class="w-5 h-5 bg-[#2A2F3D] rounded"></div>
                 <div class="w-8 h-4 bg-[#2A2F3D] rounded"></div>
               </div>
+
+              <div class="w-full h-[160px] xl:h-[200px] bg-[#2A2F3D]/60 rounded my-4"></div>
+
               <div class="flex flex-col items-start gap-4 xl:gap-6">
-                <div class="w-32 h-12 bg-[#2A2F3D] rounded"></div>
-                <div class="w-full h-16 bg-[#2A2F3D] rounded"></div>
+                <div class="w-32 h-10 bg-[#2A2F3D] rounded"></div>
+                <div class="w-full h-14 bg-[#2A2F3D] rounded"></div>
               </div>
             </div>
           </div>
 
           <div class="block md:hidden">
-            <div class="p-6 border-l border-l-[#454C5F] flex flex-col justify-between h-[360px] bg-[#131416]/40 animate-pulse">
+            <div class="p-6 border-l border-l-[#454C5F] flex flex-col justify-between h-[440px] bg-[#131416]/40 animate-pulse">
               <div class="flex justify-between items-center">
                 <div class="w-4 h-4 bg-[#2A2F3D] rounded"></div>
                 <div class="w-6 h-4 bg-[#2A2F3D] rounded"></div>
               </div>
-              <div class="flex flex-col items-start gap-4">
+
+              <div class="w-full h-[150px] bg-[#2A2F3D]/60 rounded my-3"></div>
+
+              <div class="flex flex-col items-start gap-3">
                 <div class="w-24 h-8 bg-[#2A2F3D] rounded"></div>
-                <div class="w-full h-16 bg-[#2A2F3D] rounded"></div>
+                <div class="w-full h-14 bg-[#2A2F3D] rounded"></div>
               </div>
             </div>
           </div>
@@ -52,7 +58,7 @@
             <div 
               v-for="(item, index) in listData" 
               :key="index"
-              class="p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[360px] xl:h-[460px] transition-all duration-700 ease-out hover:bg-[#131416]"
+              class="group p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[560px] xl:h-[640px] transition-all duration-700 ease-out hover:bg-[#131416]"
               :class="[
                 isScrolled 
                   ? 'opacity-100 translate-y-0' 
@@ -69,18 +75,27 @@
                 <span>0{{ index + 1 }}</span>
               </div>
 
-              <div class="flex flex-col items-start gap-4 xl:gap-6">
+              <div v-if="item.imageUrl" class="w-full aspect-[16/9] my-8 overflow-hidden bg-[#0D0E10] flex items-center justify-center rounded-[20px]">
+                <img 
+                  :src="item.imageUrl" 
+                  :alt="item.title" 
+                  loading="lazy"
+                  class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                />
+              </div>
+
+              <div class="flex flex-col items-start gap-4 xl:gap-5">
                 <div class="flex items-center gap-2">
-                  <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 xl:h-16 w-auto" />
-                  <span class="text-[40px] xl:text-[56px] font-bold tracking-tight text-white leading-none">
+                  <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 xl:h-14 w-auto" />
+                  <span class="text-[36px] xl:text-[52px] font-bold tracking-tight text-white leading-none">
                     {{ item.year }}
                   </span>
-                  <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 xl:h-16 w-auto scale-x-[-1]" />
+                  <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 xl:h-14 w-auto scale-x-[-1]" />
                 </div>
                 <p 
                   :class="[
-                    'font-semibold text-[#0043FF] leading-[1.3] text-left',
-                    isEn ? 'text-[14px] xl:text-[18px]' : 'text-[20px] xl:text-[28px]'
+                    'font-semibold text-[#0043FF] leading-[1.3] text-left line-clamp-2 ',
+                    isEn ? 'text-[14px] xl:text-[18px]' : 'text-[18px] xl:text-[24px]'
                   ]"
                 >
                   {{ item.title }}
@@ -105,7 +120,7 @@
               class="w-full !overflow-visible"
             >
               <SwiperSlide v-for="(item, index) in listData" :key="index">
-                <div class="border-l border-l-[#454C5F] flex flex-col justify-between h-[360px] px-[20px] py-[24px]">
+                <div class="border-l border-l-[#454C5F] flex flex-col justify-between h-[440px] px-[20px] py-[24px] bg-[#131416]/30">
                   <div class="flex justify-between items-center text-base font-semibold text-[#454C5F]">
                     <svg width="8" height="8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                       <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
@@ -115,19 +130,28 @@
                     <span>0{{ index + 1 }}</span>
                   </div>
 
+                  <div v-if="item.imageUrl" class="w-full aspect-[16/9] my-3 overflow-hidden bg-[#0D0E10] flex items-center justify-center">
+                    <img 
+                      :src="item.imageUrl" 
+                      :alt="item.title" 
+                      loading="lazy"
+                      class="w-full h-full object-cover"
+                    />
+                  </div>
+
                   <div class="flex flex-col items-start gap-3">
                     <div class="flex items-center gap-1.5">
-                      <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 w-auto" />
-                      <span class="text-[32px] font-semibold text-white leading-[1.2]">
+                      <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-9 w-auto" />
+                      <span class="text-[30px] font-semibold text-white leading-[1.2]">
                         {{ item.year }}
                       </span>
-                      <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-10 w-auto scale-x-[-1]" />
+                      <img src="../assets/image/title-icon.svg" alt="Title Logo" class="h-9 w-auto scale-x-[-1]" />
                     </div>
 
                     <p 
                       :class="[
-                        'font-semibold text-[#0043FF] leading-[1.2] text-left',
-                        isEn ? 'text-[13px]' : 'text-[24px]'
+                        'font-semibold text-[#0043FF] leading-[1.25] text-left line-clamp-3',
+                        isEn ? 'text-[13px]' : 'text-[20px]'
                       ]"
                     >
                       {{ item.title }}
@@ -137,7 +161,7 @@
               </SwiperSlide>
             </Swiper>
 
-            <div class="custom-swiper-pagination flex justify-center gap-2 mt-8"></div>
+            <div class="custom-swiper-pagination flex justify-center gap-2 mt-6"></div>
           </div>
         </div>
 
@@ -181,7 +205,8 @@ const fetchAcclaimData = async () => {
 const listData = computed(() => {
   return rawAcclaimList.value.map(item => ({
     year: item.time || '',
-    title: isEn.value ? (item.text_en || item.text) : (item.text || '')
+    title: isEn.value ? (item.text_en || item.text) : (item.text || ''),
+    imageUrl: item.image ? pb.files.getURL(item, item.image) : ''
   }))
 })
 

@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] h-[70vh] xl:h-[calc(100vh-96px)] overflow-hidden bg-black text-white flex items-center">
+  <section class="relative w-full h-[70vh] xl:h-[calc(100vh-96px)] max-h-[1080px] overflow-hidden bg-black text-white flex items-center">
     <div class="absolute inset-0 z-0">
       <video
         autoplay
@@ -23,7 +23,7 @@
       <div class="absolute inset-0 bg-black/40"></div>
     </div>
 
-    <div class="relative z-10 w-full mx-auto h-full flex flex-col justify-between ">
+    <div class="relative z-10 max-w-site w-full mx-auto h-full flex flex-col justify-between px-[15px] md:px-[40px] xl:px-[120px]">
       <div
       v-motion
       :initial="{ opacity: 0, y: 50 }"
@@ -71,7 +71,7 @@
           :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }" 
           class="text-[20px] sm:text-[24px] xl:text-[32px] text-white leading-[1.4] font-normal opacity-0">
             {{ $t('homeBanner.subtitle') }}
-          </p>
+          </p> 
 
           <div
           v-motion

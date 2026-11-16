@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full bg-black text-white pb-[56px] md:pb-[120px] overflow-hidden select-none">
+  <section class="relative w-full bg-black text-white py-[56px] md:pt-[120px] md:pb-[120px] overflow-hidden select-none max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px]">
     <div v-if="loading" class="w-[300px] md:w-[450px] h-[48px] md:h-[80px] bg-[#2A2F3D] rounded animate-pulse mb-8 md:mb-[64px]"></div>
     <div v-else 
     v-motion
@@ -12,7 +12,7 @@
         <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
       </svg>
       <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
-        {{ sectionTitle || $t('classicCases.title', '经典案例') }}
+        {{ $t('classicCases.title') }}
       </h2>
     </div>
 
@@ -46,32 +46,35 @@
         @swiper="onSwiper"
         class="case-swiper w-full !overflow-visible"
       >
-        <SwiperSlide v-for="item in cases" :key="item.id" class="h-auto !w-[84%] sm:!w-[80%] lg:!w-[75%] xl:!w-[65%]">
-          <div class="bg-[#131416] rounded-[4px] overflow-hidden flex flex-col h-full border border-[#131416]">
+        <SwiperSlide v-for="item in cases" :key="item.id" class="h-auto !w-[84%] sm:!w-[80%] lg:!w-[65%] xl:!w-[45%]">
+          <div class="bg-[#131416] rounded-[4px] overflow-hidden flex flex-col h-full border border-[#131416] group">
             
             <div 
-              class="relative w-full aspect-[16/9] overflow-hidden bg-black/40 group"
+              class="relative w-full aspect-[16/9] overflow-hidden bg-black/40 group/img"
               :class="{ 'cursor-pointer': item.has_video && item.videoUrl }"
               @click="handleMediaClick(item)"
             >
-              <img :src="item.coverImage" :alt="displayTitle(item)" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-[1.02]" />
+              <img :src="item.coverImage" :alt="displayTitle(item)" class="w-full h-full object-cover transition-transform duration-500 group-hover/img:scale-[1.02]" />
               
-              <div v-if="item.has_video && item.videoUrl" class="absolute inset-0 bg-black/20 group-hover:bg-black/40 transition-colors flex items-center justify-center">
-                <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-sm border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
+              <div v-if="item.has_video && item.videoUrl" class="absolute inset-0 bg-black/20 group-hover/img:bg-black/40 transition-colors flex items-center justify-center">
+                <div class="w-10 h-10 md:w-16 md:h-16 rounded-full bg-black/50 backdrop-blur-sm border border-white/30 flex items-center justify-center transition-transform duration-300 group-hover/img:scale-110">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" class="w-6 h-6 md:w-8 md:h-8 text-white fill-current translate-x-0.5"><path d="M8 5v14l11-7z" /></svg>
                 </div>
               </div>
             </div>
 
-            <div class="px-4 py-6 md:px-8 md:py-12 flex flex-col md:flex-row md:justify-between">
-              <div class="mb-2 md:mb-4">
+            <div class="px-4 py-6 md:px-8 md:py-12 flex flex-col md:flex-row md:justify-between items-center md:items-center relative flex-1 md:gap-4"
+                :class="{ 'text-area-container': displaySubtitle(item) || displayDescription(item) }"
+            >
+              
+              <div class="mb-2 md:mb-0 w-full md:w-auto">
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] mb-8 w-2 h-2 md:w-5 md:h-5">
                   <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
                   <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
                   <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
                 </svg>
                 <h3 
-                  class="text-[28px] sm:text-[38px] md:text-[42px] lg:text-[48px] xl:text-[56px] font-semibold leading-[1.2] text-white"
+                  class="text-[24px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[52px] font-semibold leading-[1.2] text-white"
                   :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"
                 >
                   {{ displayTitle(item) }}
@@ -80,22 +83,23 @@
 
               <div 
                 v-if="displaySubtitle(item) || displayDescription(item)" 
-                class="w-[100%] mb-4 md:w-[70%] md:mb-0"
+                class="w-[100%] md:w-[70%] flex flex-col justify-end moving-content"
               >
                 <h4 
                   v-if="displaySubtitle(item)" 
-                  class="text-[18px] sm:text-[20px] md:text-[24px] lg:text-[28px] xl:text-[32px] font-semibold text-white mb-4 leading-snug"
+                  class="text-[18px] sm:text-[18px] md:text-[20px] lg:text-[24px] xl:text-[28px] font-semibold text-white leading-snug"
                 >
                   {{ displaySubtitle(item) }}
                 </h4>
                 
                 <p 
                   v-if="displayDescription(item)" 
-                  class="text-[16px] sm:text-[20px] text-[#7D86A1] leading-[1.5] mt-auto"
+                  class="case-desc text-[14px] sm:text-[18px] text-[#7D86A1] leading-[1.5]"
                 >
                   {{ displayDescription(item) }}
                 </p>
               </div>
+
             </div>
 
           </div>
@@ -137,7 +141,7 @@ const props = defineProps({
 const swiperRef = ref(null)
 const onSwiper = (swiper) => { swiperRef.value = swiper }
 
-const { locale } = useI18n()
+const { locale} = useI18n()
 const isEn = computed(() => locale.value?.startsWith('en'))
 
 
@@ -168,5 +172,46 @@ const closeVideoModal = () => {
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 :deep(.classic-pagination .swiper-pagination-bullet) { width: 12px; height: 12px; background-color: #454C5F; border-radius: 2px; opacity: 1; transition: all 0.3s ease; cursor: pointer; margin: 0 !important; }
 :deep(.classic-pagination .swiper-pagination-bullet-active) { background-color: #0043FF; }
-@media (max-width: 768px) { :deep(.classic-pagination .swiper-pagination-bullet) { width: 6px; height: 6px; border-radius: 1px; } }
+@media (max-width: 768px) { :deep(.classic-pagination .swiper-pagination-bullet) { width: 6px; height: 6px; border-radius: 1px; }
+.text-area-container {
+  min-height: 280px;
+} }
+
+.text-area-container {
+  min-height: 295px;
+}
+
+.moving-content {
+  transform: translateY(16px);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.case-desc {
+  opacity: 0;
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@media (min-width: 1024px) {
+  .group:hover .moving-content {
+    transform: translateY(0);
+  }
+  .group:hover .case-desc {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 0.75rem;
+  }
+}
+
+@media (max-width: 1023px) {
+  :deep(.swiper-slide-active) .moving-content {
+    transform: translateY(0);
+  }
+  :deep(.swiper-slide-active) .case-desc {
+    opacity: 1;
+    max-height: 200px;
+    margin-top: 0.75rem;
+  }
+}
 </style>

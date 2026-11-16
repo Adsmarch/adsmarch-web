@@ -1,12 +1,12 @@
 <template>
   <section 
-    class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] overflow-hidden select-none"
+    class="relative w-full bg-black text-white px-[15px] md:pl-[40px] xl:pl-[120px] overflow-hidden select-none"
   >
     <div
     v-motion
     :initial="{ opacity: 0, y: 50 }"
     :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }" 
-    class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px]">
+    class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px] max-w-site mx-auto">
       <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 mt-2">
         <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
         <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
@@ -17,10 +17,7 @@
       </h2>
     </div>
     
-    <div 
-      @mouseenter="stopAutoplay"
-      @mouseleave="startAutoplay"
-    >
+    <div class="max-w-site mx-auto overflow-hidden">
       <Swiper
         :modules="[SwiperNavigation, SwiperAutoplay]"
         :slides-per-view="1.2"
@@ -38,7 +35,7 @@
           '1600': { slidesPerView: 4.2, spaceBetween: 24 },
         }"
         @swiper="onSwiper"
-        class="w-full !overflow-visible"
+        class="w-full !overflow-visible max-w-site mx-auto"
       >
 
         <template v-if="isLoading">
@@ -234,18 +231,6 @@ const onSwiper = (swiper) => {
   swiperRef.value = swiper
 }
 
-const stopAutoplay = () => {
-  if (swiperRef.value && swiperRef.value.autoplay) {
-    swiperRef.value.autoplay.stop()
-  }
-}
-
-const startAutoplay = () => {
-  if (swiperRef.value && swiperRef.value.autoplay) {
-    swiperRef.value.autoplay.start()
-  }
-}
-
 const slidePrev = () => {
   swiperRef.value?.slidePrev()
 }
@@ -258,7 +243,7 @@ const fetchServices = async () => {
   isLoading.value = true
   try {
     const records = await $pb.collection('services').getFullList({
-      sort: '+created',
+      sort: '+sort,+created',
     })
     rawList.value = records || []
   } catch (error) {

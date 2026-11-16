@@ -1,6 +1,6 @@
 <template>
-  <header class="sticky top-0 z-50 bg-black text-white shadow-[0_2px_8px_0_#5258701F]">
-    <div class="w-full px-[15px] md:px-[40px] xl:px-[120px] h-[72px] xl:h-[96px] flex items-center justify-between gap-4">
+  <header class="sticky top-0 z-50 bg-black text-white shadow-[0_2px_8px_0_#5258701F] w-full">
+    <div class="w-full max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px] h-[72px] xl:h-[96px] flex items-center justify-between gap-4">
       
       <NuxtLinkLocale to="/" class="flex items-center shrink-0">
         <img src="/logo.svg" alt="AdsMarch Logo" class="h-6 xl:h-10 w-auto" />

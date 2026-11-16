@@ -16,4 +16,5 @@ useSeoMeta({
 })
 
 </script>
+<style scoped></style>
 

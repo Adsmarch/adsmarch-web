@@ -1,6 +1,6 @@
 <template>
-  <footer class="relative w-full text-white overflow-hidden footer-bg">
-    <div class="mx-auto p-6 md:p-12 xl:p-[120px] pt-14 pb-14 md:pt-16 md:pb-10 flex flex-col justify-between ">
+  <footer class="relative w-full text-white overflow-hidden bg-black">
+    <div class="mx-auto p-6 md:p-12 xl:p-[120px] pt-14 pb-14 md:pt-16 md:pb-10 flex flex-col justify-between max-w-site footer-bg">
       
       <div class="z-10 mb-14 md:mb-[120px]">
         <svg class="h-10 md:h-14 w-auto" viewBox="0 0 338 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -70,18 +70,29 @@ const localePath = useLocalePath()
 </script>
 <style scoped>
 .footer-bg {
-  background-image: url('../assets/image/m-bg.png');
+  background-image: url('../assets/image/m-bg-2.png');
   background-position: right bottom;
   background-size: cover;
   background-repeat: no-repeat;
+  background-color: #000;
 }
-
-@media (min-width: 800px) {
+@media (min-width: 768px) and (max-width: 999px) {
   .footer-bg {
-    background-image: url('../assets/image/p-bg.png');
+    background-position:center 70%;
+  }
+}
+@media (min-width: 999px) {
+  .footer-bg {
+    background-image: url('../assets/image/p-bg-2.png');
     background-size: cover;
     background-repeat: no-repeat;
-    background-position: bottom;
+    background-position: right bottom;
+  }
+}
+@media (min-width: 1920px){
+  .footer-bg {
+    background-size: contain;
+    background-position: 100%;
   }
 }
 </style>

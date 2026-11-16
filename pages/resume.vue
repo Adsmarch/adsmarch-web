@@ -12,3 +12,4 @@ useSeoMeta({
   description: () => t('seoMeta.description')
 })
 </script>
+<style scoped></style>
