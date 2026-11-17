@@ -21,7 +21,7 @@
             v-motion
             :initial="{ opacity: 0, y: 40 }"
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, delay: 150, ease: 'easeOut' } }"
-            class="relative w-full aspect-[16/9] lg:aspect-[21/9] bg-gray-900 rounded-lg overflow-hidden"
+            class="relative w-full md:w-[60%] m-auto aspect-[16/9] bg-gray-900 rounded-lg overflow-hidden"
         >
             <img v-if="!cities[activeIndex]?.videoUrl" :src="cities[activeIndex]?.cover"
                 :alt="cities[activeIndex]?.name"
@@ -29,8 +29,10 @@
 
             <video v-else :key="cities[activeIndex]?.videoUrl" ref="videoRef"
                 :src="cities[activeIndex]?.videoUrl"
-                playsinline preload="metadata"
+                :poster="cities[activeIndex]?.cover || undefined"
+                playsinline :preload="cities[activeIndex]?.cover ? 'metadata' : 'auto'"
                 class="absolute inset-0 w-full h-full object-cover"
+                @loadeddata="onVideoLoadedData"
                 @timeupdate="onVideoTimeUpdate"
                 @play="isPlaying = true"
                 @pause="isPlaying = false"
@@ -213,6 +215,20 @@ function togglePlay() {
     } else {
         video.pause()
         isPlaying.value = false
+    }
+}
+
+
+function onVideoLoadedData() {
+    const video = videoRef.value
+    if (!video) return
+
+    if (!cities.value[activeIndex.value]?.cover && video.currentTime === 0) {
+        try {
+            video.currentTime = 0.001
+        } catch (e) {
+            console.warn('[video] 首帧渲染失败:', e)
+        }
     }
 }
 

@@ -49,7 +49,7 @@
 
 <script setup>
 import { useI18n } from 'vue-i18n'
-import mascotImg from '~/assets/image/hello_mascot.png'
+import mascotImg from '~/assets/image/hello_mascot_1.png'
 const { locale } = useI18n()
 const localePath = useLocalePath()
 

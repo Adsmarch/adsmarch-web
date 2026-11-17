@@ -15,9 +15,9 @@
             </h1>
 
             <div v-if="currentArticle.category || currentArticle.author || currentArticle.date" class="flex items-center flex-wrap gap-[8px] md:gap-[16px] text-[#131416] mb-[48px] md:mb-[64px] text-[18px] md:text-[20px] lg:text-[24px] border-b-[1px] border-[#D9DDE8] pb-[48px] md:pb-[64px] font-semibold">
-                <span v-if="currentArticle.category">{{ $t(`insightFilter.categories.${currentArticle.category}`) }}</span>
+                <!-- <span v-if="currentArticle.category">{{ $t(`insightFilter.categories.${currentArticle.category}`) }}</span> -->
                 <template v-if="currentArticle.author">
-                    <span v-if="currentArticle.category">|</span>
+                    <!-- <span v-if="currentArticle.category">|</span> -->
                     <span>{{ locale === 'en' ? `Author: ${currentArticle.author_en || currentArticle.author}` : `作者:${currentArticle.author}` }}</span>
                 </template>
                 <template v-if="currentArticle.date">

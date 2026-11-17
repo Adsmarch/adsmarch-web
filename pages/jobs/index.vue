@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] mt-[56px] md:mt-[120px] mb-[56px] md:mb-[120px] mx-auto text-[#131416] bg-white">
+    <div class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] mt-[56px] md:mt-[120px] mb-[56px] md:mb-[120px] mx-auto text-[#131416] bg-white max-w-site">
         
         <div 
             v-motion

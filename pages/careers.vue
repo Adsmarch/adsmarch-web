@@ -1,5 +1,5 @@
 <template>
-    <div class="bg-white text-[#131416] px-[15px] md:px-[40px] xl:px-[120px] pb-[64px] md:pb-[120px] m-auto overflow-hidden">
+    <div class="bg-white text-[#131416] px-[15px] md:px-[40px] xl:px-[120px] pb-[64px] md:pb-[120px] m-auto overflow-hidden max-w-site">
         <Join />
         <Life />
         <EmployeeQuotes />

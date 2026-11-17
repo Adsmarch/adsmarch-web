@@ -5,60 +5,123 @@
             <div v-for="i in 3" :key="i" class="h-[400px] bg-[#131416] rounded"></div>
         </div>
         <template v-else>
-            <div class="hidden md:grid xl:grid-cols-4 md:grid-cols-3 gap-[24px]">
-                <div 
-                    v-motion
-                    :initial="{ opacity: 0, y: 30 }"
-                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
-                    class="col-span-2 md:col-span-1 xl:col-span-2 pr-10 md:pr-4"
-                >
-                    <div class="flex items-start gap-3 ">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
-                            <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                            <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                            <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
-                        </svg>
-                        <h2 class="text-[40px] sm:text-[48px] lg:text-[64px] xl:text-[96px] font-semibold leading-[1.2] mb-[20px] md:mb-[24px]">
-                            {{ $t('about.leaderTeam.title') }}
-                        </h2>
-                    </div>
-                    <p class="text-[16px] md:text-[20px] lg:text-[24px] leading-[1.5] text-[#fff]">
-                        {{ $t('about.leaderTeam.desc') }}
-                    </p>
-                </div>
-
-                <template v-for="(member, index) in members" :key="index">
+            <div class="hidden md:block w-full">
+                <div class="grid xl:grid-cols-4 md:grid-cols-3 gap-[24px] mb-[24px]">
                     <div 
                         v-motion
-                        :initial="{ opacity: 0, y: 40 }"
-                        :visible-once="{ 
-                            opacity: 1, 
-                            y: 0, 
-                            transition: { 
-                                duration: 600, 
-                                delay: (index + 1) * 100, 
-                                ease: 'easeOut' 
-                            } 
-                        }"
-                        class="team-card bg-[#131416] border border-transparent transition-colors duration-300"
+                        :initial="{ opacity: 0, y: 30 }"
+                        :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+                        class="col-span-2 md:col-span-1 xl:col-span-2 pr-10 md:pr-4 flex flex-col justify-center"
                     >
-                        <div class="aspect-[1/1] overflow-hidden">
-                            <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover"
-                                loading="lazy" />
+                        <div class="flex items-start gap-3 mb-[20px] md:mb-[24px]">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
+                                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
+                                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
+                            </svg>
+                            <h2 class="text-[40px] sm:text-[48px] lg:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">
+                                {{ $t('about.leaderTeam.title') }}
+                            </h2>
                         </div>
-                        <div class="px-[16px] py-[24px] md:py-[32px]">
-                            <div class="member-name text-[28px] md:text-[34px] lg:text-[40px] leading-[1.2] font-[600] text-white mb-[4px] md:mb-[8px] transition-colors duration-300">
-                                {{ member.name }}
+                        <p class="text-[16px] md:text-[20px] lg:text-[24px] leading-[1.5] text-[#fff]">
+                            {{ $t('about.leaderTeam.desc') }}
+                        </p>
+                    </div>
+
+                    <template v-for="(member, index) in fixedMembers" :key="index">
+                        <div 
+                            v-motion
+                            :initial="{ opacity: 0, y: 40 }"
+                            :visible-once="{ 
+                                opacity: 1, 
+                                y: 0, 
+                                transition: { 
+                                    duration: 600, 
+                                    delay: (index + 1) * 100, 
+                                    ease: 'easeOut' 
+                                } 
+                            }"
+                            class="team-card bg-[#131416] border border-transparent transition-colors duration-300 flex flex-col justify-between"
+                        >
+                            <div class="aspect-[1/1] overflow-hidden">
+                                <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover" loading="lazy" />
                             </div>
-                            <div class="md:text-[20px] text-[16px] leading-[1.2] font-[600] text-[#0043FF] mb-[16px] md:mb-[24px]">
-                                {{ member.role }}
+                            <div class="px-[16px] py-[24px] md:py-[32px] flex-1 flex flex-col justify-between">
+                                <div>
+                                    <div class="member-name text-[28px] md:text-[34px] lg:text-[40px] leading-[1.2] font-[600] text-white mb-[4px] md:mb-[8px] transition-colors duration-300">
+                                        {{ member.name }}
+                                    </div>
+                                    <div class="md:text-[20px] text-[16px] leading-[1.2] font-[600] text-[#0043FF] mb-[16px] md:mb-[24px]">
+                                        {{ member.role }}
+                                    </div>
+                                </div>
+                                <p class="md:text-[20px] text-[16px] leading-[1.5] text-[#FFFFFF]">
+                                    {{ member.desc }}
+                                </p>
                             </div>
-                            <p class="md:text-[20px] text-[16px] leading-[1.5] text-[#FFFFFF]">
-                                {{ member.desc }}
-                            </p>
+                        </div>
+                    </template>
+                </div>
+
+                <div v-if="swiperMembers.length > 0" 
+                    v-motion
+                    :initial="{ opacity: 0, y: 40 }"
+                    :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
+                    class="relative w-full mt-[24px] overflow-hidden"
+                >
+                    <Swiper
+                        :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
+                        :slides-per-view="4"
+                        :space-between="24"
+                        :loop="true"
+                        :speed="600"
+                        :autoplay="{ delay: 5000, disableOnInteraction: false }"
+                        :pagination="{ el: '.team-pagination-pc', clickable: true }"
+                        :navigation="{
+                            prevEl: '.team-prev-pc',
+                            nextEl: '.team-next-pc'
+                        }"
+                        :breakpoints="{
+                            '768': { slidesPerView: 3, spaceBetween: 20 },
+                            '1024': { slidesPerView: 3, spaceBetween: 24 },
+                            '1280': { slidesPerView: 4, spaceBetween: 24 }
+                        }"
+                        class="w-full !overflow-visible"
+                    >
+                        <SwiperSlide v-for="(member, index) in swiperMembers" :key="index" class="h-auto box-border shrink-0">
+                            <div class="team-card bg-[#131416] border border-transparent transition-colors duration-300 h-full flex flex-col justify-between">
+                                <div class="aspect-[1/1] overflow-hidden">
+                                    <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover" loading="lazy" />
+                                </div>
+                                <div class="px-[16px] py-[24px] md:py-[32px] flex-1 flex flex-col justify-start md:min-h-[280px] lg:min-h-[320px] xl:min-h-[350px] 2xl:min-h-[300px]">
+                                    <div>
+                                        <div class="member-name text-[28px] md:text-[34px] lg:text-[40px] leading-[1.2] font-[600] text-white mb-[4px] md:mb-[8px] transition-colors duration-300">
+                                            {{ member.name }}
+                                        </div>
+                                        <div class="md:text-[20px] text-[16px] leading-[1.2] font-[600] text-[#0043FF] mb-[16px] md:mb-[24px]">
+                                            {{ member.role }}
+                                        </div>
+                                    </div>
+                                    <p class="md:text-[20px] text-[16px] leading-[1.5] text-[#FFFFFF]">
+                                        {{ member.desc }}
+                                    </p>
+                                </div>
+                            </div>
+                        </SwiperSlide>
+                    </Swiper>
+
+                    <div class="flex items-end justify-between mt-[40px]">
+                        <div class="team-pagination-pc flex items-center gap-[12px]"></div>
+                        <div class="flex items-center space-x-3">
+                            <button class="team-prev-pc w-16 h-16 flex items-center justify-center rounded-xs group transition cursor-pointer" aria-label="Previous Slide">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="4" class="fill-[#131416] group-hover:fill-[#103C93]" /><path d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" fill="#7D86A1"/></svg>
+                            </button>
+                            <button class="team-next-pc w-16 h-16 flex items-center justify-center rounded-xs group transition cursor-pointer" aria-label="Next Slide">
+                                <svg width="64" height="64" viewBox="0 0 64 64" fill="none"><rect width="64" height="64" rx="4" class="fill-[#0043FF] group-hover:fill-[#103C93]" /><path d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" fill="white"/></svg>
+                            </button>
                         </div>
                     </div>
-                </template>
+                </div>
             </div>
 
             <div 
@@ -98,7 +161,8 @@
                     </button>
                 </div>
 
-                <Swiper :modules="[SwiperNavigation]" :slides-per-view="1.1" :space-between="12" :loop="false" :speed="600"
+                <Swiper :modules="[SwiperNavigation, SwiperAutoplay]" :slides-per-view="1.1" :space-between="12" :loop="true" :speed="600"
+                    :autoplay="{ delay: 5000, disableOnInteraction: false }"
                     :watch-slides-progress="true" :navigation="{
                         prevEl: '#team-swiper-prev',
                         nextEl: '#team-swiper-next'
@@ -140,9 +204,11 @@
 import { ref, computed, nextTick, onMounted } from 'vue'
 import { useI18n } from 'vue-i18n'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation } from 'swiper/modules'
+import { Navigation as SwiperNavigation, Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
 
 import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
 const { $pb } = useNuxtApp()
 const { locale } = useI18n()
@@ -175,6 +241,9 @@ const members = computed(() => {
     }))
 })
 
+const fixedMembers = computed(() => members.value.slice(0, 2))
+const swiperMembers = computed(() => members.value.slice(2))
+
 const swiperProgress = ref(0)
 function onSwiper(swiper) {
     updateProgress(swiper)
@@ -198,4 +267,17 @@ function updateProgress(swiper) {
 </script>
 
 <style scoped>
+:deep(.team-pagination-pc .swiper-pagination-bullet) {
+    width: 12px;
+    height: 12px;
+    background-color: #454C5F;
+    border-radius: 2px;
+    opacity: 1;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    margin: 0 !important;
+}
+:deep(.team-pagination-pc .swiper-pagination-bullet-active) {
+    background-color: #0043FF;
+}
 </style>

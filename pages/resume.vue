@@ -1,5 +1,5 @@
 <template>
-    <div class="text-[#131416] w-full px-[15px] md:px-[40px] xl:px-[120px] m-auto">
+    <div class="text-[#131416] w-full px-[15px] md:px-[40px] xl:px-[120px] m-auto max-w-site">
         <ResumeForm />
     </div>
 </template>

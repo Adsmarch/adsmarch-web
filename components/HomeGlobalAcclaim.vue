@@ -94,7 +94,7 @@
                 </div>
                 <p 
                   :class="[
-                    'font-semibold text-[#0043FF] leading-[1.3] text-left line-clamp-2 ',
+                    'font-semibold text-[#0043FF] leading-[1.3] text-left line-clamp-2 xl:min-h-[64px]',
                     isEn ? 'text-[14px] xl:text-[18px]' : 'text-[18px] xl:text-[24px]'
                   ]"
                 >
@@ -150,7 +150,7 @@
 
                     <p 
                       :class="[
-                        'font-semibold text-[#0043FF] leading-[1.25] text-left line-clamp-3',
+                        'font-semibold text-[#0043FF] leading-[1.25] text-left line-clamp-3 min-h-[80px]',
                         isEn ? 'text-[13px]' : 'text-[20px]'
                       ]"
                     >

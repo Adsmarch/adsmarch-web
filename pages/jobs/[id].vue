@@ -1,5 +1,5 @@
 <template>
-    <div class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] mt-[56px] md:mt-[120px] mb-[56px] md:mb-[120px] mx-auto text-[#131416] bg-white">
+    <div class="relative w-full px-[15px] md:px-[40px] xl:px-[120px] mt-[56px] md:mt-[120px] mb-[56px] md:mb-[120px] mx-auto text-[#131416] bg-white max-w-site">
         <button @click="$router.back()" class="inline-flex items-center gap-[10px] text-[16px] md:text-[20px] text-[#7D86A1] hover:text-[#0043FF] transition-colors mb-[32px] md:mb-[64px] cursor-pointer">
             <svg width="6" height="12" viewBox="0 0 6 12" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <path d="M0.00792897 6.0069L3.45614 12L6 12L2.54781 6L6 -2.62268e-07L3.45614 -1.51073e-07L0.00792897 5.9931L0 5.9931L0.00395105 6L0 6.0069L0.00792897 6.0069Z" fill="#7D86A1"/>

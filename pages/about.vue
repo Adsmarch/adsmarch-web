@@ -1,9 +1,11 @@
 <template>
-    <div class="bg-black text-white">
-        <AboutTopSwiper :data="aboutData" :loading="loading" />
-        <DevelopmentSwiper :data="aboutData" :loading="loading" />
-        <LeaderTeam />
-        <BottomVideo />
+    <div class="bg-black text-white w-full">
+        <div class="max-w-site mx-auto">
+            <AboutTopSwiper :data="aboutData" :loading="loading" />
+            <DevelopmentSwiper :data="aboutData" :loading="loading" />
+            <LeaderTeam />
+            <BottomVideo />
+        </div>
     </div>
 </template>
 
