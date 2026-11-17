@@ -166,7 +166,7 @@ const FORM_CONFIGS = {
     },
 
     kol: {
-        collection: 'marketing_contact',
+        collection: 'kol_contact',
         fields: [...commonBaseFields, { key: 'website', label: '产品名称/链接', placeholder: '请输入产品名称或链接' }],
         checkboxGroups: [
             { key: 'placement_platform', title: '合作平台', options: ['TikTok', 'YouTube', 'Instagram', 'Facebook', 'X', '其他'] },
