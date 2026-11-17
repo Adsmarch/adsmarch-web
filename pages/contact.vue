@@ -1,6 +1,8 @@
 <template>
-    <div class="bg-black text-white w-full px-[15px] md:px-[40px] xl:px-[120px] m-auto">
+    <div class="bg-black w-full">
+      <div class="max-w-site m-auto px-[15px] md:px-[40px] xl:px-[120px] text-white">
         <ContactUs />
+      </div>
     </div>
 </template>
 

@@ -24,6 +24,7 @@
       :sectionTitle="pageData.cases_section_name"
       :loading="casesLoading" 
     />
+    <AppContactUs slug="training" />
   </div>
 </template>
 
@@ -37,6 +38,7 @@ import AppBanner from '@/components/services/AppBanner.vue'
 import AppServiceSwiper from '@/components/services/AppServiceSwiper.vue'
 import TrainingSystem from '@/components/services/TrainingSystem.vue'
 import CaseStudySection from '@/components/services/CaseStudySection.vue'
+import AppContactUs from '@/components/services/AppContactUs.vue'
 
 const route = useRoute()
 const pb = new PocketBase('https://api.adsmarch.bot.cd')

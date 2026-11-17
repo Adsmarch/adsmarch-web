@@ -26,6 +26,11 @@
       :sectionTitle="pageData.partners_section_name"
       :loading="partnersLoading" 
     />
+
+    <AppContactUs 
+      v-if="slug && !['marketing', 'seo'].includes(slug.toLowerCase())" 
+      :slug="slug" 
+    />
   </div>
 </template>
 
@@ -39,6 +44,7 @@ import AppBanner from '@/components/services/AppBanner.vue'
 import AppServiceSwiper from '@/components/services/AppServiceSwiper.vue'
 import CaseStudySection from '@/components/services/CaseStudySection.vue'
 import PartnerSection from '@/components/services/PartnerSection.vue'
+import AppContactUs from '@/components/services/AppContactUs.vue'
 
 const route = useRoute()
 const pb = new PocketBase('https://api.adsmarch.bot.cd')
@@ -55,6 +61,7 @@ const caseList = ref([])
 const partnerLogos = ref([])
 
 const currentSlug = computed(() => route.params.slug || 'app')
+const slug = computed(() => route.params.slug)
 
 useSeoMeta({
   title: () => {
