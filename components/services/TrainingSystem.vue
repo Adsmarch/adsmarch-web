@@ -1,5 +1,5 @@
 <template>
-  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] py-[56px] md:py-[120px] overflow-hidden max-w-site mx-auto">
+  <section class="relative w-full bg-black text-white px-[15px] md:px-[40px] xl:px-[120px] pt-[56px] md:pt-[120px] overflow-hidden max-w-site mx-auto">
     
     <div v-if="loading" class="mx-auto w-[300px] md:w-[450px] h-[48px] md:h-[80px] bg-[#2A2F3D] rounded animate-pulse mb-8 md:mb-[64px]"></div>
     <div v-else 

@@ -1,5 +1,5 @@
 <template>
-    <div class="flex flex-col md:flex-row md:gap-[80px] py-[56px] md:py-[120px] max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px]">
+    <div class="flex flex-col md:flex-row md:gap-[80px] pb-[56px] md:pb-[120px] max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px]">
         <div class="md:w-[40%] flex flex-col md:justify-between justify-center md:mb-[0px]">
             <div 
                 v-motion

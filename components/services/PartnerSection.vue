@@ -38,7 +38,7 @@
         :visible-once="{ opacity: 1, y: 0, transition: { duration: 600, ease: 'easeOut' } }"
         class="w-full md:w-[62%] md:order-1"
       >
-        <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8 border-y border-[#454C5F]">
+        <div class="grid grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-y-1 md:gap-y-4 gap-x-1 md:gap-x-4 items-center justify-items-center py-4 md:py-8">
           <div 
             v-for="(logoUrl, index) in logos" 
             :key="index"
