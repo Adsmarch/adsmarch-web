@@ -90,7 +90,6 @@
     <div v-if="visibleList.length > 0" class="bg-[#000] text-[#fff] py-[56px] w-full">
         <div class="max-w-site mx-auto px-[15px] md:px-[40px] xl:px-[120px]">
             <div class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]">
-                <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
                 <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">{{ $t('insightId.title') }}</p>
             </div>
             <div class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 md:gap-y-[32px] gap-y-[12px] md:items-start">
@@ -106,7 +105,6 @@
 <script setup>
 import { ref, computed, onMounted, nextTick, watch } from 'vue'
 import InsightItem from '~/components/insight-research/insight-item.vue'
-import icon from '~/assets/Union.png'
 
 const { $pb } = useNuxtApp()
 const route = useRoute()

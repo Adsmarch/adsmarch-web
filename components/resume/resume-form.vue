@@ -8,13 +8,6 @@
                     :visible-once="{ opacity: 1, y: 0, transition: { duration: 200, ease: 'easeOut' } }" 
                     class="opacity-0"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none"
-                        class="w-[16px] h-[16px] md:w-[24px] md:h-[24px] shrink-0">
-                        <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                        <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                        <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
-                    </svg>
-
                     <h1 class="text-[40px] sm:text-[48px] md:text-[52px] xl:text-[96px] font-semibold leading-[1.2] mt-[8px] md:mt-[12px]">
                         {{ $t('resume.title') }}
                     </h1>

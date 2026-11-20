@@ -19,8 +19,6 @@
               :to="item.path" 
               class="group/nav flex items-center space-x-1.5 cursor-pointer transition"
             >
-              <span class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200"
-                :class="isItemActive(item) ? 'bg-[#0043FF]' : 'bg-[#454C5F] group-hover/nav:bg-[#0043FF]'"></span>
               <span class="text-[16px] 2xl:text-[20px] whitespace-nowrap font-[400] transition-colors duration-200"
                 :class="isItemActive(item) ? 'text-[#0043FF]' : 'text-white group-hover/nav:text-[#0043FF]'">
                 {{ item.title }}
@@ -31,8 +29,6 @@
               v-else 
               class="group/nav flex items-center space-x-1.5 cursor-pointer transition"
             >
-              <span class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200"
-                :class="isItemActive(item) ? 'bg-[#0043FF]' : 'bg-[#454C5F] group-hover/nav:bg-[#0043FF]'"></span>
               <span class="text-[16px] 2xl:text-[20px] whitespace-nowrap font-[400] transition-colors duration-200"
                 :class="isItemActive(item) ? 'text-[#0043FF]' : 'text-white group-hover/nav:text-[#0043FF]'">
                 {{ item.title }}
@@ -49,7 +45,6 @@
                 :to="sub.path"
                 class="flex items-center px-6 py-2.5 text-sm xl:text-base 2xl:text-[18px] text-white hover:text-[#0043FF] transition group/sub gap-2.5"
               >
-                <span class="w-[5px] h-[12px] bg-[#454C5F] -skew-x-[15deg] group-hover/sub:bg-[#0043FF] transition-colors duration-200"></span>
                 <span>{{ sub.title }}</span>
               </NuxtLinkLocale>
             </div>
@@ -80,14 +75,12 @@
               @click="setLocale('zh')" 
               class="w-full flex items-center px-6 py-2.5 text-sm xl:text-base text-white hover:text-[#0043FF] transition group/lang gap-2.5"
             >
-              <span class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200" :class="locale === 'zh' ? 'bg-[#0043FF]' : 'bg-[#454C5F] group-hover/lang:bg-[#0043FF]'"></span>
               <span>中文</span>
             </button>
             <button 
               @click="setLocale('en')" 
               class="w-full flex items-center px-6 py-2.5 text-sm xl:text-base text-white hover:text-[#0043FF] transition group/lang gap-2.5"
             >
-              <span class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200" :class="locale === 'en' ? 'bg-[#0043FF]' : 'bg-[#454C5F] group-hover/lang:bg-[#0043FF]'"></span>
               <span>English</span>
             </button>
           </div>
@@ -144,8 +137,6 @@
               class="flex items-center justify-between text-base font-medium group cursor-pointer"
             >
               <div class="flex items-center gap-[6px] text-[20px]">
-                <span class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200"
-                  :class="isItemActive(item) ? 'bg-[#0043FF]' : 'bg-[#454C5F] group-hover:bg-[#0043FF]'"></span>
                 <span class="transition-colors duration-200"
                   :class="isItemActive(item) ? 'text-[#0043FF]' : 'text-white group-hover:text-[#0043FF]'">{{ item.title }}</span>
               </div>
@@ -156,10 +147,6 @@
               class="flex items-center justify-between text-base font-medium cursor-pointer"
             >
               <div class="flex items-center gap-[6px] text-[20px]">
-                <span 
-                  class="w-[5px] h-[12px] -skew-x-[15deg] transition-colors duration-200"
-                  :class="openSubMenuIndices.includes(index) ? 'bg-[#0043FF]' : 'bg-[#454C5F]'"
-                ></span>
                 <span 
                   class="transition-colors duration-200"
                   :class="openSubMenuIndices.includes(index) ? 'text-[#0043FF]' : 'text-white'"
@@ -190,7 +177,6 @@
                 @click="isMobileMenuOpen = false"
                 class="flex items-center gap-2 text-base text-white hover:text-[#0043FF] transition-colors"
               >
-                <span class="w-[5px] h-[8px] bg-[#454C5F] -skew-x-[15deg] transition-colors duration-200"></span>
                 <span>{{ sub.title }}</span>
               </NuxtLinkLocale>
             </div>

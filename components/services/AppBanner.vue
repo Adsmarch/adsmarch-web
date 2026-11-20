@@ -20,11 +20,6 @@
       class="flex flex-col md:flex-row md:items-start justify-between gap-8 lg:gap-16 xl:gap-[120px] px-[15px] md:px-[40px] xl:px-[120px] opacity-0 max-w-site mx-auto"
     >
       <div class="flex items-start gap-3 xl:gap-6 shrink-0">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="w-6 h-6 md:w-8 md:h-8 shrink-0 mt-2">
-          <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-          <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-          <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-        </svg>
         <h1 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] whitespace-nowrap">
           {{ displayTitle }}
         </h1>

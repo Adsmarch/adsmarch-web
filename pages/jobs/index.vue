@@ -8,11 +8,6 @@
             class="flex flex-col lg:flex-row lg:items-end justify-between gap-[32px] lg:gap-[48px] pb-[32px] md:pb-[56px] mb-[32px] md:mb-[56px] border-b border-[#D9DDE8]"
         >
             <div class="flex items-flex-start gap-[16px] md:gap-[24px]">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 w-[16px] h-[16px] md:w-[40px] md:h-[40px] lg:w-[48px] lg:h-[48px]">
-                    <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                    <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                    <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                </svg>
                 <h1 class="text-[40px] sm:text-[52px] md:text-[64px] lg:text-[72px] xl:text-[80px] 2xl:text-[96px] font-semibold leading-[1.2] tracking-tight">
                     {{ $t('jobs.title') }}
                 </h1>

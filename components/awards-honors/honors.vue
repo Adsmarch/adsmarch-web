@@ -6,13 +6,6 @@
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
             class="flex items-start md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]"
         >
-            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
-                <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-            </svg>
-
-
             <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
                 {{ $t('awards.honors.title') }}
             </h2>
@@ -68,11 +61,7 @@
                         @mouseenter="hoverIndex = index"
                         class="year-card group md:h-[250px] border-t border-[#454C5F] px-[20px] py-[24px] flex flex-col justify-between transition-colors duration-300 hover:items-start hover:justify-center hover:bg-[#0043FF] hover:border-[#0043FF]">
                         <div class="flex items-start justify-between group-hover:hidden">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"  class="w-[16px] h-[16px] shrink-0 text-white transition-colors duration-300">>
-                                <path d="M7.87817 11.486L0.0812183 16V12.6773L7.87817 8.16327V11.486Z" fill="currentColor"/>
-                                <path d="M7.79695 3.4611L0 8.16327V4.70217L7.79695 0V3.4611Z" fill="currentColor"/>
-                                <path d="M16 3.4611L7.87817 8.16327V4.70217L16 0V3.4611Z" fill="currentColor"/>
-                            </svg>
+                            <span></span>
 
                             <span class="md:text-[16px] leading-none text-[#454C5F] group-hover:text-white/70 transition-colors duration-300">
                                 {{ String(index + 1).padStart(2, '0') }}
@@ -129,11 +118,7 @@
                         <div class="border-t py-[20px] px-[16px] h-[200px] flex flex-col gap-[10px] transition-colors duration-300"
                             :class="index === activeIndex ? 'bg-[#0043FF] border-[#0043FF] items-start justify-center' : 'border-[#454C5F] justify-between'">
                             <div :class="index === activeIndex ? 'hidden' : 'flex items-start justify-between'">
-                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" class="w-[16px] h-[16px] shrink-0">
-                                    <path d="M7.87817 11.486L0.0812183 16V12.6773L7.87817 8.16327V11.486Z" fill="white"/>
-                                    <path d="M7.79695 3.4611L0 8.16327V4.70217L7.79695 0V3.4611Z" fill="white"/>
-                                    <path d="M16 3.4611L7.87817 8.16327V4.70217L16 0V3.4611Z" fill="currentColor"/>
-                                </svg>
+                                <span></span>
 
                                 <span class="text-[12px] leading-none text-[#7D86A1]">
                                     {{ String(index + 1).padStart(2, '0') }}

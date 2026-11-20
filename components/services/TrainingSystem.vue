@@ -9,11 +9,6 @@
       class="flex flex-col items-center justify-center text-center gap-3 xl:gap-4 shrink-0 mb-8 md:mb-[64px]"
     >
       <div class="flex items-center justify-center gap-3 xl:gap-6 shrink-0">
-        <svg width="24" height="24" viewBox="0 0 32 32" fill="none" class="w-6 h-6 shrink-0 text-[#0043FF]">
-          <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="currentColor"/>
-          <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="currentColor"/>
-          <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="currentColor"/>
-        </svg>
         <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] whitespace-nowrap">
           {{ $t('training.title', '培训课程体系介绍') }}
         </h2>
@@ -42,13 +37,7 @@
         >
           <SwiperSlide v-for="item in items" :key="item.id" class="h-auto box-border shrink-0">
             <div class="training-card flex flex-col min-h-[380px] p-6 bg-black border-l border-[#454C5F] transition-colors duration-300">
-              <div class="mb-6">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#0043FF] w-4 h-4">
-                  <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                  <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                  <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-                </svg>
-              </div>
+              <div class="mb-6"></div>
 
               <div>
                 <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-3 leading-tight transition-colors duration-300 text-white">
@@ -75,13 +64,7 @@
             class="training-card flex flex-col h-full min-h-[420px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
             :class="{ 'col-span-2': items.length === 3 && index === 2 }"
           >
-            <div class="mb-8">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#0043FF] w-5 h-5">
-                <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-              </svg>
-            </div>
+            <div class="mb-8"></div>
             <div>
               <h3 class="md:text-[28px] lg:text-[32px] xl:text-[40px] font-bold mb-3 leading-tight transition-colors duration-300 text-white">
                 {{ displayTitle(item) }}

@@ -7,11 +7,6 @@
     :initial="{ opacity: 0, y: 50 }"
     :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }"
     class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] opacity-0">
-      <svg width="24" height="24" viewBox="0 0 32 32" fill="none" class="w-6 h-6 shrink-0">
-        <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-        <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-        <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-      </svg>
       <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] whitespace-nowrap">
         {{ $t('appService.title', '我们的服务') }}
       </h2>
@@ -41,11 +36,7 @@
             </div>
 
             <div class="card-icon relative z-10 flex items-center justify-between">
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] group-hover:text-white transition-colors duration-300 w-2 h-2">
-                <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-              </svg>
+              <span></span>
               <span class="card-index text-[14px] text-[#7D86A1] font-semibold tracking-wider group-hover:text-white transition-colors duration-300">
                 {{ String(index + 1).padStart(2, '0') }}
               </span>
@@ -77,11 +68,7 @@
 
           <div class="w-1/2 p-10 lg:p-16 xl:p-20 flex flex-col justify-between">
             <div class="flex items-center justify-between">
-              <svg width="24" height="24" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] group-hover:text-white transition-colors duration-300 w-5 h-5">
-                <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-              </svg>
+              <span></span>
               <span class="text-[20px] text-[#7D86A1] group-hover:text-white transition-colors duration-300 font-semibold tracking-wider">01</span>
             </div>
 
@@ -121,11 +108,7 @@
                 </div>
 
                 <div class="card-icon relative z-10 flex items-center justify-between">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] group-hover:text-white transition-colors duration-300 w-2 h-2">
-                    <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                    <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                    <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-                  </svg>
+                  <span></span>
                   <span class="card-index text-[14px] text-[#7D86A1] font-semibold tracking-wider group-hover:text-white transition-colors duration-300">
                     {{ String(index + 1).padStart(2, '0') }}
                   </span>
@@ -172,11 +155,7 @@
                 </div>
 
                 <div class="card-icon relative z-10 flex items-center justify-between">
-                  <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] group-hover:text-white transition-colors duration-300 xl:w-5 xl:h-5">
-                    <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                    <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                    <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-                  </svg>
+                 <span></span>
                   <span class="card-index md:text-[20px] text-[#7D86A1] font-semibold tracking-wider group-hover:text-white transition-colors duration-300">
                     {{ String(index + 1).padStart(2, '0') }}
                   </span>
@@ -226,11 +205,7 @@
                   </div>
 
                   <div class="card-icon relative z-10 flex items-center justify-between">
-                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] group-hover:text-white transition-colors duration-300 xl:w-5 xl:h-5">
-                      <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                      <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                      <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-                    </svg>
+                    <span></span>
                     <span class="card-index md:text-[20px] text-[#7D86A1] font-semibold tracking-wider group-hover:text-white transition-colors duration-300">
                       {{ String(index + 1).padStart(2, '0') }}
                     </span>

@@ -6,11 +6,6 @@
     :initial="{ opacity: 0, y: 50 }"
     :visible-once="{ opacity: 1, y: 0, transition: { duration: 300, ease: 'easeOut' } }"
      class="flex items-start gap-3 xl:gap-6 shrink-0 mb-8 md:mb-[64px] justify-center opacity-0">
-      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#0043FF]">
-        <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-        <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-        <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-      </svg>
       <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
         {{ $t('classicCases.title') }}
       </h2>
@@ -68,11 +63,6 @@
             >
               
               <div class="mb-2 md:mb-0 w-full md:w-auto">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none" class="text-[#7D86A1] mb-8 w-2 h-2 md:w-5 md:h-5">
-                  <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor"/>
-                  <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor"/>
-                  <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor"/>
-                </svg>
                 <h3 
                   class="text-[24px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[52px] font-semibold leading-[1.2] text-white"
                   :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"

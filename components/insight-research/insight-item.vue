@@ -33,11 +33,7 @@
 
         <div class="flex flex-col justify-between md:hidden w-full">
             <div class="flex items-center justify-between mb-[16px]">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none" class="w-[8px] h-[8px] text-white">
-                    <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor" />
-                    <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor" />
-                    <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor" />
-                </svg>
+                <span></span>
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="w-[24px] h-[24px]">
                     <path d="M29 28.3812H27.2496V5.98803L4.23761 29L3 27.7624L26.012 4.75043H3.6188V3H28.1248L29 3.87521V28.3812Z" fill="#0043FF" />
                 </svg>
@@ -62,12 +58,7 @@
 
         <div class="hidden md:flex flex-col justify-between h-full">
             <div class="flex items-center justify-between md:mb-[96px] md:group-hover:mb-[30px] transition-[margin] duration-300">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="none"
-                    class="text-[#fff] md:text-[#7D86A1] group-hover:text-[#fff] w-[8px] h-[8px] md:w-[20px] md:h-[20px]">
-                    <path d="M9.84772 14.3575L0.101523 20V15.8466L9.84772 10.2041V14.3575Z" fill="currentColor" />
-                    <path d="M9.74619 4.32637L0 10.2041V5.87771L9.74619 0V4.32637Z" fill="currentColor" />
-                    <path d="M20 4.32637L9.84772 10.2041V5.87771L20 0V4.32637Z" fill="currentColor" />
-                </svg>
+                <span></span>
                 <span class="text-[#fff] md:text-[#7D86A1] md:text-[20px] text-[12px] group-hover:text-[#fff] leading-none font-[600]">
                     {{ formattedDate }}
                 </span>

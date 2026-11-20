@@ -67,11 +67,7 @@
               :style="{ transitionDelay: isScrolled ? `${index * 150 + 200}ms` : '0ms' }"
             >
               <div class="flex justify-between items-center text-[20px] font-semibold text-[#454C5F]">
-                <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                  <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                  <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                </svg>
+                <span></span>
                 <span>0{{ index + 1 }}</span>
               </div>
 
@@ -122,11 +118,7 @@
               <SwiperSlide v-for="(item, index) in listData" :key="index">
                 <div class="border-l border-l-[#454C5F] flex flex-col justify-between h-[440px] px-[20px] py-[24px] bg-[#131416]/30">
                   <div class="flex justify-between items-center text-base font-semibold text-[#454C5F]">
-                    <svg width="8" height="8" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                      <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                      <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                    </svg>
+                    <span></span>
                     <span>0{{ index + 1 }}</span>
                   </div>
 

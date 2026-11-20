@@ -7,12 +7,6 @@
             class="flex items-center justify-between mb-[32px] md:mb-[48px] xl:mb-[64px]"
         >
             <div class="flex items-start md:gap-[24px] gap-[12px]">
-                <svg width="32" height="32" viewBox="0 0 32 32" fill="none" class="w-[24px] h-[24px] md:w-[32px] md:h-[32px] shrink-0">
-                    <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                    <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                    <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                </svg>
-
                 <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
                     {{ $t('awards.industry.title') }}
                 </h2>
@@ -78,11 +72,6 @@
                     <div class="h-full rounded-[4px] overflow-hidden bg-[#1A1B1E] flex flex-col">
                         <img :src="item.image" :alt="item.desc" class="w-full aspect-[16/9] object-cover" loading="lazy" />
                         <div class="px-[16px] py-[20px] md:px-[24px] md:py-[30px] xl:px-[32px] xl:py-[40px] flex flex-col">
-                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M7.87817 11.486L0.0812183 16V12.6773L7.87817 8.16327V11.486Z" fill="white"/>
-                                <path d="M7.79695 3.4611L0 8.16327V4.70217L7.79695 0V3.4611Z" fill="white"/>
-                                <path d="M16 3.4611L7.87817 8.16327V4.70217L16 0V3.4611Z" fill="white"/>
-                            </svg>
                             <span class="text-[#0043FF] text-[24px] md:text-[32px] xl:text-[40px] font-[600] leading-[1.2] mt-[24px] md:mb-[12px] mb-[8px]">
                                 {{ item.year }}
                             </span>

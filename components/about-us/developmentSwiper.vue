@@ -40,8 +40,6 @@
             {{ displayTitle2 }}
           </h2>
         </div>
-        <img class="w-[12px] md:w-[24px]" src="/assets/Union.png" :alt="$t('about.development.decoAlt')" />
-
         <div class="min-[1120px]:mt-[24px] mt-[16px] font-[400] text-[16px] md:text-[18px] lg:text-[20px] leading-[1.5]">
           <p style="white-space: pre-line;" v-html="displayDesc2">
           </p>
@@ -60,11 +58,6 @@
             class="flex items-center justify-between mb-[32px] md:mb-[64px] md:mt-[120px] mt-[56px]"
         >
         <div class="flex items-start gap-3 xl:gap-6">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
-            <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF" />
-            <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF" />
-            <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF" />
-          </svg>
           <h3 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
             {{ $t('about.development.devTitle', '发展历程') }}
           </h3>
@@ -146,12 +139,7 @@
                       }"
                       class="swiper-progress timeline-card border-l-[#454C5F] border-l-[1px] py-[24px] pl-[8px] pr-[20px] md:py-[40px] md:pl-[12px] md:pr-[32px] md:p-6 h-[320px] md:h-[460px] justify-between flex flex-col transition-all"
                   >
-                      <svg xmlns="http://www.w3.org/2000/svg" width="8" height="8" viewBox="0 0 8 8" fill="none"
-                          class="card-icon">
-                          <path d="M3.93909 5.74298L0.0406091 8V6.33865L3.93909 4.08163V5.74298Z" />
-                          <path d="M3.89848 1.73055L0 4.08163V2.35108L3.89848 0V1.73055Z" />
-                          <path d="M8 1.73055L3.93909 4.08163V2.35108L8 0V1.73055Z" />
-                      </svg>
+                      <span></span>
                       <div>
                           <div
                               class="card-year text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] leading-[1.2] font-[400] md:mb-[40px] mb-[32px] transition-colors duration-300">

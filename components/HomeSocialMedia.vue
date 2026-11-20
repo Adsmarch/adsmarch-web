@@ -11,12 +11,6 @@
       </h2>
 
       <div class="flex items-start gap-3 xl:gap-6 justify-end">
-        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 w-[12px] h-[12px] xl:w-[32px] xl:h-[32px]">
-          <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-          <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-          <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-        </svg>
-        
         <div class="w-[70%] xl:w-[auto]">
           <i18n-t 
             keypath="homeSocialMedia.subtitle" 

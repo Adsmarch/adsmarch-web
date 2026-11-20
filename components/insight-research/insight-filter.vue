@@ -6,7 +6,6 @@
             :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
             class="flex md:gap-[24px] gap-[12px] mb-[32px] md:mb-[64px]"
         >
-            <img :src="icon" alt="" class="w-[16px] h-[16px] md:w-[32px] md:h-[32px]">
             <p class="text-[40px] sm:text-[52px] md:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">
                 {{ $t('insightFilter.title') }}
             </p>
@@ -158,7 +157,6 @@
 import { ref, computed, watch, onMounted } from 'vue'
 const { t, locale, setLocale } = useI18n()
 import InsightItem from './insight-item.vue'
-import icon from '~/assets/Union.png'
 
 const { $pb } = useNuxtApp()
 const localePath = useLocalePath()

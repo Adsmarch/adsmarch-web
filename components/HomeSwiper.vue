@@ -7,11 +7,6 @@
     :initial="{ opacity: 0, y: 50 }"
     :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }" 
     class="flex items-start justify-end gap-6 my-8 md:my-[96px] xl:my-[120px] max-w-site mx-auto">
-      <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg" class="shrink-0 mt-2">
-        <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-        <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-        <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-      </svg>
       <h2 class="text-[40px] sm:text-[64px] xl:text-[96px] font-semibold leading-[1.2] tracking-tight text-left w-[240px] sm:w-[480px] md:w-[680px] xl:w-[1064px]">
         {{ $t('homeValue.title') }}
       </h2>
@@ -100,40 +95,8 @@
                   <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
                 </div>
 
-                <div class="relative z-10 h-full px-4 py-5 xl:px-6 xl:py-8 flex flex-col justify-end">
-                  
-                  <div 
-                    :class="[
-                      'absolute top-6 left-6 z-20 transition-all duration-500 ease-in-out pointer-events-none',
-                      isActive 
-                        ? 'opacity-100 scale-100 md:opacity-0 md:scale-90 md:group-hover:opacity-100 md:group-hover:scale-100' 
-                        : 'opacity-0 scale-90 group-hover:opacity-100 group-hover:scale-100'
-                    ]"
-                  >
-                    <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                      <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                      <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                    </svg>
-                  </div>
-
+                <div class="relative z-10 h-full px-4 py-5 xl:px-6 xl:py-8 flex flex-col justify-end">                 
                   <div class="relative flex flex-col justify-end">
-                    
-                    <div 
-                      :class="[
-                        'mb-3 transition-all duration-300 ease-in-out',
-                        isActive 
-                          ? 'opacity-0 -translate-y-2 md:opacity-100 md:translate-y-0 md:group-hover:opacity-0 md:group-hover:-translate-y-2' 
-                          : 'opacity-100 translate-y-0 group-hover:opacity-0 group-hover:-translate-y-2'
-                      ]"
-                    >
-                      <svg width="20" height="20" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M15.7563 22.9719L0.162437 32V25.3546L15.7563 16.3265V22.9719Z" fill="#0043FF"/>
-                        <path d="M15.5939 6.92219L0 16.3265V9.40434L15.5939 0V6.92219Z" fill="#0043FF"/>
-                        <path d="M32 6.92219L15.7563 16.3265V9.40434L32 0V6.92219Z" fill="#0043FF"/>
-                      </svg>
-                    </div>
-
                     <h3 class="text-[28px] xl:text-[40px] font-semibold text-white mb-2 leading-[1.2]">
                       {{ item.title }}
                     </h3>

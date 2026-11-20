@@ -14,11 +14,6 @@
                         class="col-span-2 md:col-span-1 xl:col-span-2 pr-10 md:pr-4 flex flex-col justify-center"
                     >
                         <div class="flex items-start gap-3 mb-[20px] md:mb-[24px]">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none">
-                                <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                                <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                                <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
-                            </svg>
                             <h2 class="text-[40px] sm:text-[48px] lg:text-[64px] xl:text-[96px] font-semibold leading-[1.2]">
                                 {{ $t('about.leaderTeam.title') }}
                             </h2>
@@ -131,11 +126,6 @@
                 class="md:hidden py-[28px]"
             >
                 <div class="flex items-start gap-3 mb-[20px]">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M11.9391 17.2289L0.121826 24V19.0159L11.9391 12.2449V17.2289Z" fill="#0043FF" />
-                        <path d="M11.6954 5.19165L0 12.2449V7.05325L11.6954 0V5.19165Z" fill="#0043FF" />
-                        <path d="M24 5.19165L11.8173 12.2449V7.05325L24 0V5.19165Z" fill="#0043FF" />
-                    </svg>
                     <h2 class="text-[40px] font-[600] leading-none">
                         {{ $t('about.leaderTeam.title') }}
                     </h2>
