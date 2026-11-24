@@ -227,7 +227,7 @@ const members = computed(() => {
         name: isEn && r.name_en ? r.name_en : r.name,
         role: isEn && r.position_en ? r.position_en : r.position,
         desc: isEn && (r.desc_en || r.short_desc_en) ? (r.desc_en || r.short_desc_en) : (r.desc || r.short_desc),
-        photo: r.avatar ? $pb.files.getUrl(r, r.avatar) : ''
+        photo: r.avatar ? $pb.files.getURL(r, r.avatar) : ''
     }))
 })
 

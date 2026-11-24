@@ -158,8 +158,8 @@ onMounted(async () => {
         cities.value = records.map(r => ({
             name: r.city,
             address: r.address,
-            cover: r.image ? $pb.files.getUrl(r, r.image) : '',
-            videoUrl: (r.has_video && r.video) ? $pb.files.getUrl(r, r.video) : ''
+            cover: r.image ? $pb.files.getURL(r, r.image) : '',
+            videoUrl: (r.has_video && r.video) ? $pb.files.getURL(r, r.video) : ''
         }))
     } catch (e) {
         console.error('Failed to fetch office locations:', e)

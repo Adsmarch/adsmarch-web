@@ -118,29 +118,30 @@ const fetchPageData = async () => {
     }
 
       if (record.expand?.icon && record.expand.icon.media_file) {
-        bannerIconUrl.value = pb.files.getUrl(record.expand.icon, record.expand.icon.media_file)
+        bannerIconUrl.value = pb.files.getURL(record.expand.icon, record.expand.icon.media_file)
       } else if (record.icon && typeof record.icon === 'string') {
-        bannerIconUrl.value = pb.files.getUrl(record, record.icon)
+        bannerIconUrl.value = pb.files.getURL(record, record.icon)
       }
 
       if (record.expand?.items) {
         serviceItems.value = record.expand.items.map(item => ({
           ...item,
-          image: (item.image && typeof item.image === 'string') ? pb.files.getUrl(item, item.image) : ''
+          image: (item.image && typeof item.image === 'string') ? pb.files.getURL(item, item.image) : ''
         }))
       }
 
       if (record.expand?.cases) {
         caseList.value = record.expand.cases.map(c => ({
           ...c,
-          coverImage: (c.cover_image && typeof c.cover_image === 'string') ? pb.files.getUrl(c, c.cover_image) : '',
-          videoUrl: (c.has_video && c.video && typeof c.video === 'string') ? pb.files.getUrl(c, c.video) : ''
+          coverImage: (c.cover_image && typeof c.cover_image === 'string') ? pb.files.getURL(c, c.cover_image) : '',
+          videoUrl: (c.has_video && c.video && typeof c.video === 'string') ? pb.files.getURL(c, c.video) : '',
+          titleLogo: (c.title_logo && typeof c.title_logo === 'string') ? pb.files.getURL(c, c.title_logo) : ''
         }))
       }
 
       if (record.expand?.partners) {
         partnerLogos.value = record.expand.partners.map(p => 
-          (p.logo && typeof p.logo === 'string') ? pb.files.getUrl(p, p.logo) : ''
+          (p.logo && typeof p.logo === 'string') ? pb.files.getURL(p, p.logo) : ''
         )
       }
     }

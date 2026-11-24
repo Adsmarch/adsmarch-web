@@ -83,7 +83,7 @@ const displayDescription = computed(() => isEn.value ? (props.data.description_e
 const images = computed(() => {
   if (!props.data?.file_url) return []
   const fileUrls = Array.isArray(props.data.file_url) ? props.data.file_url : [props.data.file_url]
-  return fileUrls.map(f => $pb.files.getUrl(props.data, f))
+  return fileUrls.map(f => $pb.files.getURL(props.data, f))
 })
 
 const loopImages = computed(() => images.value.length ? [...images.value, ...images.value] : [])

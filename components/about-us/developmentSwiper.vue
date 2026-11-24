@@ -210,7 +210,7 @@ onMounted(async () => {
 const isEn = computed(() => locale.value?.startsWith('en'))
 const displayBannerUrl = computed(() => {
   if (!props.data?.banner || !props.data?.id) return ''
-  return $pb.files.getUrl(props.data, props.data.banner)
+  return $pb.files.getURL(props.data, props.data.banner)
 })
 const displayTitle2 = computed(() => isEn.value ? (props.data.title2_en || props.data.title2) : props.data.title2)
 const displayDesc2 = computed(() => isEn.value ? (props.data.description2_en || props.data.description2) : props.data.description2)

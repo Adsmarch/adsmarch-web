@@ -63,7 +63,9 @@
             >
               
               <div class="mb-2 md:mb-0 w-full md:w-auto">
-                <h3 
+                <img v-if="item.titleLogo" :src="item.titleLogo" :alt="displayTitle(item)"
+                  class="h-[86px] w-auto object-contain m-auto" />
+                <h3 v-else
                   class="text-[24px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[52px] font-semibold leading-[1.2] text-white"
                   :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"
                 >
@@ -73,7 +75,7 @@
 
               <div 
                 v-if="displaySubtitle(item) || displayDescription(item)" 
-                class="w-[100%] md:w-[70%] flex flex-col justify-end moving-content"
+                class="w-[100%] md:w-[70%] flex flex-col justify-start moving-content min-h-[78px]"
               >
                 <h4 
                   v-if="displaySubtitle(item)" 

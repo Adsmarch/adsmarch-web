@@ -209,7 +209,7 @@ const slides = computed(() => {
         number: String(index + 1).padStart(2, '0'),
         title: isEn ? (item.title_en || item.title) : item.title,
         subtitle: isEn ? (item.description_en || item.description) : item.description,
-        image: item.image ? $pb.files.getUrl(item, item.image) : ''
+        image: item.image ? $pb.files.getURL(item, item.image) : ''
     }))
 })
 
