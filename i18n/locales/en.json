@@ -71,6 +71,7 @@
   },
   "homeGlobalAcclaim": {
     "title": "Global Acclaim",
+    "viewMore": "Learn More",
     "list": [
       {
         "year": "2023",
@@ -526,5 +527,9 @@
       "contact_title": "Contact Us {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
       "about_title": "About Us {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth",
       "awards_title": "Awards and Recognition {'|'} AdsMarch {'|'} AI-Powered. Expert-Led. One-Stop Global Growth"
+    },
+    "training": {
+      "title": "Introduction to the Training System",
+      "course_title": "Introduction to the Training Course"
     }
 }

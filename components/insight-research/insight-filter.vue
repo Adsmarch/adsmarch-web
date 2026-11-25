@@ -1,5 +1,5 @@
 <template>
-    <div class="py-[56px] md:py-[120px]">
+    <div ref="containerRef" class="py-[56px] md:py-[120px]">
         <div 
             v-motion
             :initial="{ opacity: 0, y: 30 }"
@@ -71,45 +71,10 @@
             </div>
         </div>
 
-        <div v-if="visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start md:gap-x-[24px]"
-            :class="{'mt-[120px]': sortOpen}"
-            >
-            <NuxtLink 
-                v-for="(item, index) in visibleList" 
-                :key="item.id" 
-                :to="localePath(`/articles/${item.slug || item.id}`)"
-                v-motion
-                :initial="{ opacity: 0, y: 40 }"
-                :visible-once="{ 
-                    opacity: 1, 
-                    y: 0, 
-                    transition: { 
-                        duration: 600, 
-                        delay: (index % 3) * 120,
-                        ease: 'easeOut' 
-                    } 
-                }"
-                class="flex flex-col justify-between h-full insight-card group  bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative md:border-b md:border-[#454C5F] md:pb-[32px]"
-            >
-                <InsightItem :item="item" />
-            </NuxtLink>
-        </div>
-
-        <div v-else-if="loading" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start animate-pulse">
+        <div v-if="loading" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:gap-x-[24px] md:items-start animate-pulse">
             <div 
                 v-for="i in 6" 
                 :key="i"
-                v-motion
-                :initial="{ opacity: 0, y: 30 }"
-                :visible-once="{ 
-                    opacity: 1, 
-                    y: 0, 
-                    transition: { 
-                        duration: 500, 
-                        delay: (i - 1) * 80, 
-                        ease: 'easeOut' 
-                    } 
-                }"
                 class="flex flex-col justify-between h-full insight-card bg-[#131416] p-[16px] md:p-0 rounded-[4px] md:rounded-none md:bg-transparent md:relative md:border-b md:border-[#454C5F] md:pb-[32px]"
             >
                 <div class="flex flex-col flex-1">
@@ -139,27 +104,85 @@
             </div>
         </div>
 
-        <hr class="border-[#454C5F] my-[32px] md:hidden">      
-        <div v-if="hasMore" class="flex justify-center mt-[40px] md:mt-[64px]">
-        <button 
-            type="button" 
-            @click="loadMore"
-            :disabled="loadingMore"
-            class="md:px-[56px] md:py-[16px] w-[160px] h-[40px] md:w-[240px] md:h-[64px] bg-[#0043FF] text-white md:text-[20px] text-[14px] font-[600] rounded-[4px] hover:bg-[#103C93]"
+        <div v-else-if="visibleList.length > 0" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:items-start md:gap-x-[24px]"
+            :class="{'mt-[120px]': sortOpen}"
         >
-            {{ loadingMore ? $t('insights.loading'): $t('insights.loadMore') }}
-        </button>
-</div>
+            <NuxtLink 
+                v-for="(item, index) in visibleList" 
+                :key="item.id" 
+                :to="localePath(`/articles/${item.slug || item.id}`)"
+                v-motion
+                :initial="{ opacity: 0, y: 40 }"
+                :visible-once="{ 
+                    opacity: 1, 
+                    y: 0, 
+                    transition: { 
+                        duration: 600, 
+                        delay: (index % 3) * 120,
+                        ease: 'easeOut' 
+                    } 
+                }"
+                class="flex flex-col justify-between h-full insight-card group bg-[#131416] rounded-[4px] md:rounded-none md:bg-transparent md:relative"
+            >
+                <InsightItem :item="item" />
+            </NuxtLink>
+        </div>
+
+        <hr class="border-[#454C5F] my-[32px] md:hidden">
+        <div v-if="totalPages > 1" class="flex items-center justify-center gap-[8px] md:gap-[16px] mt-[40px] md:mt-[64px]">
+            <button
+                type="button"
+                @click="handlePageChange(page - 1)"
+                :disabled="page <= 1 || loading"
+                aria-label="Previous page"
+                class="group w-8 h-8 xl:w-12 xl:h-12 flex items-center justify-center transition cursor-pointer focus:outline-none rounded-[4px]"
+            >
+                <svg data-v-35d9e7ef="" class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect data-v-35d9e7ef="" width="64" height="64" rx="4" fill="#131416" class="transition-colors duration-200 group-hover:fill-[#103C93]"></rect><path data-v-35d9e7ef="" d="M20.2679 30.7622H48L47.9646 33.2021H20.2351L27.0324 40H23.9912L16 32.0174L24.0265 24H26.997L20.2679 30.7622Z" fill="#7D86A1" class="transition-colors duration-200 group-hover:fill-white"></path></svg>
+            </button>
+
+            <template v-for="(item, idx) in paginationItems" :key="'page-' + idx">
+                <span
+                    v-if="item === '...'"
+                    class="w-8 h-8 xl:w-12 xl:h-12 flex items-center justify-center text-[#FFFFFF] text-[14px] md:text-[20px] select-none"
+                >
+                    ...
+                </span>
+                <button
+                    v-else
+                    type="button"
+                    @click="handlePageChange(item)"
+                    :disabled="loading"
+                    class="w-8 h-8 xl:w-12 xl:h-12 flex items-center justify-center text-[14px] md:text-[20px] font-[600] transition-colors cursor-pointer"
+                    :class="page === item
+                        ? ' text-[#0043FF] hover:text-[#0043FF]'
+                        : 'text-white'"
+                >
+                    {{ item }}
+                </button>
+            </template>
+
+            <button
+                type="button"
+                @click="handlePageChange(page + 1)"
+                :disabled="page >= totalPages || loading"
+                aria-label="Next page"
+                class="group w-8 h-8 xl:w-12 xl:h-12 flex items-center justify-center transition cursor-pointer focus:outline-none rounded-[4px]"
+            >
+               <svg data-v-35d9e7ef="" class="w-full h-full" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect data-v-35d9e7ef="" width="64" height="64" rx="4" fill="#0043FF" class="transition-colors duration-200 group-hover:fill-[#103C93]"></rect><path data-v-35d9e7ef="" d="M44.7321 30.7622H17L17.0354 33.2021H44.7649L37.9676 40H41.0088L49 32.0174L40.9735 24H38.003L44.7321 30.7622Z" fill="white"></path></svg>
+            </button>
+        </div>
     </div>
 </template>
 
 <script setup>
 import { ref, computed, watch, onMounted } from 'vue'
-const { t, locale, setLocale } = useI18n()
+const { t, locale } = useI18n()
 import InsightItem from './insight-item.vue'
 
 const { $pb } = useNuxtApp()
 const localePath = useLocalePath()
+
+const containerRef = ref(null)
 
 const sortOptions = ['featured', 'latest', 'hottest']
 const categories = ref(['tips', 'research'])
@@ -174,16 +197,11 @@ const rawList = ref([])
 const page = ref(1)
 const totalPages = ref(1)
 const loading = ref(false)
-const loadingMore = ref(false)
 
 const perPage = 6
 
-async function fetchBlogs(isLoadMore = false) {
-    if (isLoadMore) {
-        loadingMore.value = true
-    } else {
-        loading.value = true
-    }
+async function fetchBlogs(targetPage = 1) {
+    loading.value = true
 
     try {
         let filterStr = 'status = "published"'
@@ -202,37 +220,27 @@ async function fetchBlogs(isLoadMore = false) {
             sortStr = '-views'
         }
 
-        const currentPage = isLoadMore ? page.value + 1 : 1
-        
-        const resultList = await $pb.collection('blogs').getList(currentPage, perPage, {
+        const resultList = await $pb.collection('blogs').getList(targetPage, perPage, {
             filter: filterStr,
             sort: sortStr
         })
 
-        if (isLoadMore) {
-            // 🚀 原有数据保留，新的 6 条直接 push 追加到末尾
-            rawList.value = [...rawList.value, ...resultList.items]
-            page.value = currentPage
-        } else {
-            rawList.value = resultList.items
-            page.value = 1
-        }
-
-        totalPages.value = resultList.totalPages
+        rawList.value = resultList.items
+        page.value = resultList.page || targetPage
+        totalPages.value = resultList.totalPages || 1
     } catch (e) {
         console.error('获取博客列表失败:', e)
     } finally {
         loading.value = false
-        loadingMore.value = false
     }
 }
 
 onMounted(() => {
-    fetchBlogs()
+    fetchBlogs(1)
 })
 
 watch(sortBy, () => {
-    fetchBlogs(false)
+    fetchBlogs(1)
 })
 
 const visibleList = computed(() => {
@@ -255,11 +263,32 @@ const visibleList = computed(() => {
     })
 })
 
-const hasMore = computed(() => page.value < totalPages.value)
+const paginationItems = computed(() => {
+  const total = totalPages.value
+  const current = page.value
 
-function loadMore() {
-    if (!loading.value && hasMore.value) {
-        fetchBlogs(true)
+  if (total <= 5) {
+    return Array.from({ length: total }, (_, i) => i + 1)
+  }
+
+  if (current < 3) {
+    return [1, 2, 3, '...', total]
+  }
+
+  if (current >= total - 2) {
+    return [1, '...', total - 2, total - 1, total]
+  }
+
+  return [current - 1, current, current + 1, '...', total]
+})
+
+async function handlePageChange(targetPage) {
+    if (loading.value || targetPage === page.value || targetPage < 1 || targetPage > totalPages.value) return
+    await fetchBlogs(targetPage)
+
+    if (containerRef.value && import.meta.client) {
+        const top = containerRef.value.getBoundingClientRect().top + window.scrollY - 80
+        window.scrollTo({ top, behavior: 'smooth' })
     }
 }
 
@@ -281,15 +310,12 @@ function clearAll() {
 function applyFilter() {
     selected.value = [...pendingSelected.value]
     expanded.value = false
-    fetchBlogs(false)
+    fetchBlogs(1)
 }
 </script>
 
 <style scoped>
 @media screen and (min-width: 1024px) {
-    /* .insight-card:nth-child(3n){
-        padding-right: 0;
-    } */
     .insight-card:nth-child(3n) :deep(.col-line),
     .insight-card:last-child :deep(.col-line) {
         display: none;

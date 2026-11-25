@@ -126,6 +126,21 @@ useSeoMeta({
   description: () => t('seoMeta.description')
 })
 
+const sanitizeRichContent = (html = '') => {
+  if (!html) return ''
+
+  return String(html).replace(
+    /(<div\b[^>]*\bstyle\s*=\s*["'])([\s\S]*?)(["'][^>]*>)/gi,
+    (_, prefix, styleVal, suffix) => {
+      const cleanedStyle = styleVal
+        .replace(/max-width\s*:\s*[^;]+;?/gi, 'max-width: none;')
+        .replace(/padding\s*:\s*[^;]+;?/gi, 'padding: 0;')
+        .replace(/padding-(top|right|bottom|left)\s*:\s*[^;]+;?/gi, '')
+      return `${prefix}${cleanedStyle}${suffix}`
+    }
+  )
+}
+
 const initRichTextAccordions = async () => {
     await nextTick()
     const container = document.querySelector('.blog-rich-content')
@@ -215,12 +230,12 @@ onMounted(async () => {
                 shortdesc_en: rawCurrent.shortdesc_en || '',
                 author: rawCurrent.author || '',
                 author_en: rawCurrent.author_en || '',
-                sections_zh: rawCurrent.sections_zh || '',
-                sections_en: rawCurrent.sections_en || '',
-                reportFileUrl: rawCurrent.report_file 
+                sections_zh: sanitizeRichContent(rawCurrent.sections_zh || ''),
+                sections_en: sanitizeRichContent(rawCurrent.sections_en || ''),
+                reportFileUrl: rawCurrent.report_file
                     ? `https://api.adsmarch.bot.cd/api/files/${rawCurrent.collectionId || collectionName}/${rawCurrent.id}/${rawCurrent.report_file}`
                     : ''
-            }
+                }
 
             if (typeof window !== 'undefined') {
                 const isEn = locale.value === 'en'
@@ -299,6 +314,10 @@ function goBack() {
     display: flex;
     flex-direction: column;
     gap: 24px;
+}
+.blog-rich-content :deep(div) {
+  max-width: none !important;
+  padding: 0 !important;
 }
 
 .blog-overview :deep(li),

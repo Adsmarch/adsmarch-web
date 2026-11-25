@@ -24,7 +24,7 @@
                 </span>
                 <a 
                     href="mailto:hr@adsmarch.com" 
-                    class="text-[32px] md:text-[36px] xl:text-[42px] 2xl:text-[64px] font-semibold text-[#0043FF] underline"
+                    class="text-[24px] md:text-[32px] xl:text-[40px] font-semibold text-[#0043FF] underline"
                 >
                     hr@adsmarch.com
                 </a>

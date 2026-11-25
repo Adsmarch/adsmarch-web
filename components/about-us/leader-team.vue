@@ -21,44 +21,10 @@
                         <p class="text-[16px] md:text-[20px] lg:text-[24px] leading-[1.5] text-[#fff]">
                             {{ $t('about.leaderTeam.desc') }}
                         </p>
-                    </div>
-
-                    <template v-for="(member, index) in fixedMembers" :key="index">
-                        <div 
-                            v-motion
-                            :initial="{ opacity: 0, y: 40 }"
-                            :visible-once="{ 
-                                opacity: 1, 
-                                y: 0, 
-                                transition: { 
-                                    duration: 600, 
-                                    delay: (index + 1) * 100, 
-                                    ease: 'easeOut' 
-                                } 
-                            }"
-                            class="team-card bg-[#131416] border border-transparent transition-colors duration-300 flex flex-col justify-between"
-                        >
-                            <div class="aspect-[1/1] overflow-hidden">
-                                <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover" loading="lazy" />
-                            </div>
-                            <div class="px-[16px] py-[24px] md:py-[32px] flex-1 flex flex-col justify-between">
-                                <div>
-                                    <div class="member-name text-[28px] md:text-[34px] lg:text-[40px] leading-[1.2] font-[600] text-white mb-[4px] md:mb-[8px] transition-colors duration-300">
-                                        {{ member.name }}
-                                    </div>
-                                    <div class="md:text-[20px] text-[16px] leading-[1.2] font-[600] text-[#0043FF] mb-[16px] md:mb-[24px]">
-                                        {{ member.role }}
-                                    </div>
-                                </div>
-                                <p class="md:text-[20px] text-[16px] leading-[1.5] text-[#FFFFFF]">
-                                    {{ member.desc }}
-                                </p>
-                            </div>
-                        </div>
-                    </template>
+                    </div>                   
                 </div>
 
-                <div v-if="swiperMembers.length > 0" 
+                <div v-if="members.length > 0" 
                     v-motion
                     :initial="{ opacity: 0, y: 40 }"
                     :visible-once="{ opacity: 1, y: 0, transition: { duration: 700, ease: 'easeOut' } }"
@@ -83,7 +49,7 @@
                         }"
                         class="w-full !overflow-visible"
                     >
-                        <SwiperSlide v-for="(member, index) in swiperMembers" :key="index" class="h-auto box-border shrink-0">
+                        <SwiperSlide v-for="(member, index) in members" :key="index" class="h-auto box-border shrink-0">
                             <div class="team-card bg-[#131416] border border-transparent transition-colors duration-300 h-full flex flex-col justify-between">
                                 <div class="aspect-[1/1] overflow-hidden">
                                     <img :src="member.photo" :alt="member.name" class="w-full h-full object-cover" loading="lazy" />
@@ -230,9 +196,6 @@ const members = computed(() => {
         photo: r.avatar ? $pb.files.getURL(r, r.avatar) : ''
     }))
 })
-
-const fixedMembers = computed(() => members.value.slice(0, 2))
-const swiperMembers = computed(() => members.value.slice(2))
 
 const swiperProgress = ref(0)
 function onSwiper(swiper) {

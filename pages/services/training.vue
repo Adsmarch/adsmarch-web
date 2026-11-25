@@ -17,6 +17,10 @@
       :items="trainingItems" 
       :loading="trainingLoading" 
     />
+    <TrainingCourse 
+      :items="trainingCourseItems" 
+      :loading="trainingCourseLoading" 
+    />
 
     <CaseStudySection 
       v-if="(caseList && caseList.length > 0) || casesLoading"
@@ -39,6 +43,7 @@ import AppServiceSwiper from '@/components/services/AppServiceSwiper.vue'
 import TrainingSystem from '@/components/services/TrainingSystem.vue'
 import CaseStudySection from '@/components/services/CaseStudySection.vue'
 import AppContactUs from '@/components/services/AppContactUs.vue'
+import TrainingCourse from '@/components/services/TrainingCourse.vue'
 
 const route = useRoute()
 const pb = new PocketBase('https://api.adsmarch.bot.cd')
@@ -47,12 +52,14 @@ const bannerLoading = ref(true)
 const itemsLoading = ref(true)
 const casesLoading = ref(true)
 const trainingLoading = ref(true)
+const trainingCourseLoading = ref(true)
 
 const pageData = ref({})
 const bannerIconUrl = ref('')
 const serviceItems = ref([])
 const caseList = ref([])
 const trainingItems = ref([])
+const trainingCourseItems = ref([])
 
 const currentSlug = ref('training')
 
@@ -80,12 +87,14 @@ const fetchPageData = async () => {
   itemsLoading.value = true
   casesLoading.value = true
   trainingLoading.value = true
+  trainingCourseLoading.value = true
 
   pageData.value = {}
   bannerIconUrl.value = ''
   serviceItems.value = []
   caseList.value = []
   trainingItems.value = []
+  trainingCourseItems.value = []
 
   try {
     const record = await pb.collection('service_main').getFirstListItem('slug="training"', {
@@ -139,6 +148,12 @@ const fetchPageData = async () => {
     })
     trainingItems.value = trainingRecords || []
 
+    const trainingCourseRecords = await pb.collection('service_course_system').getFullList({
+      sort: 'created', 
+      requestKey: null
+    })
+    trainingCourseItems.value = trainingCourseRecords || []
+
   } catch (err) {
     if (err?.status !== 404) {
       console.warn('获取页面数据提示:', err?.message || err)
@@ -148,6 +163,7 @@ const fetchPageData = async () => {
     itemsLoading.value = false
     casesLoading.value = false
     trainingLoading.value = false 
+    trainingCourseLoading.value = false
   }
 }
 

@@ -6,7 +6,7 @@
     :visible-once="{ opacity: 1, y: 0, transition: { duration: 800, ease: 'easeOut' } }" 
     class="flex flex-col md:flex-row md:items-start justify-between gap-6 mb-12 md:mb-[120px] px-[15px] md:px-[40px] xl:px-[120px] max-w-site mx-auto">
       
-      <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2]">
+      <h2 class="text-[clamp(40px,5vw,96px)] font-semibold leading-[1.2]">
         {{ $t('homeSocialMedia.title') }}
       </h2>
 
@@ -15,7 +15,7 @@
           <i18n-t 
             keypath="homeSocialMedia.subtitle" 
             tag="div" 
-            class="text-[28px] sm:text-[32px] md:text-[42px] lg:text-[52px] xl:text-[64px] font-semibold leading-[1.2] mb-3"
+            class="text-[clamp(28px,5vw,64px)] font-semibold leading-[1.2] mb-3"
           >
             <template #count>
               <span class="text-[#0043FF] font-semibold">200+</span>

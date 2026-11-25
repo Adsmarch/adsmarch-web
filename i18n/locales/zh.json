@@ -71,6 +71,7 @@
   },
   "homeGlobalAcclaim": {
     "title": "全球赞誉",
+    "viewMore": "了解更多",
     "list": [
       {
         "year": "2023",
@@ -525,5 +526,9 @@
       "contact_title": "联系我们 {'|'} 麦炽科技 {'|'} 一站式出海整合营销服务商",
       "about_title": "我们是谁 {'|'} 麦炽科技 {'|'} 一站式出海整合营销服务商",
       "awards_title": "奖项与荣誉 {'|'} 麦炽科技 {'|'} 一站式出海整合营销服务商"
+    },
+    "training": {
+      "title": "培训体系介绍",
+      "course_title": "课程体系介绍"
     }
 }

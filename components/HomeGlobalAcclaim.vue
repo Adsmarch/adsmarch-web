@@ -1,6 +1,6 @@
 <template>
   <section ref="sectionRef" class="relative w-full bg-black text-white min-h-[100vh]">
-    <div class="sticky top-0 h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[120px] md:pb-[120px] max-w-site mx-auto">
+    <div class="sticky top-0 min-h-screen w-full flex flex-col items-center justify-center overflow-hidden px-[15px] md:px-[40px] xl:px-[120px] pt-[28px] pb-[56px] md:pt-[120px] md:pb-[120px] max-w-site mx-auto">
       <div 
         class="flex flex-col items-center transition-transform duration-700 ease-out z-20 gap-3 xl:gap-6"
         :class="[
@@ -21,7 +21,7 @@
       <div class="w-full max-w-site mx-auto mt-6 md:mt-[24px] z-10">      
         <div v-if="loading" class="w-full">
           <div class="hidden md:grid grid-cols-3 gap-6">
-            <div v-for="i in 3" :key="i" class="p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[460px] xl:h-[540px] bg-[#131416]/40 animate-pulse">
+            <div v-for="i in 3" :key="i" class="p-8 flex flex-col justify-between h-[460px] xl:h-[540px] bg-[#131416]/40 animate-pulse">
               <div class="flex justify-between items-center">
                 <div class="w-5 h-5 bg-[#2A2F3D] rounded"></div>
                 <div class="w-8 h-4 bg-[#2A2F3D] rounded"></div>
@@ -37,7 +37,7 @@
           </div>
 
           <div class="block md:hidden">
-            <div class="p-6 border-l border-l-[#454C5F] flex flex-col justify-between h-[440px] bg-[#131416]/40 animate-pulse">
+            <div class="p-6  flex flex-col justify-between h-[440px] bg-[#131416]/40 animate-pulse">
               <div class="flex justify-between items-center">
                 <div class="w-4 h-4 bg-[#2A2F3D] rounded"></div>
                 <div class="w-6 h-4 bg-[#2A2F3D] rounded"></div>
@@ -58,7 +58,7 @@
             <div 
               v-for="(item, index) in listData" 
               :key="index"
-              class="group p-8 border-l border-l-[#454C5F] flex flex-col justify-between h-[560px] xl:h-[640px] transition-all duration-700 ease-out hover:bg-[#131416]"
+              class="group p-8 flex flex-col justify-between h-[560px] xl:h-[640px] transition-all duration-700 ease-out hover:bg-[#131416]"
               :class="[
                 isScrolled 
                   ? 'opacity-100 translate-y-0' 
@@ -156,9 +156,11 @@
             <div class="custom-swiper-pagination flex justify-center gap-2 mt-6"></div>
           </div>
         </div>
-
       </div>
-
+        <nuxtLink to="/awards" class="inline-flex items-center justify-center gap-2 px-4 py-2.5 sm:px-8 sm:py-4 bg-[#0043FF] text-white text-[14px] sm:text-[20px] font-semibold rounded hover:bg-[#103C93] transition-colors duration-200 w-auto min-w-[120px] sm:w-[240px] h-[40px] sm:h-[64px] md:mt-16 mt-12">
+        {{ $t('homeGlobalAcclaim.viewMore') }}
+        <svg width="6" height="12" viewBox="0 0 6 12" fill="none" class="w-1.5 h-2.5 sm:w-2 sm:h-3 ml-1"><path d="M5.99207 6.0069L2.54386 12L0 12L3.45219 6L0 -2.62268e-07L2.54386 -1.51073e-07L5.99207 5.9931L6 5.9931L5.99605 6L6 6.0069L5.99207 6.0069Z" fill="white"></path></svg>
+      </nuxtLink>
     </div>
   </section>
 </template>

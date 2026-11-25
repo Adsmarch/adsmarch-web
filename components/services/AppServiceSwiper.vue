@@ -13,7 +13,7 @@
     </div>
 
     <div v-if="loading" class="w-full animate-pulse">
-      <div class="h-[420px] bg-[#131416]/50 border-l border-[#454C5F] p-6"></div>
+      <div class="h-[420px] bg-[#131416]/50 p-6"></div>
     </div>
 
     <div 
@@ -30,7 +30,7 @@
             :key="item.id" 
             class="service-card single-card-m group relative flex flex-col justify-between h-[480px] p-6 overflow-hidden w-full transition-all duration-300"
           >
-            <div class="card-bg-wrap absolute inset-0 z-0 transition-opacity duration-300">
+            <div class="card-bg-wrap absolute inset-0 z-0">
               <img :src="item.image" :alt="displayItemTitle(item)" class="w-full h-full object-cover" />
               <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80"></div>
             </div>
@@ -60,7 +60,7 @@
           </div>
         </div>
 
-        <div class="single-card-pc hidden md:flex w-full bg-transparent border-l border-[#454C5F] overflow-hidden min-h-[500px] lg:min-h-[580px] group transition-all duration-300">
+        <div class="single-card-pc hidden md:flex w-full bg-transparent overflow-hidden min-h-[500px] lg:min-h-[580px] group transition-all duration-300">
           <div class="w-1/2 relative overflow-hidden group/img">
             <img :src="items[0].image" :alt="displayItemTitle(items[0])" class="w-full h-full object-cover transition-transform duration-700 group-hover/img:scale-105" />
             <div class="absolute inset-0 bg-gradient-to-r from-black/20 to-transparent"></div>
@@ -102,7 +102,7 @@
           >
             <SwiperSlide v-for="(item, index) in items" :key="item.id" v-slot="{ isActive }" class="h-auto box-border shrink-0">
               <div class="service-card group relative flex flex-col justify-between h-[420px] p-6 overflow-hidden transition-all duration-300 w-full">
-                <div class="card-bg-wrap absolute inset-0 z-0 transition-opacity duration-300">
+                <div class="card-bg-wrap absolute inset-0 z-0">
                   <img :src="item.image" :alt="displayItemTitle(item)" class="w-full h-full object-cover" />
                   <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80"></div>
                 </div>
@@ -149,7 +149,7 @@
           <div v-if="items.length < 3" class="grid grid-cols-2 gap-[24px]">
             <div v-for="(item, index) in items" :key="item.id" class="h-auto box-border shrink-0 w-full">
               <div class="service-card group relative flex flex-col justify-between p-6 h-[520px] overflow-hidden transition-all duration-300 w-full">
-                <div class="card-bg-wrap absolute inset-0 z-0 transition-opacity duration-300">
+                <div class="card-bg-wrap absolute inset-0 z-0">
                   <img :src="item.image" :alt="displayItemTitle(item)" class="w-full h-full object-cover" />
                   <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80"></div>
                 </div>
@@ -198,8 +198,8 @@
               class="w-full !overflow-visible"
             >
               <SwiperSlide v-for="(item, index) in items" :key="item.id" v-slot="{ isActive }" class="h-auto box-border shrink-0">
-                <div class="service-card group relative flex flex-col justify-between aspect-[4.4/5.6] p-6 overflow-hidden transition-all duration-300 w-full">
-                  <div class="card-bg-wrap absolute inset-0 z-0 transition-opacity duration-300">
+                <div class="service-card group relative flex flex-col justify-between aspect-[4.4/5.6] p-6 overflow-hidden  w-full">
+                  <div class="card-bg-wrap absolute inset-0 z-0">
                     <img :src="item.image" :alt="displayItemTitle(item)" class="w-full h-full object-cover" />
                     <div class="absolute inset-0 bg-gradient-to-b from-black/20 via-black/40 to-black/80"></div>
                   </div>
@@ -286,17 +286,19 @@ const slideNext = () => { swiperRef.value?.slideNext() }
 
 <style scoped>
 :deep(.swiper-slide) { flex-shrink: 0; box-sizing: border-box; width: 440px; }
-.service-card { background-color: transparent !important; border-left: 1px solid #454C5F; }
+.service-card { background-color: transparent !important; 
+  /* border-left: 1px solid #454C5F; */
+ }
 .service-card .card-bg-wrap { opacity: 1 !important; }
 
 .single-card-m {
   background-color: transparent !important;
-  border-left: 1px solid #454C5F !important;
+  /* border-left: 1px solid #454C5F !important; */
 }
 .single-card-m:hover,
 .single-card-m:active {
   background-color: #131416 !important;
-  border-left: 1px solid #0043FF !important;
+  /* border-left: 1px solid #0043FF !important; */
 }
 .single-card-m:hover .card-bg-wrap,
 .single-card-m:active .card-bg-wrap {
@@ -315,17 +317,17 @@ const slideNext = () => { swiperRef.value?.slideNext() }
 
 .single-card-pc:hover {
   background-color: #131416 !important;
-  border-left: 1px solid #0043FF !important;
+  /* border-left: 1px solid #0043FF !important; */
 }
 
 @media (max-width: 1023px) {
-  :deep(.swiper-slide-active) .service-card { background-color: #131416 !important; border-left: 1px solid !important; border-image-source: linear-gradient(180deg, #0043FF 0%, #131416 100%) !important; border-image-slice: 1 !important; }
+  :deep(.swiper-slide-active) .service-card { background-color: #131416 !important; border-image-source: linear-gradient(180deg, #0043FF 0%, #131416 100%) !important; border-image-slice: 1 !important; }
   :deep(.swiper-slide-active) .service-card .card-bg-wrap { opacity: 0 !important; }
   :deep(.swiper-slide-active) .service-card .card-title { color: #0043FF !important; }
   :deep(.swiper-slide-active) .service-card .card-index,:deep(.swiper-slide-active) .service-card .card-icon svg { color: #ffffff !important; }
 }
 @media (min-width: 1024px) {
-  .service-card:hover { background-color: #131416 !important; border-left: 1px solid !important; border-image-source: linear-gradient(180deg, #0043FF 0%, #131416 100%) !important; border-image-slice: 1 !important; }
+  .service-card:hover { background-color: #131416 !important; border-image-source: linear-gradient(180deg, #0043FF 0%, #131416 100%) !important; border-image-slice: 1 !important; }
   .service-card:hover .card-bg-wrap { opacity: 0 !important; }
   .service-card:hover .card-title { color: #0043FF !important; }
 }

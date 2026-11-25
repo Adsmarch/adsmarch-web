@@ -29,7 +29,7 @@
 
     <div
         v-else
-        class="flex flex-col justify-between h-full px-[16px] py-[24px] transition-all duration-300 md:p-0 md:group-hover:bg-[#131416] md:px-[24px] md:py-[32px] md:group-hover:rounded-[4px] md:border-l-[1px] md:border-[#454C5F] bg-[#131416] rounded-[4px] md:rounded-[2px]">
+        class="flex flex-col justify-between h-full px-[16px] py-[24px] transition-all duration-300 md:p-0 md:group-hover:bg-[#131416] md:px-[24px] md:py-[32px] md:group-hover:rounded-[4px] bg-[#131416] rounded-[4px] md:rounded-[2px]">
 
         <div class="flex flex-col justify-between md:hidden w-full">
             <div class="flex items-center justify-between mb-[16px]">

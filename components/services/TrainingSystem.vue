@@ -10,7 +10,7 @@
     >
       <div class="flex items-center justify-center gap-3 xl:gap-6 shrink-0">
         <h2 class="text-[40px] sm:text-[48px] md:text-[54px] lg:text-[72px] xl:text-[96px] font-semibold leading-[1.2] whitespace-nowrap">
-          {{ $t('training.title', '培训课程体系介绍') }}
+          {{ $t('training.title', '培训体系介绍') }}
         </h2>
       </div>
     </div>
@@ -29,14 +29,20 @@
       
       <div class="block md:hidden w-full">
         <Swiper
-          :modules="[SwiperPagination]"
+          :modules="[SwiperPagination, SwiperAutoplay]"
           :slides-per-view="1.2"
           :space-between="16"
+          :loop="true"
+          :autoplay="{
+            delay: 3000,
+            disableOnInteraction: false,
+            pauseOnMouseEnter: true
+          }"
           :pagination="{ el: '.training-pagination-m', clickable: true }"
           class="w-full !overflow-visible"
         >
           <SwiperSlide v-for="item in items" :key="item.id" class="h-auto box-border shrink-0">
-            <div class="training-card flex flex-col min-h-[380px] p-6 bg-black border-l border-[#454C5F] transition-colors duration-300">
+            <div class="training-card flex flex-col min-h-[250px] p-6 bg-black border-l border-[#454C5F] transition-colors duration-300">
               <div class="mb-6"></div>
 
               <div>
@@ -61,7 +67,7 @@
           <div 
             v-for="(item, index) in items" 
             :key="item.id" 
-            class="training-card flex flex-col h-full min-h-[420px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
+            class="training-card flex flex-col h-full min-h-[280px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
             :class="{ 'col-span-2': items.length === 3 && index === 2 }"
           >
             <div class="mb-8"></div>
@@ -80,9 +86,15 @@
 
         <template v-else>
           <Swiper
-            :modules="[SwiperNavigation, SwiperPagination]"
+            :modules="[SwiperNavigation, SwiperPagination, SwiperAutoplay]"
             :slides-per-view="2"
             :space-between="24"
+            :loop="true"
+            :autoplay="{
+              delay: 3000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true
+            }"
             :pagination="{ el: '.training-pagination-pc', clickable: true }"
             class="w-full !overflow-visible"
           >
@@ -120,7 +132,7 @@
 <script setup>
 import { computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Pagination as SwiperPagination, Navigation as SwiperNavigation } from 'swiper/modules'
+import { Pagination as SwiperPagination, Navigation as SwiperNavigation, Autoplay as SwiperAutoplay} from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/pagination'
 

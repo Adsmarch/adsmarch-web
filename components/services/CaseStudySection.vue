@@ -65,24 +65,30 @@
               <div class="mb-2 md:mb-0 w-full md:w-auto">
                 <img v-if="item.titleLogo" :src="item.titleLogo" :alt="displayTitle(item)"
                   class="h-[86px] w-auto object-contain m-auto" />
-                <h3 v-else
-                  class="text-[24px] sm:text-[32px] md:text-[36px] lg:text-[40px] xl:text-[52px] font-semibold leading-[1.2] text-white"
-                  :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"
-                >
-                  {{ displayTitle(item) }}
-                </h3>
+                <template v-else>
+                  <h3
+                    class="block md:hidden text-[28px] font-semibold leading-[1.2] text-white"
+                  >
+                    {{ formatMobileTitle(item) }}
+                  </h3>
+
+                  <h3
+                    class="hidden md:block md:text-[56px]  font-semibold leading-[1.2] text-white"
+                    :class="{ 'md:max-w-[320px]': displaySubtitle(item) || displayDescription(item) }"
+                    v-html="formatPcTitle(item)"
+                  />
+                </template>
               </div>
 
               <div 
                 v-if="displaySubtitle(item) || displayDescription(item)" 
-                class="w-[100%] md:w-[70%] flex flex-col justify-start moving-content min-h-[78px]"
+                class="w-[100%] md:w-[60%] flex flex-col justify-start moving-content min-h-[78px]"
               >
                 <h4 
                   v-if="displaySubtitle(item)" 
                   class="text-[18px] sm:text-[18px] md:text-[20px] lg:text-[24px] xl:text-[28px] font-semibold text-white leading-snug"
-                >
-                  {{ displaySubtitle(item) }}
-                </h4>
+                  v-html="formatSubtitle(item)"
+                />
                 
                 <p 
                   v-if="displayDescription(item)" 
@@ -136,6 +142,25 @@ const onSwiper = (swiper) => { swiperRef.value = swiper }
 const { locale} = useI18n()
 const isEn = computed(() => locale.value?.startsWith('en'))
 
+const formatPcTitle = (item) => {
+  const raw = displayTitle(item) || ''
+  return String(raw).replace(/<br\s*\/?>/gi, '<br>')
+}
+
+const formatMobileTitle = (item) => {
+  const raw = displayTitle(item) || ''
+  return String(raw)
+    .replace(/<br\s*\/?>/gi, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+}
+const formatSubtitle = (item) => {
+  const raw = displaySubtitle(item) || ''
+  return String(raw)
+    .replace(/(\r\n|\r|\n|<br\s*\/?>)/gi, '<br>')
+    .trim()
+}
+
 
 const displayTitle = (item) => isEn.value ? (item.title_en || item.title) : item.title
 const displaySubtitle = (item) => isEn.value ? (item.subtitle_en || item.subtitle) : item.subtitle
@@ -164,10 +189,6 @@ const closeVideoModal = () => {
 .fade-enter-from, .fade-leave-to { opacity: 0; }
 :deep(.classic-pagination .swiper-pagination-bullet) { width: 12px; height: 12px; background-color: #454C5F; border-radius: 2px; opacity: 1; transition: all 0.3s ease; cursor: pointer; margin: 0 !important; }
 :deep(.classic-pagination .swiper-pagination-bullet-active) { background-color: #0043FF; }
-@media (max-width: 768px) { :deep(.classic-pagination .swiper-pagination-bullet) { width: 6px; height: 6px; border-radius: 1px; }
-.text-area-container {
-  min-height: 280px;
-} }
 
 .text-area-container {
   min-height: 295px;
@@ -204,6 +225,12 @@ const closeVideoModal = () => {
     opacity: 1;
     max-height: 200px;
     margin-top: 0.75rem;
+  }
+}
+@media (max-width: 768px) { 
+  :deep(.classic-pagination .swiper-pagination-bullet) { width: 6px; height: 6px; border-radius: 1px; }
+  .text-area-container {
+    min-height: 240px;
   }
 }
 </style>
