@@ -99,7 +99,9 @@
     "categories": {
       "tips": "Tips",
       "research": "Research",
-      "report": "Industry Reports"
+      "report": "Industry Reports",
+      "share": "Training Sharing",
+      "case": "Customer Cases"
     },
     "clearAll": "Clear All",
     "showResults": "Show Results"

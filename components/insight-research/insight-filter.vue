@@ -50,26 +50,35 @@
             </div>
 
             <div v-if="expanded" class="pb-[20px] md:pb-[32px] pt-[20px] md:pt-[32px] border-t border-[#454C5F]">
-                <div class="flex flex-wrap gap-[12px] md:gap-[24px]">
-                    <button v-for="cat in categories" :key="cat" type="button" @click="toggleCategory(cat)"
-                        class="px-[16px] py-[8px] rounded-[4px] text-[14px] md:text-[20px] transition-colors font-[400]"
-                        :class="pendingSelected.includes(cat) ? 'bg-[#0043FF] text-white' : 'bg-[#131416] text-white hover:bg-[#0043FF]'">
-                        {{ $t(`insightFilter.categories.${cat}`) }}
+                <div v-if="categoriesLoading" class="flex flex-wrap gap-[12px] md:gap-[24px] animate-pulse">
+                    <div v-for="n in 4" :key="'sk-cat-' + n" class="h-[38px] md:h-[46px] w-[96px] bg-[#26282C] rounded-[4px]"></div>
+                </div>
+
+                <div v-else class="flex flex-wrap gap-[12px] md:gap-[24px]">
+                    <button
+                    v-for="cat in categories"
+                    :key="cat.value"
+                    type="button"
+                    @click="toggleCategory(cat.value)"
+                    class="px-[16px] py-[8px] rounded-[4px] text-[14px] md:text-[20px] transition-colors font-[400] cursor-pointer"
+                    :class="pendingSelected.includes(cat.value) ? 'bg-[#0043FF] text-white' : 'bg-[#131416] text-white hover:bg-[#0043FF]'"
+                    >
+                    {{ getCategoryLabel(cat) }}
                     </button>
                 </div>
 
                 <div class="grid grid-cols-2 md:flex md:justify-end md:gap-[21px] gap-[12px] mt-[32px]">
                     <button type="button" @click="clearAll"
-                        class="h-[40px] px-[24px] bg-[#26282C] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#33363B] transition-colors">
-                        {{ $t('insightFilter.clearAll') }}
+                    class="h-[40px] px-[24px] bg-[#26282C] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#33363B] transition-colors cursor-pointer">
+                    {{ $t('insightFilter.clearAll') }}
                     </button>
                     <button type="button" @click="applyFilter"
-                        class="h-[40px] px-[24px] bg-[#0043FF] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition">
-                        {{ $t('insightFilter.showResults') }}
+                    class="h-[40px] px-[24px] bg-[#0043FF] text-white text-[14px] md:text-[20px] font-[600] rounded-[4px] hover:bg-[#103C93] active:scale-[0.98] transition cursor-pointer">
+                    {{ $t('insightFilter.showResults') }}
                     </button>
                 </div>
+                </div>
             </div>
-        </div>
 
         <div v-if="loading" class="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-y-[32px] md:gap-x-[24px] md:items-start animate-pulse">
             <div 
@@ -185,11 +194,12 @@ const localePath = useLocalePath()
 const containerRef = ref(null)
 
 const sortOptions = ['featured', 'latest', 'hottest']
-const categories = ref(['tips', 'research'])
+const categories = ref([])
+const categoriesLoading = ref(false)
 
 const expanded = ref(false)
 const sortOpen = ref(false)
-const sortBy = ref('latest') 
+const sortBy = ref('latest')
 const selected = ref([])
 const pendingSelected = ref([])
 
@@ -200,14 +210,72 @@ const loading = ref(false)
 
 const perPage = 6
 
+function isZhLocale() {
+    return String(locale.value || '').toLowerCase().startsWith('zh')
+}
+
+function formatFallbackText(val = '') {
+    return String(val)
+        .replace(/[-_]+/g, ' ')
+        .replace(/\b\w/g, ch => ch.toUpperCase())
+}
+
+function getCategoryLabel(cat) {
+    if (!cat) return ''
+    if (typeof cat === 'object') {
+        if (isZhLocale()) {
+            return (cat.zh && cat.zh.trim()) || formatFallbackText(cat.value)
+        }
+        return formatFallbackText(cat.value)
+    }
+    return formatFallbackText(cat)
+}
+
+async function fetchCategories() {
+    categoriesLoading.value = true
+    const map = new Map()
+
+    try {
+        const publishedItems = await $pb.collection('blogs').getFullList({
+            filter: 'status = "published"',
+            fields: 'category,category_zh',
+            requestKey: null
+        })
+
+        publishedItems.forEach(item => {
+            const value = typeof item?.category === 'string' ? item.category.trim() : ''
+            if (!value) return
+
+            const zh = typeof item?.category_zh === 'string' ? item.category_zh.trim() : ''
+            if (!map.has(value)) {
+                map.set(value, { value, zh })
+            } else if (zh && !map.get(value).zh) {
+                map.get(value).zh = zh
+            }
+        })
+
+        categories.value = Array.from(map.values())
+
+        const validValues = new Set(categories.value.map(c => c.value))
+        selected.value = selected.value.filter(v => validValues.has(v))
+        pendingSelected.value = pendingSelected.value.filter(v => validValues.has(v))
+    } catch (e) {
+        console.error('获取分类列表失败:', e)
+    } finally {
+        categoriesLoading.value = false
+    }
+}
+
 async function fetchBlogs(targetPage = 1) {
     loading.value = true
 
     try {
         let filterStr = 'status = "published"'
-        
+
         if (selected.value.length > 0) {
-            const catFilters = selected.value.map(c => `category = "${c}"`).join(' || ')
+            const catFilters = selected.value
+                .map(c => `category = "${String(c).replace(/"/g, '\\"')}"`)
+                .join(' || ')
             filterStr += ` && (${catFilters})`
         }
 
@@ -222,7 +290,8 @@ async function fetchBlogs(targetPage = 1) {
 
         const resultList = await $pb.collection('blogs').getList(targetPage, perPage, {
             filter: filterStr,
-            sort: sortStr
+            sort: sortStr,
+            requestKey: null
         })
 
         rawList.value = resultList.items
@@ -236,6 +305,7 @@ async function fetchBlogs(targetPage = 1) {
 }
 
 onMounted(() => {
+    fetchCategories()
     fetchBlogs(1)
 })
 
@@ -244,42 +314,41 @@ watch(sortBy, () => {
 })
 
 const visibleList = computed(() => {
-    return rawList.value.map(r => {
-        const isEn = locale.value === 'en'
-        return {
-            id: r.id,
-            slug: r.slug,
-            date: r.publish_date || r.created,
-            category: r.category,
-            title: isEn && r.title_en ? r.title_en : r.title,
-            shortdesc: isEn && r.shortdesc_en ? r.shortdesc_en : r.shortdesc,
-            author: isEn && r.author_en ? r.author_en : r.author,
-            is_featured: r.is_featured || false,
-            views: r.views || 0,
-            image: r.cover_image 
-                ? `https://api.adsmarch.bot.cd/api/files/${r.collectionId}/${r.id}/${r.cover_image}`
-                : ''
-        }
-    })
+    const isEn = locale.value === 'en'
+    return rawList.value.map(r => ({
+        id: r.id,
+        slug: r.slug,
+        date: r.publish_date || r.created,
+        category: r.category,
+        category_zh: r.category_zh || '',
+        title: isEn && r.title_en ? r.title_en : r.title,
+        shortdesc: isEn && r.shortdesc_en ? r.shortdesc_en : r.shortdesc,
+        author: isEn && r.author_en ? r.author_en : r.author,
+        is_featured: r.is_featured || false,
+        views: r.views || 0,
+        image: r.cover_image
+            ? `https://api.adsmarch.bot.cd/api/files/${r.collectionId}/${r.id}/${r.cover_image}`
+            : ''
+    }))
 })
 
 const paginationItems = computed(() => {
-  const total = totalPages.value
-  const current = page.value
+    const total = totalPages.value
+    const current = page.value
 
-  if (total <= 5) {
-    return Array.from({ length: total }, (_, i) => i + 1)
-  }
+    if (total <= 5) {
+        return Array.from({ length: total }, (_, i) => i + 1)
+    }
 
-  if (current < 3) {
-    return [1, 2, 3, '...', total]
-  }
+    if (current < 3) {
+        return [1, 2, 3, '...', total]
+    }
 
-  if (current >= total - 2) {
-    return [1, '...', total - 2, total - 1, total]
-  }
+    if (current >= total - 2) {
+        return [1, '...', total - 2, total - 1, total]
+    }
 
-  return [current - 1, current, current + 1, '...', total]
+    return [current - 1, current, current + 1, '...', total]
 })
 
 async function handlePageChange(targetPage) {
@@ -297,10 +366,10 @@ function setSort(opt) {
     sortOpen.value = false
 }
 
-function toggleCategory(cat) {
-    const i = pendingSelected.value.indexOf(cat)
+function toggleCategory(catValue) {
+    const i = pendingSelected.value.indexOf(catValue)
     if (i >= 0) pendingSelected.value.splice(i, 1)
-    else pendingSelected.value.push(cat)
+    else pendingSelected.value.push(catValue)
 }
 
 function clearAll() {

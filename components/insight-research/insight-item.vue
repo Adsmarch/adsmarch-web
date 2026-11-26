@@ -106,14 +106,23 @@ const props = defineProps({
     }
 })
 
-const { te, t } = useI18n()
+const { locale } = useI18n()
 
 const fallbackImage = 'https://via.placeholder.com/600x400/131416/ffffff?text=AdsMarch'
 
 const displayCategory = computed(() => {
-    if (!props.item?.category) return ''
-    const key = `insightFilter.categories.${props.item.category}`
-    return te(key) ? t(key) : props.item.category
+    const rawCat = String(props.item?.category || '').trim()
+    const zhCat = String(props.item?.category_zh || '').trim()
+    const isZh = String(locale.value || '').toLowerCase().startsWith('zh')
+
+    if (isZh && zhCat) {
+        return zhCat
+    }
+    if (!rawCat) return zhCat
+
+    return rawCat
+        .replace(/[-_]+/g, ' ')
+        .replace(/\b\w/g, ch => ch.toUpperCase())
 })
 
 const formattedDate = computed(() => {

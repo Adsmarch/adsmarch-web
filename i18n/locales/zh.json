@@ -99,7 +99,9 @@
     "categories": {
       "tips": "干货分享",
       "research": "研究分析",
-      "report": "行业报告"
+      "report": "行业报告",
+      "share": "培训分享",
+      "case": "客户案例"
     },
     "clearAll": "全部清除",
     "showResults": "显示结果"
