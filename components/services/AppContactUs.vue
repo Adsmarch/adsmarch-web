@@ -227,10 +227,23 @@ const touched = reactive({})
 const submitted = ref(false)
 const submitting = ref(false)
 
+function isMessageRequired() {
+    return Boolean(currentConfig.value.messageTitle)
+}
+
 function fieldError(key) {
     const val = String(form[key] ?? '').trim()
-    if (key === 'message') return !val ? '请输入咨询内容' : ''
-    if (key === 'website') return val && !patterns.website.test(val) ? '请输入正确的网址格式' : ''
+    if (key === 'message') {
+        if (!isMessageRequired()) return ''
+        return !val ? '请输入咨询内容' : ''
+    }
+    if (key === 'website') {
+        if (!val || /[\u4e00-\u9fa5\s]/.test(val)) return ''
+        if (val.includes('.') || /^https?:\/\//i.test(val)) {
+            return !patterns.website.test(val) ? '请输入正确的网址格式' : ''
+        }
+        return ''
+    }
     const field = currentConfig.value.fields.find(f => f.key === key)
     if (field?.required && !val) return '此项不能为空'
     if (val && patterns[key] && !patterns[key].test(val)) return '格式不正确'
@@ -243,8 +256,10 @@ const errors = computed(() => {
         const msg = fieldError(f.key)
         if (msg) e[f.key] = msg
     })
-    const msgError = fieldError('message')
-    if (msgError) e.message = msgError
+    if (isMessageRequired()) {
+        const msgError = fieldError('message')
+        if (msgError) e.message = msgError
+    }
     return e
 })
 
@@ -268,6 +283,7 @@ async function onSubmit() {
     try {
         const cfg = currentConfig.value
         const payload = {}
+
         cfg.fields.forEach(f => {
             payload[f.key] = sanitize(form[f.key])
         })
@@ -282,7 +298,9 @@ async function onSubmit() {
             payload[g.key] = selectedList.join(',')
         })
 
-        payload.message = sanitize(form.message)
+        if (isMessageRequired() || String(form.message || '').trim()) {
+            payload.message = sanitize(form.message)
+        }
 
         await pb.collection(cfg.collection).create(payload)
 
