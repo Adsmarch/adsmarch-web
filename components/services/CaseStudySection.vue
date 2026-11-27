@@ -29,19 +29,19 @@
       class="relative w-full opacity-0"
     >
       <Swiper
-        :modules="[SwiperPagination, SwiperAutoplay]"
-        :slides-per-view="'auto'"
+        :modules="[SwiperAutoplay]"
+        :loop="true"
+        :slides-per-view="1.2"
         :space-between="16"
         :centered-slides="true"
-        :initial-slide="1"
         :speed="600"
         :autoplay="{ delay: 5000, disableOnInteraction: false }"
-        :pagination="{ el: '.classic-pagination', clickable: true }"
-        :breakpoints="{ '640': { spaceBetween: 20 }, '1024': { spaceBetween: 24 }, '1400': { spaceBetween: 32 } }"
+        :breakpoints="{ '640': { spaceBetween: 20 }, '768': { slidesPerView: 1.5 }, '1024': { spaceBetween: 16, slidesPerView: 2.2 } }"
         @swiper="onSwiper"
+        @slide-change="onSlideChange"
         class="case-swiper w-full !overflow-visible"
       >
-        <SwiperSlide v-for="item in cases" :key="item.id" class="h-auto !w-[84%] sm:!w-[80%] lg:!w-[65%] xl:!w-[45%]">
+        <SwiperSlide v-for="item in loopCases" :key="item._key" class="h-auto">
           <div class="bg-[#131416] rounded-[4px] overflow-hidden flex flex-col h-full border border-[#131416] group">
             
             <div 
@@ -104,7 +104,17 @@
         </SwiperSlide>
       </Swiper>
 
-      <div class="classic-pagination flex items-center justify-center gap-[8px] md:gap-[12px] mt-[32px] md:mt-[64px]"></div>
+      <div class="classic-pagination flex items-center justify-center gap-[8px] md:gap-[12px] mt-[32px] md:mt-[64px]">
+        <button
+          v-for="(c, i) in cases"
+          :key="c.id ?? i"
+          type="button"
+          class="case-dot"
+          :class="{ 'is-active': activeRealIndex === i }"
+          :aria-label="`Slide ${i + 1}`"
+          @click="goToRealIndex(i)"
+        />
+      </div>
     </div>
 
     <Teleport to="body">
@@ -127,9 +137,8 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Pagination as SwiperPagination, Autoplay as SwiperAutoplay } from 'swiper/modules'
+import { Autoplay as SwiperAutoplay } from 'swiper/modules'
 import 'swiper/css'
-import 'swiper/css/pagination'
 
 const props = defineProps({
   cases: { type: Array, default: () => [] },
@@ -138,6 +147,31 @@ const props = defineProps({
 
 const swiperRef = ref(null)
 const onSwiper = (swiper) => { swiperRef.value = swiper }
+
+const loopCases = computed(() => {
+  const list = props.cases || []
+  if (!list.length) return []
+
+  const repeat = Math.max(2, Math.ceil(8 / list.length))
+  const out = []
+  for (let r = 0; r < repeat; r++) {
+    list.forEach(item => out.push({ ...item, _key: `${r}-${item.id}` }))
+  }
+  return out
+})
+
+const activeRealIndex = ref(0)
+
+function onSlideChange(swiper) {
+  const total = props.cases.length
+  if (!total) return
+  activeRealIndex.value = ((swiper.realIndex % total) + total) % total
+}
+
+function goToRealIndex(index) {
+  if (!swiperRef.value) return
+  swiperRef.value.slideToLoop(index)
+}
 
 const { locale} = useI18n()
 const isEn = computed(() => locale.value?.startsWith('en'))
@@ -187,8 +221,20 @@ const closeVideoModal = () => {
 :deep(.swiper-slide) { height: auto; flex-shrink: 0; box-sizing: border-box; }
 .fade-enter-active, .fade-leave-active { transition: opacity 0.3s ease; }
 .fade-enter-from, .fade-leave-to { opacity: 0; }
-:deep(.classic-pagination .swiper-pagination-bullet) { width: 12px; height: 12px; background-color: #454C5F; border-radius: 2px; opacity: 1; transition: all 0.3s ease; cursor: pointer; margin: 0 !important; }
-:deep(.classic-pagination .swiper-pagination-bullet-active) { background-color: #0043FF; }
+.case-dot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border: none;
+  border-radius: 2px;
+  background-color: #454C5F;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.case-dot.is-active {
+  background-color: #0043FF;
+}
 
 .text-area-container {
   min-height: 295px;
@@ -228,7 +274,7 @@ const closeVideoModal = () => {
   }
 }
 @media (max-width: 768px) { 
-  :deep(.classic-pagination .swiper-pagination-bullet) { width: 6px; height: 6px; border-radius: 1px; }
+  .case-dot { width: 6px; height: 6px; border-radius: 1px; }
   .text-area-container {
     min-height: 240px;
   }

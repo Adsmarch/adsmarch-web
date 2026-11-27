@@ -65,18 +65,17 @@
         <div class="training-pagination-m flex items-center justify-center gap-[8px] mt-6"></div>
       </div>
 
-      <div class="hidden md:grid md:grid-cols-6 gap-[24px] w-full">
+      <div class="hidden md:flex md:flex-wrap justify-center gap-[24px] w-full">
         <div
-          v-for="(item, index) in items"
+          v-for="item in items"
           :key="item.id"
-          class="training-card flex flex-col h-full min-h-[180px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
-          :class="getPcCardSpanClass(index, items.length)"
+          class="training-card w-full md:w-[32%] flex flex-col justify-between min-h-[180px] p-8 bg-black border-l border-[#454C5F] transition-colors duration-300"
         >
           <div>
-            <h3 class="text-[28px] lg:text-[32px] font-semibold text-white mb-6 leading-tight">
+            <h3 class="text-[40px] font-semibold text-white mb-6 leading-tight">
               {{ displayTitle(item) }}
             </h3>
-            <ul class="space-y-3 text-[16px] lg:text-[18px] text-[#7D86A1] leading-relaxed">
+            <ul class="space-y-3 text-[24px] text-[#7D86A1] leading-relaxed">
               <template v-for="n in 5" :key="n">
                 <li v-if="getPoint(item, n)" class="whitespace-pre-line">{{ getPoint(item, n) }}</li>
               </template>
@@ -110,13 +109,6 @@ const getPoint = (item, index) => {
   const paddedIndex = String(index).padStart(2, '0')
   const field = isEn.value ? `point_${paddedIndex}_en` : `point_${paddedIndex}`
   return item[field] || item[`point_${paddedIndex}`] || ''
-}
-
-const getPcCardSpanClass = (index, total) => {
-  if (total === 5) {
-    return index < 3 ? 'md:col-span-2' : 'md:col-span-3'
-  }
-  return index < 3 ? 'md:col-span-2' : 'md:col-span-2'
 }
 </script>
 
